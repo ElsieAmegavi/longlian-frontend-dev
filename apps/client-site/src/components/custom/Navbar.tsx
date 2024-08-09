@@ -22,13 +22,13 @@ export const Navbar = () => {
                         </li>
                         <li className="border-x border-black px-2 lg:px-3"><a href="#" className="hover:text-orange-600">+23312341234</a></li>
                         <li><Link to="/contactus" className="hover:text-orange-600">{t('Contact Us')}</Link></li>
-                        <li><Link to="/faq" className="hover:text-orange-600">FAQ</Link></li>
+                        <li><Link to="/faq" className="hover:text-orange-600">{t("FAQ")}</Link></li>
                     </ul>
                     <ul className="flex items-center gap-3 lg:gap-4 text-sm">
                         <li><Search className="text-orange-600 cursor-pointer w-4 h-4"/></li>
-                        <li><a href="/" className="hover:text-orange-600">Home</a></li>
-                        <li><a href="/generator" className="hover:text-orange-600">Generators</a></li>
-                        <li><a href="#" className="hover:text-orange-600">News</a></li>
+                        <li><a href="/" className="hover:text-orange-600">{t("Home")}</a></li>
+                        <li><a href="/generator" className="hover:text-orange-600">{t("Generators")}</a></li>
+                        <li><a href="#" className="hover:text-orange-600">{t("News")}</a></li>
                     </ul>
                 </div>
                 <div className="lg:hidden flex items-center gap-3">
@@ -39,13 +39,16 @@ export const Navbar = () => {
             {isMenuOpen && (
                 <div className="lg:hidden mt-3 border-t pt-3">
                     <ul className="flex flex-col gap-3 text-sm">
-                        <li><a href="#" className="hover:text-orange-600">中文</a></li>
+                        <li>
+                            {/* <a href="#" className="hover:text-orange-600">中文</a> */}
+                            <LanguageSelector/>
+                        </li>
                         <li><a href="#" className="hover:text-orange-600">+23312341234</a></li>
-                        <li><Link to="/contactus" className="hover:text-orange-600">Contact Us</Link></li>
-                        <li><Link to="/faq" className="hover:text-orange-600">FAQ</Link></li>
-                        <li><a href="/" className="hover:text-orange-600">Home</a></li>
-                        <li><a href="/generator" className="hover:text-orange-600">Generators</a></li>
-                        <li><a href="#" className="hover:text-orange-600">News</a></li>
+                        <li><Link to="/contactus" className="hover:text-orange-600">{t("Contact Us")}</Link></li>
+                        <li><Link to="/faq" className="hover:text-orange-600">{t("FAQ")}</Link></li>
+                        <li><a href="/" className="hover:text-orange-600">{t("Home")}</a></li>
+                        <li><a href="/generator" className="hover:text-orange-600">{t("Generators")}</a></li>
+                        <li><a href="#" className="hover:text-orange-600">{t("News")}</a></li>
                     </ul>
                 </div>
             )}

@@ -1,8 +1,36 @@
 import { MailOpen, MapPin, Smartphone } from "lucide-react";
 import { Footer } from "../../components/custom/Footer";
 import { Navbar } from "../../components/custom/Navbar";
+import { useMutation } from "@tanstack/react-query";
+import { makeEnquiry } from "../../api/data/mutations";
+import { useState } from "react";
+import Dialog from "../../components/custom/Dialog";
 
 export default function ContactUs() {
+    const [openDialog, setOpenDialog ] = useState(false);
+    const [message, setMessage] = useState('')
+    const [formData, setFormData] = useState({
+        firstname:'',
+        lastname:'',
+        email:"",
+        phone:'',
+        message:'',
+    })
+    const { mutateAsync, isPending } = useMutation({
+        mutationFn:(data) => makeEnquiry(data)
+    })
+    const submit = async() => {
+        try {
+            const response = await mutateAsync(formData);
+            console.log(response)
+            if(response?.data?.return_code == "004"){
+                setMessage(response?.data?.response_message)
+                setOpenDialog(true);
+            }
+        } catch (error) {
+            
+        }
+    }
     return (
         <main className='flex flex-col items-start m-auto min-h-screen w-full bg-gray-100'>
             <Navbar />
@@ -75,15 +103,36 @@ export default function ContactUs() {
                             If you got any questions don't hesitate to send us a message
                         </p>
                         <div className='w-full grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6 py-10 tracking-wider'>
-                            <input id='text' placeholder='First Name' className=' h-16 text-gray-700 bg-white shadow-md border-black rounded-lg px-5' />
-                            <input id='text' placeholder='Last Name' className=' h-16 text-gray-700 bg-white shadow-md border-black rounded-lg px-5' />
-                            <input id='email' placeholder='Email' className='h-16 text-gray-700 bg-white shadow-md border-black rounded-lg px-5' />
-                            <input id='text' placeholder='Phone Number' className='h-16 text-gray-700 bg-white shadow-md border-black rounded-lg px-5' />
+                            <input id='text' placeholder='First Name' value={formData.firstname}
+                             className=' h-16 text-gray-700 bg-white shadow-md border-black rounded-lg px-5' 
+                             onChange={e => setFormData((prev) => ({...prev, firstname:e.target.value}))}
+                            />
+                            <input id='text' placeholder='Last Name' value={formData.lastname}
+                             className=' h-16 text-gray-700 bg-white shadow-md border-black rounded-lg px-5' 
+                             onChange={e => setFormData((prev) => ({...prev, lastname:e.target.value}))}
+                            />
+                            <input id='email' placeholder='Email' value={formData.email}
+                             className='h-16 text-gray-700 bg-white shadow-md border-black rounded-lg px-5' 
+                             onChange={e => setFormData((prev) => ({...prev, email:e.target.value}))}
+                            />
+                            <input id='text' placeholder='Phone Number' value={formData.phone}
+                             className='h-16 text-gray-700 bg-white shadow-md border-black rounded-lg px-5' 
+                             onChange={e => setFormData((prev) => ({...prev, phone:e.target.value}))}
+                            />
                         </div>
 
                         <div className='w-full tracking-widest'>
-                            <textarea id='message' placeholder='Message' className='w-full h-40  text-gray-700 bg-white shadow-md border-black rounded-lg px-5 ' />
-                            <button type="submit" className="w-32 text-xl h-12 bg-orange-600 text-white rounded hover:bg-orange-600 mx-auto uppercase tracking-wider">Send</button>
+                            <textarea id='message' placeholder='Message' value={formData.message}
+                             className='w-full h-40  text-gray-700 bg-white shadow-md border-black rounded-lg px-5 ' 
+                             onChange={e => setFormData((prev) => ({...prev, message:e.target.value}))}
+                            />
+                            <button type="submit"
+                             disabled={isPending}
+                             className={`w-32 text-xl h-12 bg-orange-600 text-white rounded hover:bg-orange-600 mx-auto uppercase tracking-wider disabled:bg-orange-300 disabled:cursor-not-allowed ${isPending && 'animate-pulse'}`}
+                             onClick={submit}
+                            >
+                                Send
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -111,6 +160,9 @@ export default function ContactUs() {
             </section>
 
             <Footer />
+            <Dialog open={openDialog} onClose={() => setOpenDialog(false)}>
+                {message}
+            </Dialog>
         </main>
     )
 }

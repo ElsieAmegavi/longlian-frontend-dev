@@ -36,7 +36,7 @@ function LanguageSelector() {
                     {Object.keys(languages).map((lng) => (
                         <li key={lng}
                          style={{ fontWeight: i18n.resolvedLanguage === lng ? 'bold' : 'normal' }}
-                         className='block px-4 py-2 text-sm cursor-pointer hover:bg-gray-300'
+                         className='block px-4 py-2 text-sm cursor-pointer hover:bg-gray-300 text-black'
                          onClick={() => onChange(lng)}
                         >
                             {languages[lng].nativeName}
