@@ -48,11 +48,11 @@ export default function Home() {
 			<Navbar />
 			<section className='w-full h-[60vh] sm:h-[70vh] md:h-[80vh] bg-[url("/assets/hero.jpg")] bg-no-repeat bg-cover bg-center'>
 				{' '}
-				<div className='w-full md:w-10/12 lg:w-8/12 h-full bg-[#000522BF] clip flex flex-col px-4 sm:px-6 md:px-10 gap-3 sm:gap-4 md:gap-5 justify-center'>
-					<h3 className='text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-medium w-full md:w-3/4 leading-tight tracking-wider text-white animate-slide-right'>
+				<div className='lg:animate-slide-right delay-0 w-full md:w-10/12 lg:w-8/12 h-full bg-[#000522BF] clip flex flex-col px-4 sm:px-6 md:px-10 gap-3 sm:gap-4 md:gap-5 justify-center'>
+					<h3 className='text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-medium w-full md:w-3/4 leading-tight tracking-wider text-white lg:animate-slide-right animation-delay-200 '>
 						{t("Powering Your World with Reliable")}<span className='text-orange-500'>{t("Generators")}</span>
 					</h3>
-					<p className='text-white text-sm sm:text-base md:text-lg lg:text-xl w-full md:w-3/4 leading-normal mt-2 sm:mt-3 md:mt-5 lg:mt-10 tracking-wide sm:tracking-wider animate-slide-up'>
+					<p className='text-white text-sm sm:text-base md:text-lg lg:text-xl w-full md:w-3/4 leading-normal mt-2 sm:mt-3 md:mt-5 lg:mt-10 tracking-wide sm:tracking-wider lg:animate-slide-up animation-delay-500'>
 						{t("To provide you with stable reliable electricity, Let you enjoy unlimited convienience in life")}
 					</p>
 					<Link to='/generator'>
@@ -65,21 +65,21 @@ export default function Home() {
 			</section>
 
 			{/* About */}
-			<section className='w-full grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 md:gap-10 py-12 sm:py-16 md:py-20 lg:py-32 xl:py-52 bg-[url("/assets/about-bg.png")] bg-cover bg-no-repeat bg-center px-4 sm:px-6 md:px-10 lg:px-16'>
+			<section className={`w-full grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 md:gap-10 py-12 sm:py-16 md:py-20 lg:py-32 xl:py-52 bg-[url("/assets/about-bg.png")] bg-cover bg-no-repeat bg-center px-4 sm:px-6 md:px-10 lg:px-16 ${startFirstAnimation && 'lg:animate-bg-slide-in'}`}>
 				<div className='w-full flex justify-center lg:justify-end relative' ref={elementOne.containerRef}>
 					<img
 						src='/assets/about-img-02.jpg'
 						alt='about-page'
-						className={`w-full sm:w-4/5 md:w-3/4 lg:w-[561px] h-[250px] sm:h-[300px] md:h-[350px] lg:h-[452px] object-cover object-center ${startFirstAnimation ? 'animate-slide-down': ''}`}
+						className={`w-full sm:w-4/5 md:w-3/4 lg:w-[561px] h-[250px] sm:h-[300px] md:h-[350px] lg:h-[452px] object-cover object-center ${startFirstAnimation ? 'lg:animate-slide-down': ''}`}
 					/>
 					<img
 						src='/assets/about-img-01.jpg'
 						alt='about-page'
-						className={`hidden lg:block w-[561px] h-[452px] object-cover object-center absolute top-16 -left-10 xl:left-0 ${startFirstAnimation ? 'animate-slide-right' : ''}`}
+						className={`hidden lg:block w-[561px] h-[452px] object-cover object-center absolute top-16 -right-10 ${startFirstAnimation ? 'lg:animate-slide-right' : ''}`}
 					/>
 				</div>
 
-				<div className='w-full lg:w-11/12 xl:w-9/12 flex flex-col relative mt-6 lg:mt-0 lg:ml-10 xl:ml-32 [&>p]:mb-4 sm:[&>p]:mb-5 md:[&>p]:mb-6 lg:[&>p]:mb-7'>
+				<div className={`w-full lg:w-11/12 xl:w-9/12 flex flex-col relative mt-6 lg:mt-0 lg:ml-10 xl:ml-32 [&>p]:mb-4 sm:[&>p]:mb-5 md:[&>p]:mb-6 lg:[&>p]:mb-7 ${startFirstAnimation && 'lg:animate-slide-left'}`}>
 					<h3 className='text-orange-500 text-lg sm:text-xl font-semibold'>{t("About")}</h3>
 
 					<h3 className='text-xl sm:text-2xl md:text-3xl text-navy-500 font-medium py-2 sm:py-3'>
@@ -116,7 +116,7 @@ export default function Home() {
 
 			{/* Product */}
 			<section ref={elementTwo.containerRef} className='w-full h-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 sm:gap-8 md:gap-10 py-12 sm:py-16 md:py-20 px-4 sm:px-6 md:px-10 lg:px-16 xl:px-32'>
-				<div className={`inline-flex items-center flex-wrap md:flex-nowrap md:col-span-2 gap-4 ${startSecondAnimation && 'animate-slide-right'}`}>
+				<div className={`inline-flex items-center flex-wrap md:flex-nowrap md:col-span-2 gap-4 ${startSecondAnimation && 'lg:animate-slide-right'}`}>
 				{!isLoading &&
 					productList?.slice(0, 2)?.map(product => (
 						<Link key={product.id} to={`/generators/details/${product.id}`}>
@@ -124,7 +124,7 @@ export default function Home() {
 						</Link>
 					))}
 					</div>
-				<div className={`bg-blue-900 p-4 sm:p-5 mt-6 sm:mt-8 md:mt-10 h-auto sm:h-[90%] md:h-[85%] lg:h-[80%] ${startSecondAnimation && 'animate-slide-left'}`}>
+				<div className={`bg-blue-900 p-4 sm:p-5 mt-6 sm:mt-8 md:mt-10 h-auto sm:h-[90%] md:h-[85%] lg:h-[80%] ${startSecondAnimation && 'lg:animate-slide-left'}`}>
 					<h3 className='text-white text-lg sm:text-xl'>Top Products</h3>
 					<hr className='bg-gray-400 my-2 sm:my-3 w-10/12' />
 					{!isLoading &&
@@ -144,13 +144,13 @@ export default function Home() {
 			{/* Core Values */}
 			<section ref={elementThree.containerRef} className='w-full grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 py-12 sm:py-16 md:py-20 px-4 sm:px-6 md:px-10 lg:px-16'>
 				<div className='flex flex-col justify-center relative'>
-					<h3 className={`text-orange-500 text-lg sm:text-xl font-semibold ${startThirdAnimation ? 'animate-slide-down':''}`}>Why Choose Us</h3>
+					<h3 className={`text-orange-500 text-lg sm:text-xl font-semibold ${startThirdAnimation ? 'lg:animate-slide-down':''}`}>Why Choose Us</h3>
 
-					<h3 className={`text-2xl sm:text-3xl md:text-4xl text-navy-500 font-medium py-2 sm:py-3 ${startThirdAnimation ? 'animate-slide-down' : ''}`}>
+					<h3 className={`text-2xl sm:text-3xl md:text-4xl text-navy-500 font-medium py-2 sm:py-3 ${startThirdAnimation ? 'lg:animate-slide-down' : ''}`}>
 						Our Core Values
 					</h3>
 
-					<p className='mt-2 sm:mt-3 text-base sm:text-lg md:text-xl tracking-wide sm:tracking-wider leading-snug animate-slide-right'>
+					<p className='mt-2 sm:mt-3 text-base sm:text-lg md:text-xl tracking-wide sm:tracking-wider leading-snug lg:animate-slide-right'>
 						At Jigdoli Industry and Trade Co, Ltd, we believe that strong values are the foundation
 						of trust, innovation, and exceptional results. Our core values guide our actions,
 						decisions. and relationships, and are at the heart of everything we do.
@@ -159,7 +159,7 @@ export default function Home() {
 
 				<div className='flex flex-col lg:flex-row relative mt-6 lg:mt-0'>
 					<div className='flex flex-col gap-y-12 sm:gap-y-16 md:gap-y-20'>
-						<div className='p-4 sm:p-5 shadow bg-white space-y-2 sm:space-y-3 relative rounded-md'>
+						<div className={`p-4 sm:p-5 shadow bg-white space-y-2 sm:space-y-3 relative rounded-md ${startThirdAnimation && 'lg:animate-slide-top-left-down'}`}>
 							<div className='w-16 h-16 sm:w-20 sm:h-20 absolute -top-8 sm:-top-10 bg-orange-600 rounded-full flex justify-center items-center'>
 								<h3 className='text-2xl sm:text-3xl font-semibold tracking-wider text-white'>01</h3>
 							</div>
@@ -173,7 +173,7 @@ export default function Home() {
 							</p>
 						</div>
 
-						<div className='p-4 sm:p-5 shadow bg-white space-y-2 sm:space-y-3 relative rounded-md mt-4 sm:mt-5'>
+						<div className={`p-4 sm:p-5 shadow bg-white space-y-2 sm:space-y-3 relative rounded-md mt-4 sm:mt-5 ${startThirdAnimation && 'lg:animate-slide-bottom-left-up'}`}>
 							<div className='w-16 h-16 sm:w-20 sm:h-20 absolute -top-8 sm:-top-10 bg-orange-600 rounded-full flex justify-center items-center'>
 								<h3 className='text-2xl sm:text-3xl font-semibold tracking-wider text-white'>03</h3>
 							</div>
@@ -189,7 +189,7 @@ export default function Home() {
 					</div>
 
 					<div className='flex flex-col gap-y-12 sm:gap-y-16 md:gap-y-20 mt-12 lg:mt-20 lg:px-6 xl:px-12'>
-						<div className='p-4 sm:p-5 shadow bg-white relative space-y-2 sm:space-y-3 rounded-md'>
+						<div className={`p-4 sm:p-5 shadow bg-white relative space-y-2 sm:space-y-3 rounded-md ${startThirdAnimation && 'lg:animate-slide-top-right-down'}`}>
 							<div className='w-16 h-16 sm:w-20 sm:h-20 absolute -top-8 sm:-top-10 bg-orange-600 rounded-full flex justify-center items-center'>
 								<h3 className='text-2xl sm:text-3xl font-semibold tracking-wider text-white'>02</h3>
 							</div>
@@ -203,7 +203,7 @@ export default function Home() {
 							</p>
 						</div>
 
-						<div className='p-4 sm:p-5 shadow bg-white space-y-2 sm:space-y-3 rounded-md relative mt-4 sm:mt-5'>
+						<div className={`p-4 sm:p-5 shadow bg-white space-y-2 sm:space-y-3 rounded-md relative mt-4 sm:mt-5 ${startThirdAnimation && 'lg:animate-slide-bottom-right-up'}`}>
 							<div className='w-16 h-16 sm:w-20 sm:h-20 absolute -top-8 sm:-top-10 bg-orange-600 rounded-full flex justify-center items-center'>
 								<h3 className='text-2xl sm:text-3xl font-semibold tracking-wider text-white'>04</h3>
 							</div>
