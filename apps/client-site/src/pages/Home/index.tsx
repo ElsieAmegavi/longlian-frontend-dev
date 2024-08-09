@@ -119,7 +119,7 @@ export default function Home() {
 				<div className={`inline-flex items-center flex-wrap md:flex-nowrap md:col-span-2 gap-4 ${startSecondAnimation && 'animate-slide-right'}`}>
 				{!isLoading &&
 					productList?.slice(0, 2)?.map(product => (
-						<Link to={`/generators/details/${product.id}`}>
+						<Link key={product.id} to={`/generators/details/${product.id}`}>
 							<Product key={product.id} {...product} />
 						</Link>
 					))}
@@ -129,7 +129,7 @@ export default function Home() {
 					<hr className='bg-gray-400 my-2 sm:my-3 w-10/12' />
 					{!isLoading &&
 						productList?.slice(3, 6).map(product => (
-							<Link to={`/generators/details/${product.id}`}>
+							<Link key={product.id} to={`/generators/details/${product.id}`}>
 								<div className='bg-white h-8 sm:h-10 flex justify-center items-center relative mt-4 sm:mt-5 md:mt-7'>
 									<div className='bg-orange-600 w-1 sm:w-1.5 absolute left-0 h-full'></div>
 									<p className='text-black text-sm sm:text-base truncate w-11/12'>
