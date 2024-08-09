@@ -7,28 +7,30 @@ import { useState } from "react";
 import Dialog from "../../components/custom/Dialog";
 
 export default function ContactUs() {
-    const [openDialog, setOpenDialog ] = useState(false);
+    const [openDialog, setOpenDialog] = useState(false);
     const [message, setMessage] = useState('')
     const [formData, setFormData] = useState({
-        firstname:'',
-        lastname:'',
-        email:"",
-        phone:'',
-        message:'',
+        first_name: '',
+        last_name: '',
+        email: "",
+        phone_number: '',
+        message: '',
     })
     const { mutateAsync, isPending } = useMutation({
-        mutationFn:(data) => makeEnquiry(data)
+        mutationFn: (data) => makeEnquiry(data)
     })
-    const submit = async() => {
+    const submit = async () => {
         try {
             const response = await mutateAsync(formData);
             console.log(response)
-            if(response?.data?.return_code == "004"){
+            if (response?.data?.response_code == "002") {
+                setOpenDialog(true);
+            } else if (response?.data?.return_code == "004") {
                 setMessage(response?.data?.response_message)
                 setOpenDialog(true);
             }
         } catch (error) {
-            
+
         }
     }
     return (
@@ -103,33 +105,33 @@ export default function ContactUs() {
                             If you got any questions don't hesitate to send us a message
                         </p>
                         <div className='w-full grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6 py-10 tracking-wider'>
-                            <input id='text' placeholder='First Name' value={formData.firstname}
-                             className=' h-16 text-gray-700 bg-white shadow-md border-black rounded-lg px-5' 
-                             onChange={e => setFormData((prev) => ({...prev, firstname:e.target.value}))}
+                            <input id='text' placeholder='First Name' value={formData.firs_tname}
+                                className=' h-16 text-gray-700 bg-white shadow-md border-black rounded-lg px-5'
+                                onChange={e => setFormData((prev) => ({ ...prev, first_name: e.target.value }))}
                             />
-                            <input id='text' placeholder='Last Name' value={formData.lastname}
-                             className=' h-16 text-gray-700 bg-white shadow-md border-black rounded-lg px-5' 
-                             onChange={e => setFormData((prev) => ({...prev, lastname:e.target.value}))}
+                            <input id='text' placeholder='Last Name' value={formData.last_name}
+                                className=' h-16 text-gray-700 bg-white shadow-md border-black rounded-lg px-5'
+                                onChange={e => setFormData((prev) => ({ ...prev, last_name: e.target.value }))}
                             />
                             <input id='email' placeholder='Email' value={formData.email}
-                             className='h-16 text-gray-700 bg-white shadow-md border-black rounded-lg px-5' 
-                             onChange={e => setFormData((prev) => ({...prev, email:e.target.value}))}
+                                className='h-16 text-gray-700 bg-white shadow-md border-black rounded-lg px-5'
+                                onChange={e => setFormData((prev) => ({ ...prev, email: e.target.value }))}
                             />
-                            <input id='text' placeholder='Phone Number' value={formData.phone}
-                             className='h-16 text-gray-700 bg-white shadow-md border-black rounded-lg px-5' 
-                             onChange={e => setFormData((prev) => ({...prev, phone:e.target.value}))}
+                            <input id='text' placeholder='Phone Number' value={formData.phone_number}
+                                className='h-16 text-gray-700 bg-white shadow-md border-black rounded-lg px-5'
+                                onChange={e => setFormData((prev) => ({ ...prev, phone_number: e.target.value }))}
                             />
                         </div>
 
                         <div className='w-full tracking-widest'>
                             <textarea id='message' placeholder='Message' value={formData.message}
-                             className='w-full h-40  text-gray-700 bg-white shadow-md border-black rounded-lg px-5 ' 
-                             onChange={e => setFormData((prev) => ({...prev, message:e.target.value}))}
+                                className='w-full h-40  text-gray-700 bg-white shadow-md border-black rounded-lg px-5 '
+                                onChange={e => setFormData((prev) => ({ ...prev, message: e.target.value }))}
                             />
                             <button type="submit"
-                             disabled={isPending}
-                             className={`w-32 text-xl h-12 bg-orange-600 text-white rounded hover:bg-orange-600 mx-auto uppercase tracking-wider disabled:bg-orange-300 disabled:cursor-not-allowed ${isPending && 'animate-pulse'}`}
-                             onClick={submit}
+                                disabled={isPending}
+                                className={`w-32 text-xl h-12 bg-orange-600 text-white rounded hover:bg-orange-600 mx-auto uppercase tracking-wider disabled:bg-orange-300 disabled:cursor-not-allowed ${isPending && 'animate-pulse'}`}
+                                onClick={submit}
                             >
                                 Send
                             </button>
@@ -161,7 +163,18 @@ export default function ContactUs() {
 
             <Footer />
             <Dialog open={openDialog} onClose={() => setOpenDialog(false)}>
-                {message}
+                {message ? message :
+                    <>
+                        <div className="w-full h-full flex flex-col items-center justify-center">
+                            <svg className="w-52 h-52 text-[#D33D03] self-center mx-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path fill="currentColor" d="M7.29 4.908a54.4 54.4 0 0 1 9.42 0l1.511.13a2.89 2.89 0 0 1 2.313 1.546a.236.236 0 0 1-.091.307l-6.266 3.88a4.25 4.25 0 0 1-4.4.045L3.47 7.088a.236.236 0 0 1-.103-.293A2.89 2.89 0 0 1 5.78 5.039z" />
+                                <path fill="currentColor" d="M3.362 8.767a.248.248 0 0 0-.373.187a30.4 30.4 0 0 0 .184 7.56A2.89 2.89 0 0 0 5.78 18.96l1.51.131c3.135.273 6.287.273 9.422 0l1.51-.13a2.89 2.89 0 0 0 2.606-2.449a30.4 30.4 0 0 0 .161-7.779a.248.248 0 0 0-.377-.182l-5.645 3.494a5.75 5.75 0 0 1-5.951.061z" />
+                            </svg>
+                            <p className="uppercase font-bold text-3xl">THANK YOU!</p>
+                            <p className="text-xl text-[#84868D]">Your message has been sent. We’ll be in touch shortly to answer all your question</p>
+                        </div>
+                    </>
+                }
             </Dialog>
         </main>
     )
