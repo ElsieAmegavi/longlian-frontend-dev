@@ -10,7 +10,7 @@ const languages = {
 function LanguageSelector() {
     const { i18n } = useTranslation();
     console.log(i18n.language)
-    const [language, setLanguage] = useState(languages[i18n.language]?.nativeName || i18n.language)
+    const [language, setLanguage] = useState(languages.en?.nativeName || i18n.language)
     const [open, setOpen] = useState(false);
     const toggle = () => setOpen(!open);
 
