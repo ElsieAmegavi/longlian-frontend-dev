@@ -1,4 +1,3 @@
-import { Card } from '../../components/custom/Card'
 import { Footer } from '../../components/custom/Footer'
 import { Navbar } from '../../components/custom/Navbar'
 import Product from '../../components/custom/Product'
