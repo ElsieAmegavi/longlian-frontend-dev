@@ -61,7 +61,7 @@ export default function ContactUs() {
 
                         <div>
                             <h3 className='text-2xl font-semibold'>
-                                {this("Phone Number")}
+                                {t("Phone Number")}
                             </h3>
                             <p className="text-gray-700 text-sm font-semibold">
                                 +233 53 509 7486
