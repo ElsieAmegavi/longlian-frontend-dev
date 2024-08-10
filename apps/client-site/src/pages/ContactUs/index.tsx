@@ -2,7 +2,7 @@ import { MailOpen, MapPin, Smartphone } from "lucide-react";
 import { Footer } from "../../components/custom/Footer";
 import { Navbar } from "../../components/custom/Navbar";
 import { useMutation } from "@tanstack/react-query";
-import { makeEnquiry } from "../../api/data/mutations";
+import { contactUs } from "../../api/data/mutations";
 import { useState } from "react";
 import Dialog from "../../components/custom/Dialog";
 
@@ -17,15 +17,22 @@ export default function ContactUs() {
         message: '',
     })
     const { mutateAsync, isPending } = useMutation({
-        mutationFn: (data) => makeEnquiry(data)
+        mutationFn: (data) => contactUs(data)
     })
     const submit = async () => {
         try {
             const response = await mutateAsync(formData);
-            console.log(response)
-            if (response?.data?.response_code == "002") {
+            setMessage(null);
+            if (response?.data?.response_code == "100") {
+                setFormData({
+                    first_name: '',
+                    last_name: '',
+                    email: '',
+                    phone_number: '',
+                    message: ''
+                });
                 setOpenDialog(true);
-            } else if (response?.data?.return_code == "004") {
+            } else {
                 setMessage(response?.data?.response_message)
                 setOpenDialog(true);
             }
@@ -105,7 +112,7 @@ export default function ContactUs() {
                             If you got any questions don't hesitate to send us a message
                         </p>
                         <div className='w-full grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6 py-10 tracking-wider'>
-                            <input id='text' placeholder='First Name' value={formData.firs_tname}
+                            <input id='text' placeholder='First Name' value={formData.first_name}
                                 className=' h-16 text-gray-700 bg-white shadow-md border-black rounded-lg px-5'
                                 onChange={e => setFormData((prev) => ({ ...prev, first_name: e.target.value }))}
                             />
