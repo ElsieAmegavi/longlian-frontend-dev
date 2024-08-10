@@ -9,6 +9,7 @@ import { makeEnquiry, orderOnline } from '../../../api/data/mutations'
 import Dialog from '../../../components/custom/Dialog'
 import { useState } from "react";
 
+import { t } from 'i18next'
 export default function Details() {
 	const { id } = useParams()
 
@@ -95,15 +96,15 @@ export default function Details() {
 					<div className='w-full grid grid-cols-2 max-w-[500px]'>
 						<div>
 							<div className='w-full flex gap-2 items-center'>
-								<p className='text-black'>Engine:</p>
+								<p className='text-black'>{t("Engine:")}</p>
 								<p className='text-gray-500 capitalize'>{productList?.engine}</p>
 							</div>
 							<div className='w-full flex gap-2 items-center mt-2'>
-								<p className='text-black'>Prime:</p>
+								<p className='text-black'>{t("Prime:")}</p>
 								<p className='text-gray-500 capitalize'>{productList?.prime}</p>
 							</div>
 							<div className='w-full flex gap-2 items-center mt-2'>
-								<p className='text-black'>Alternator:</p>
+								<p className='text-black'>{t("Alternator:")}</p>
 								<p className='text-gray-500'>{productList?.alternator}</p>
 							</div>
 							<div className='py-5'>
@@ -112,22 +113,22 @@ export default function Details() {
 									type='submit'
 									className='w-44 text-xl h-12 bg-orange-600 text-white rounded mx-auto uppercase tracking-wider font-semibold'
 								>
-									Make Enquiry
+									{t("Make Enquiry")}
 								</button>
 							</div>
 						</div>
 
 						<div className=''>
 							<div className='w-full flex gap-2 items-center '>
-								<p className='text-black'>Voltage:</p>
+								<p className='text-black'>{t("Voltage:")}</p>
 								<p className='text-gray-500'>{productList?.voltage}</p>
 							</div>
 							<div className='w-full flex mt-2 gap-2 items-center'>
-								<p className='text-black'>Frequency:</p>
+								<p className='text-black'>{t("Frequency:")}</p>
 								<p className='text-gray-500'>{productList?.frequency}</p>
 							</div>
 							<div className='w-full flex mt-2 gap-2 items-center'>
-								<p className='text-black'>Amp Per Phase:</p>
+								<p className='text-black'>{t("Amp Per Phase:")}</p>
 								<p className='text-gray-500'>{productList?.amp_per_phase}</p>
 							</div>
 							<div className='py-5'>
@@ -136,7 +137,7 @@ export default function Details() {
 									type='submit'
 									className='w-44 text-xl h-12 bg-white text-orange-600 border border-orange-600 rounded mx-auto uppercase tracking-wider font-semibold'
 								>
-									Order Online
+									{t("Order Online")}
 								</button>
 							</div>
 						</div>
@@ -154,7 +155,7 @@ export default function Details() {
 
 			{/* Technical Problems */}
 			<section className='w-full flex flex-col items-center justify-center py-5'>
-				<h3 className='font-semibold text-5xl text-black'>Technical Problems</h3>
+				<h3 className='font-semibold text-5xl text-black'>{t("Technical Problems")}</h3>
 
 				<div className='w-full flex flex-col items-center my-5'>
 					<div className='  w-10/12 '>
@@ -188,7 +189,7 @@ export default function Details() {
 						type='submit'
 						className='w-full text-xl h-12 bg-white text-orange-600 border border-orange-600 rounded px-5 pt-2 pb-2  uppercase tracking-wider font-semibold flex flex-row'
 					>
-						Download PDF <Download className='ml-2' />{' '}
+						{t("Download PDF")} <Download className='ml-2' />{' '}
 					</button>
 				</div>
 			</section>
@@ -204,12 +205,12 @@ export default function Details() {
 						<div className='w-full'>
 							<div className='flex flex-row items-center justify-center'>
 								<p className='text-xl text-center'>
-									For more information about
+									{t("For more information about")}
 									<span className='font-semibold text-gray-700 uppercase text-xl'>
 										{' '}
-										Long Lian Industry and Trade Generators
+										{t("Long Lian Industry and Trade Generators")}
 									</span>{' '}
-									Get in touch to speak with our experts
+									{t("Get in touch to speak with our experts")}
 								</p>
 							</div>
 						</div>
@@ -218,7 +219,7 @@ export default function Details() {
 								to='/contactus'
 								className='w-48 p-5 text-lg h-20 bg-orange-600 text-white rounded uppercase tracking-wider font-semibold'
 							>
-								Contact Us{' '}
+								{t("Contact Us")}{' '}
 							</Link>
 						</div>
 					</div>
@@ -240,8 +241,8 @@ export default function Details() {
 								<img src='/assets/logo.png' alt='logo' className='w-48' />
 							</span>
 						</div>
-						<h3 className='font-bold text-lg '>Make Enquiry</h3>
-						<p className='text-gray-500 mb-2'>Send us a message to answer all your questions</p>
+						<h3 className='font-bold text-lg '>"{t("Make Enquiry")}</h3>
+						<p className='text-gray-500 mb-2'>{t("Send us a message to answer all your questions")}</p>
 					</div>
 
 					<form onSubmit={makeEnquiries}>
@@ -297,7 +298,7 @@ export default function Details() {
 								type='submit'
 								className='btn w-44 bg-red-500 my-3 uppercase text-xl text-white'
 							>
-								send
+								{t("send")}
 							</button>
 							<p className='uppercase text-lg'>or</p>
 							<button
@@ -330,8 +331,8 @@ export default function Details() {
 								<img src='/assets/logo.png' alt='logo' className='w-48' />
 							</span>
 						</div>
-						<h3 className='font-bold text-lg '>Order Form</h3>
-						<p className='text-gray-500 mb-2'>Fill in the details below to place your order:</p>
+						<h3 className='font-bold text-lg '>{t("Order Form")}</h3>
+						<p className='text-gray-500 mb-2'>{t("Fill in the details below to place your order:")}</p>
 					</div>
 					<form onSubmit={makeOrderOnline}>
 						<div className='w-full grid grid-cols-2 gap-x-5 '>
@@ -403,7 +404,7 @@ export default function Details() {
 
 						<div className='form-control mt-4 flex items-center justify-center'>
 							<button type='submit' className='btn w-44 bg-orange-500 text-white text-xl'>
-								Submit Order
+								{t("Submit Order")}
 							</button>
 						</div>
 					</form>

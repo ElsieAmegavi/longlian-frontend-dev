@@ -87,27 +87,20 @@ export default function Home() {
 					</h3>
 
 					<p className='text-sm sm:text-base md:text-lg'>
-						Jingdoli Industry and Trade Co., Ltd, specializes in diesel generator sets, prioritizing
-						humanized design, professional production, and reliable support. Our generators are
-						compact, efficient, and quiet, ideal for main and backup power. We partner with top
-						companies and serve customers worldwide.
+						{t("Jingdoli Industry and Trade Co., Ltd, specializes in diesel generator sets, prioritizing humanized design, professional production, and reliable support. Our generators are compact, efficient, and quiet, ideal for main and backup power. We partner with top companies and serve customers worldwide.")}
 					</p>
 
 					<p className='text-sm sm:text-base md:text-lg'>
-						Our products are used in various fields like power plants, telecom, hospitals, and more.
-						We offer a wide range of models to meet the needs of different industries, and our
-						customers are very satisfied with our products.
+						{t("Our products are used in various fields like power plants, telecom, hospitals, and more. We offer a wide range of models to meet the needs of different industries, and our customers are very satisfied with our products.")}
 					</p>
 
 					<p className='text-sm sm:text-base md:text-lg'>
-						Africa is growing fast, but faces power shortages. China's "Belt and Road" initiative
-						aims to help. We're excited to be part of it, bringing our products to support Africa's
-						growth and development
+						{t("Africa is growing fast, but faces power shortages. China's Belt and Road initiative aims to help. We're excited to be part of it, bringing our products to support Africa's growth and development.")}
 					</p>
 
 					<Link to= '/faq'>
 						<button className='p-2 sm:p-3 text-base sm:text-lg md:text-xl max-w-32 sm:max-w-36 md:max-w-44 tracking-wider flex justify-center items-center bg-orange-600 text-white'>
-							Learn more
+							{t("Learn more")}
 						</button>
 					</Link>
 					
@@ -124,8 +117,8 @@ export default function Home() {
 						</Link>
 					))}
 					</div>
-				<div className={`bg-blue-900 p-4 sm:p-5 mt-6 sm:mt-8 md:mt-10 h-auto sm:h-[90%] md:h-[85%] lg:h-[80%] ${startSecondAnimation && 'lg:animate-slide-left'}`}>
-					<h3 className='text-white text-lg sm:text-xl'>Top Products</h3>
+				<div className={`bg-blue-900 p-4 sm:p-5 mt-6 sm:mt-8 md:mt-10 h-auto sm:h-[90%] md:h-[85%] lg:h-[80%] ${startSecondAnimation && 'animate-slide-left'}`}>
+					<h3 className='text-white text-lg sm:text-xl'>{t("Top Products")}</h3>
 					<hr className='bg-gray-400 my-2 sm:my-3 w-10/12' />
 					{!isLoading &&
 						productList?.slice(3, 6).map(product => (
@@ -144,16 +137,14 @@ export default function Home() {
 			{/* Core Values */}
 			<section ref={elementThree.containerRef} className='w-full grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 py-12 sm:py-16 md:py-20 px-4 sm:px-6 md:px-10 lg:px-16'>
 				<div className='flex flex-col justify-center relative'>
-					<h3 className={`text-orange-500 text-lg sm:text-xl font-semibold ${startThirdAnimation ? 'lg:animate-slide-down':''}`}>Why Choose Us</h3>
+					<h3 className={`text-orange-500 text-lg sm:text-xl font-semibold ${startThirdAnimation ? 'animate-slide-down':''}`}>{t("Why Choose Us")}</h3>
 
-					<h3 className={`text-2xl sm:text-3xl md:text-4xl text-navy-500 font-medium py-2 sm:py-3 ${startThirdAnimation ? 'lg:animate-slide-down' : ''}`}>
-						Our Core Values
+					<h3 className={`text-2xl sm:text-3xl md:text-4xl text-navy-500 font-medium py-2 sm:py-3 ${startThirdAnimation ? 'animate-slide-down' : ''}`}>
+						{t("Our Core Values")}
 					</h3>
 
-					<p className='mt-2 sm:mt-3 text-base sm:text-lg md:text-xl tracking-wide sm:tracking-wider leading-snug lg:animate-slide-right'>
-						At Jigdoli Industry and Trade Co, Ltd, we believe that strong values are the foundation
-						of trust, innovation, and exceptional results. Our core values guide our actions,
-						decisions. and relationships, and are at the heart of everything we do.
+					<p className='mt-2 sm:mt-3 text-base sm:text-lg md:text-xl tracking-wide sm:tracking-wider leading-snug animate-slide-right'>
+						{t("At Jigdoli Industry and Trade Co, Ltd, we believe that strong values are the foundation of trust, innovation, and exceptional results. Our core values guide our actions,decisions, and relationships, and are at the heart of everything we do.")}
 					</p>
 				</div>
 
@@ -165,11 +156,10 @@ export default function Home() {
 							</div>
 
 							<h3 className='text-xl sm:text-2xl text-navy-500 font-medium py-2 sm:py-3'>
-								Reliable
+								{t("Reliable")}
 							</h3>
 							<p className='text-sm sm:text-base'>
-								We prioritize reliability, ensuring our durable and sturdy equipment performs
-								optimally in harsh environments.
+								{t("We prioritize reliability, ensuring our durable and sturdy equipment performsoptimally in harsh environments.")}
 							</p>
 						</div>
 
@@ -179,11 +169,10 @@ export default function Home() {
 							</div>
 
 							<h3 className='text-xl sm:text-2xl text-navy-500 font-medium py-2 sm:py-3'>
-								Innovative
+								{t("Innovative")}
 							</h3>
 							<p className='text-sm sm:text-base'>
-								We embrace innovation, offering fully automatic configuration and robust protection
-								performance to meet your evolving needs.
+								{t("We embrace innovation, offering fully automatic configuration and robust protection performance to meet your evolving needs.")}
 							</p>
 						</div>
 					</div>
@@ -195,11 +184,10 @@ export default function Home() {
 							</div>
 
 							<h3 className='text-xl sm:text-2xl text-navy-500 font-medium py-2 sm:py-3'>
-								Efficient
+								{t("Efficient")}
 							</h3>
 							<p className='text-sm sm:text-base'>
-								We strive for efficiency achieving high power density and economic efficiency
-								through innovative design and material
+								{t("We strive for efficiency achieving high power density and economic efficiency through innovative design and material")}
 							</p>
 						</div>
 
@@ -209,11 +197,10 @@ export default function Home() {
 							</div>
 
 							<h3 className='text-xl sm:text-2xl text-navy-500 font-medium py-2 sm:py-3'>
-								Customer-Centric
+								{t("Customer-Centric")}
 							</h3>
 							<p className='text-sm sm:text-base'>
-								We put customers first, providing silent configuration options and a complete range
-								of products to meet the unique demands of various industries
+								{t("We put customers first, providing silent configuration options and a complete range of products to meet the unique demands of various industries")}
 							</p>
 						</div>
 					</div>
@@ -229,7 +216,7 @@ export default function Home() {
 						</div>
 						<div>
 							<p className='text-base sm:text-lg md:text-xl text-white max-w-60 sm:max-w-80 text-center'>
-								Focus on generator set products
+								{t("Focus on generator set products")}
 							</p>
 						</div>
 					</div>
@@ -244,7 +231,7 @@ export default function Home() {
 						</div>
 						<div>
 							<p className='text-base sm:text-lg md:text-xl text-white max-w-60 sm:max-w-80 text-center'>
-								Small size, light weight, no noise
+								{t("Small size, light weight, no noise")}
 							</p>
 						</div>
 					</div>
@@ -259,7 +246,7 @@ export default function Home() {
 						</div>
 						<div>
 							<p className='text-base sm:text-lg md:text-xl text-white max-w-60 sm:max-w-80 text-center'>
-								Less exhaust gas, less fuel consumption, good starting performance
+								{t("Less exhaust gas, less fuel consumption, good starting performance")}
 							</p>
 						</div>
 					</div>
@@ -269,12 +256,47 @@ export default function Home() {
 			{/* testimonials */}
 			<section className='w-full flex flex-col items-center p-6 sm:p-8 md:p-10 py-16 sm:py-20 md:py-32 lg:py-44'>
 				<h3 className='text-orange-500 text-2xl sm:text-3xl md:text-4xl font-semibold tracking-wider text-center'>
-					Clients Testimonials
+					{t("Clients Testimonials")}
 				</h3>
 				<div className='w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 mt-8 sm:mt-10 max-w-[1450px]'>
-					<Card />
-					<Card />
-					<Card />
+					<div className='p-5 rounded-md shadow-2xl bg-white space-y-3'>
+						<div className='flex items-center gap-3'>
+							<img src='./assets/img-01.jpg' alt='logo' className='w-16 h-16  rounded-full' />
+							<div>
+								<h3 className='text-lg text-orange-500 font-medium'>{t("Prof Freda Abban")}</h3>
+								<p className='text-sm text-gray-500'>{t("Deputy Speaker")}</p>
+							</div>
+						</div>
+						<div className='pt-5'>
+							{t("Long Lian Industry and Trade's products have been a game changer for our business.Their generator have proven to be reliable,efficient and durable. We can't recommend them enough")}
+						</div>
+					</div>
+
+					<div className='p-5 rounded-md shadow-2xl bg-white space-y-3'>
+						<div className='flex items-center gap-3'>
+							<img src='./assets/img-01.jpg' alt='logo' className='w-16 h-16  rounded-full' />
+							<div>
+								<h3 className='text-lg text-orange-500 font-medium'>{t("Xia Wanqui")}</h3>
+								<p className='text-sm text-gray-500'>{t("Deputy Speaker")}</p>
+							</div>
+						</div>
+						<div className='pt-5'>
+							{t("Long Lian Industry and Trade's products have been a game changer for our business.Their generator have proven to be reliable,efficient and durable. We can't recommend them enough")}
+						</div>
+					</div>
+
+					<div className='p-5 rounded-md shadow-2xl bg-white space-y-3'>
+						<div className='flex items-center gap-3'>
+							<img src='./assets/img-01.jpg' alt='logo' className='w-16 h-16  rounded-full' />
+							<div>
+								<h3 className='text-lg text-orange-500 font-medium'>{t("Prof Elliet Allan")}</h3>
+								<p className='text-sm text-gray-500'>{t("Deputy Speaker")}</p>
+							</div>
+						</div>
+						<div className='pt-5'>
+							{t("Long Lian Industry and Trade's products have been a game changer for our business.Their generator have proven to be reliable,efficient and durable. We can't recommend them enough")}
+						</div>
+					</div>
 				</div>
 			</section>
 			<Footer />

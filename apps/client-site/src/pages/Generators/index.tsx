@@ -5,6 +5,7 @@ import { getProductList } from '../../api/data/query'
 import { Footer } from '../../components/custom/Footer'
 import { FileQuestion } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import { t } from 'i18next'
 
 export default function Generators() {
 	const { data, isLoading } = useQuery({
@@ -20,7 +21,7 @@ export default function Generators() {
 			<section className='w-full h-[50vh] bg-[url("/assets/hero-gen.jpg")] bg-center bg-cover bg-no-repeat relative'>
 				<div className='w-full h-full absolute top-0 left-0 bg-black/60 flex items-center justify-center'>
 					<h2 className='text-white text-3xl md:text-4xl lg:text-6xl tracking-wider font-semibold text-center px-4'>
-						DIESEL GENERATORS
+						{t("DIESEL GENERATORS")}
 					</h2>
 				</div>
 			</section>
@@ -43,7 +44,7 @@ export default function Generators() {
 			{/* Products */}
 			<section className='w-full grid grid-cols-1 lg:grid-cols-3 gap-4 px-4 md:px-8 lg:px-16 mt-10'>
 				<div className='w-full p-6 md:p-10 bg-gray-100 flex flex-col items-center mb-4 lg:mb-0'>
-					<h3 className='text-xl md:text-2xl font-semibold'>Quick Search</h3>
+					<h3 className='text-xl md:text-2xl font-semibold'>{t("Quick Search")}</h3>
 					<hr className='w-10/12 my-3 bg-black' />
 					<div className='w-full flex flex-col pl-5 gap-3'>
 						{!isLoading &&
@@ -76,12 +77,11 @@ export default function Generators() {
 							<div className='h-12 w-12 md:h-16 md:w-16 rounded-full bg-orange-600 flex justify-center items-center'>
 								<FileQuestion className='text-white size-6 md:size-10' />
 							</div>
-							<h3 className='text-2xl md:text-3xl font-semibold'>MAKE ENQUIRY</h3>
+							<h3 className='text-2xl md:text-3xl font-semibold'>{t("MAKE ENQUIRY")}</h3>
 						</div>
 
 						<p className='text-base md:text-lg tracking-wide leading-snug'>
-							Didn't find what you were looking for? No problem! Contact us today to discuss your
-							generator needs and let us help you find the perfect solution.
+							{t("Didn't find what you were looking for? No problem! Contact us today to discuss your generator needs and let us help you find the perfect solution.")}
 						</p>
 					</div>
 					<div className='w-full mt-6 lg:mt-0'>
@@ -119,7 +119,7 @@ export default function Generators() {
 								type='submit'
 								className='w-full sm:w-32 text-lg md:text-xl h-12 bg-orange-600 text-white rounded hover:bg-orange-700 uppercase tracking-wider'
 							>
-								Send
+								{t("Send")}
 							</button>
 						</div>
 					</div>

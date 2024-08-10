@@ -5,6 +5,7 @@ import { useMutation } from "@tanstack/react-query";
 import { contactUs } from "../../api/data/mutations";
 import { useState } from "react";
 import Dialog from "../../components/custom/Dialog";
+import { t } from "i18next";
 
 export default function ContactUs() {
     const [openDialog, setOpenDialog] = useState(false);
@@ -60,7 +61,7 @@ export default function ContactUs() {
 
                         <div>
                             <h3 className='text-2xl font-semibold'>
-                                Phone Number
+                                {this("Phone Number")}
                             </h3>
                             <p className="text-gray-700 text-sm font-semibold">
                                 +233 53 509 7486
@@ -76,12 +77,12 @@ export default function ContactUs() {
 
                         <div>
                             <h3 className='text-2xl font-semibold'>
-                                Address
+                                {t("Address")}
                             </h3>
                             <p className="text-gray-700 text-sm font-semibold">
-                                Adjecent Sunu Assurance 61
+                                {t("Adjecent Sunu Assurance 61")}
                                 <br />
-                                George Bush Hwy GA-157-8719
+                                {t("George Bush Hwy GA-157-8719")}
                             </p>
                         </div>
                     </div>
@@ -93,10 +94,10 @@ export default function ContactUs() {
 
                         <div>
                             <h3 className='text-2xl font-semibold'>
-                                Email Address
+                                {t("Email Address")}
                             </h3>
                             <p className="text-gray-700 text-sm font-semibold">
-                                jingdoli@gmail.com
+                                {t("jingdoli@gmail.com")}
                             </p>
                         </div>
 
@@ -105,11 +106,11 @@ export default function ContactUs() {
                 <div className='w-full bg-white px-10'>
                     <div className='w-full gap-x-72 gap-y-6 py-10 tracking-wider'>
                         <h3 className='text-2xl font-semibold uppercase mb-5'>
-                            Send a message
+                            {t("Send a message")}
                         </h3>
 
                         <p className="text-gray-700 text-sm">
-                            If you got any questions don't hesitate to send us a message
+                            {t("If you got any questions don't hesitate to send us a message")}
                         </p>
                         <div className='w-full grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6 py-10 tracking-wider'>
                             <input id='text' placeholder='First Name' value={formData.first_name}
@@ -140,7 +141,7 @@ export default function ContactUs() {
                                 className={`w-32 text-xl h-12 bg-orange-600 text-white rounded hover:bg-orange-600 mx-auto uppercase tracking-wider disabled:bg-orange-300 disabled:cursor-not-allowed ${isPending && 'animate-pulse'}`}
                                 onClick={submit}
                             >
-                                Send
+                                {t("Send")}
                             </button>
                         </div>
                     </div>
@@ -151,11 +152,11 @@ export default function ContactUs() {
             <section className="w-full flex flex-col items-center justify-center">
                 <div className="w-full py-10 flex items-center justify-center flex-col">
                     <h3 className='text-4xl text-gray-800 font-semibold mb-5 '>
-                        Find Us On Google Maps
+                        {t("Find Us On Google Maps")}
                     </h3>
 
                     <p className="text-gray-500 font-semibold text-md ">
-                        Discover our location: Long Lian Industry and Trade on Google Maps - Visit us today!
+                        {t("Discover our location: Long Lian Industry and Trade on Google Maps - Visit us today!")}
                     </p>
                 </div>
                 <div className="w-full max-w-4xl aspect-w-16 aspect-h-10 py-10">
