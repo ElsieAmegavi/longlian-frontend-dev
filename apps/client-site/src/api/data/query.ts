@@ -1,5 +1,5 @@
 import { api } from '../client'
-import { ProductResponseSchema, ProductResponseType, SingleProductResponseSchema } from '../schema'
+import {  ProductResponseType} from '../schema'
 
 export const getProductList = async () => {
 	const res = await api.get('/products')

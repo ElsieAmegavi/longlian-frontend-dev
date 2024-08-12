@@ -72,7 +72,7 @@ export default function Home() {
 						className={`w-full sm:w-4/5 md:w-3/4 lg:w-[561px] h-[250px] sm:h-[300px] md:h-[350px] lg:h-[452px] object-cover object-center ${startFirstAnimation ? 'lg:animate-slide-down': ''}`}
 					/>
 					<img
-						src='/assets/about-img-01.jpg'
+						src='/assets/longlian-about.png'
 						alt='about-page'
 						className={`hidden lg:block w-[561px] h-[452px] object-cover object-center absolute top-16 -right-10 ${startFirstAnimation ? 'lg:animate-slide-right' : ''}`}
 					/>
@@ -82,11 +82,11 @@ export default function Home() {
 					<h3 className='text-orange-500 text-lg sm:text-xl font-semibold'>{t("About")}</h3>
 
 					<h3 className='text-xl sm:text-2xl md:text-3xl text-navy-500 font-medium py-2 sm:py-3'>
-						{t("Know More About Jingdoli")}
+						{t("Know More About LongLian")}
 					</h3>
 
 					<p className='text-sm sm:text-base md:text-lg'>
-						{t("Jingdoli Industry and Trade Co., Ltd, specializes in diesel generator sets, prioritizing humanized design, professional production, and reliable support. Our generators are compact, efficient, and quiet, ideal for main and backup power. We partner with top companies and serve customers worldwide.")}
+						{t("LongLian Industry and Trade Co., Ltd, specializes in diesel generator sets, prioritizing humanized design, professional production, and reliable support. Our generators are compact, efficient, and quiet, ideal for main and backup power. We partner with top companies and serve customers worldwide.")}
 					</p>
 
 					<p className='text-sm sm:text-base md:text-lg'>
@@ -143,7 +143,7 @@ export default function Home() {
 					</h3>
 
 					<p className='mt-2 sm:mt-3 text-base sm:text-lg md:text-xl tracking-wide sm:tracking-wider leading-snug animate-slide-right'>
-						{t("At Jigdoli Industry and Trade Co, Ltd, we believe that strong values are the foundation of trust, innovation, and exceptional results. Our core values guide our actions,decisions, and relationships, and are at the heart of everything we do.")}
+						{t("At LongLian Industry and Trade Co, Ltd, we believe that strong values are the foundation of trust, innovation, and exceptional results. Our core values guide our actions,decisions, and relationships, and are at the heart of everything we do.")}
 					</p>
 				</div>
 
@@ -207,7 +207,7 @@ export default function Home() {
 			</section>
 
 			{/* Kpi */}
-			<section className='w-full bg-[url("/assets/kpi.png")] bg-cover bg-no-repeat bg-center flex flex-col items-center'>
+			<section className='w-full bg-[url("/assets/longlian-about.png")] bg-cover bg-no-repeat bg-center flex flex-col items-center'>
 				<div className='w-full grid grid-cols-3 gap-10 bg-[#000522BF] p-10 py-40'>
 					<div className='w-full flex flex-col items-center gap-5'>
 						<div className='w-44 h-44 rounded-full bg-[#FBECE6] mt-5 items-center justify-center flex relative'>

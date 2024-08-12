@@ -46,7 +46,7 @@ export default function ContactUs() {
             <Navbar />
 
             {/* Image */}
-            <section className='w-full h-[65vh] bg-[url("/assets/contactus.png")] bg-center bg-cover bg-no-repeat relative'>
+            <section className='w-full h-[50vh] bg-[url("/assets/longlian-contact.png")] bg-center bg-cover bg-no-repeat relative'>
 
             </section>
 
