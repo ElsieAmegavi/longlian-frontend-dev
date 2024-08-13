@@ -1,11 +1,11 @@
 import { api } from '../client'
-import {  ProductResponseType} from '../schema'
+import {  ProductResponseType, ProductsResponseType} from '../schema'
 
 export const getProductList = async () => {
 	const res = await api.get('/products')
 	// const response = ProductResponseSchema.parse(res.data)
 	// if (response.response_code === '000') {
-		return res.data as ProductResponseType
+		return res.data as ProductsResponseType
 	// } else {
 		// console.error('Something went wrong')
 		// throw Error

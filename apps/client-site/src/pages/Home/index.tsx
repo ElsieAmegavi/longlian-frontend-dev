@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useElementOnScreen } from '../../hooks/useElementOnScreen'
 import { useState } from 'react'
+import { ProductType } from '../../api/schema'
 
 export default function Home() {
 	const { t } = useTranslation()
@@ -15,33 +16,35 @@ export default function Home() {
 	const [startThirdAnimation, setStartThirdAnimation] = useState(false)
 
 	const elementOne = useElementOnScreen({
-	  root: null,
-	  rootMargin: '0px',
-	  treshold: 1.0
+		root: null, 
+		rootMargin: '0px',
+		treshold: 1.0
 	}, () => {
-	  if (!startFirstAnimation) setStartFirstAnimation(true)
+		if (!startFirstAnimation) setStartFirstAnimation(true)
 	});
 
 	const elementTwo = useElementOnScreen({
 		root: null,
 		rootMargin: '0px',
 		treshold: 1.0
-	  }, () => {
+	}, () => {
 		if (!startSecondAnimation) setstartSecondAnimation(true)
-	  });
+	});
 
-	  const elementThree = useElementOnScreen({
+	const elementThree = useElementOnScreen({
 		root: null,
 		rootMargin: '0px',
 		treshold: 1.0
-	  }, () => {
+	}, () => {
 		if (!startThirdAnimation) setStartThirdAnimation(true)
-	  });
+	});
+
 	const { data, isLoading } = useQuery({
 		queryKey: ['products'],
 		queryFn: () => getProductList(),
 	})
-	const productList = data?.data
+	const productList: ProductType[] = data?.data;
+
 	return (
 		<main className='pt-14 sm:pt-16 md:pt-18 lg:pt-20'>
 			<Navbar />

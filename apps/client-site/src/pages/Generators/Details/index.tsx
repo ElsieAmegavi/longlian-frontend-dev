@@ -8,8 +8,15 @@ import { ProductType } from '../../../api/schema'
 import { makeEnquiry, orderOnline } from '../../../api/data/mutations'
 import Dialog from '../../../components/custom/Dialog'
 import { useState } from "react";
-
 import { t } from 'i18next'
+
+interface ApiResponse {
+    data: {
+        response_code: string;
+        response_message: string;
+    }
+}
+
 export default function Details() {
 	const { id } = useParams()
 
@@ -32,7 +39,6 @@ export default function Details() {
 	})
 
 	const productList: ProductType = data?.data
-	console.log({ productList })
 
 	const openModal = (modalId: string) => {
 		const modal = document.getElementById(modalId) as HTMLDialogElement | null
@@ -44,14 +50,14 @@ export default function Details() {
 	const makeEnquiries = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 		const data = new FormData(e.target as HTMLFormElement)
-		console.log(Object.fromEntries(data.entries()))
-		const res: any = await createEnquiryMutation.mutateAsync(Object.fromEntries(data.entries()))
+		// console.log(Object.fromEntries(data.entries()))
+		const res = await createEnquiryMutation.mutateAsync(Object.fromEntries(data.entries())) as ApiResponse;
 		const modal = document.getElementById('enquiry_modal') as HTMLDialogElement | null
 		setMessage(null);
 		if (res.data.response_code === '002') {
 			modal.close()
 			setOpenDialog(true);
-			e.target.reset();
+			(e.target as HTMLFormElement).reset();
 		} else {
 			modal.close();
 			setMessage(res?.data?.response_message)
@@ -62,17 +68,17 @@ export default function Details() {
 	const makeOrderOnline = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 		const data = new FormData(e.target as HTMLFormElement)
-		console.log(Object.fromEntries(data.entries()))
-		const res: any = await createOrderMutation.mutateAsync({
+		// console.log(Object.fromEntries(data.entries()))
+		const res = await createOrderMutation.mutateAsync({
 			...Object.fromEntries(data.entries()),
 			product_id: Number(id),
-		})
+		}) as ApiResponse
 		const modal = document.getElementById('order_modal') as HTMLDialogElement | null
 		setMessage(null);
 		if (res.data.response_code === '009') {
 			modal.close()
 			setOpenDialog(true);
-			e.target.reset();
+			(e.target as HTMLFormElement).reset();
 		} else {
 			modal.close();
 			setMessage(res?.data?.response_message)
@@ -149,7 +155,7 @@ export default function Details() {
 
             </div> */}
 				<div className=''>
-					<img src={productList?.picture_url || ''} alt={productList?.model!} className='' />
+					<img src={productList?.picture_url || ''} alt={productList?.model} className='' />
 				</div>
 			</section>
 

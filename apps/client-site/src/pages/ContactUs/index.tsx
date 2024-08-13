@@ -7,24 +7,43 @@ import { useState } from "react";
 import Dialog from "../../components/custom/Dialog";
 import { t } from "i18next";
 
+interface FormData {
+    first_name: string;
+    last_name: string;
+    email: string;
+    phone_number: string;
+    message: string;
+}
+
+interface ApiResponse {
+    data: {
+        response_code: string;
+        response_message: string;
+    }
+}
+
 export default function ContactUs() {
     const [openDialog, setOpenDialog] = useState(false);
     const [message, setMessage] = useState('')
-    const [formData, setFormData] = useState({
+    const [formData, setFormData] = useState<FormData>({
         first_name: '',
         last_name: '',
-        email: "",
+        email: '',
         phone_number: '',
-        message: '',
-    })
-    const { mutateAsync, isPending } = useMutation({
-        mutationFn: (data) => contactUs(data)
-    })
+        message: ''
+    });
+
+    
+    const { mutateAsync, isPending } = useMutation<ApiResponse, Error, FormData>({
+        mutationFn: (data: FormData) => contactUs(data)
+    });
+    
+    
     const submit = async () => {
         try {
-            const response = await mutateAsync(formData);
+            const response = await mutateAsync(formData) as ApiResponse;
             setMessage(null);
-            if (response?.data?.response_code == "100") {
+            if (response?.data?.response_code === "100") {
                 setFormData({
                     first_name: '',
                     last_name: '',
@@ -34,11 +53,12 @@ export default function ContactUs() {
                 });
                 setOpenDialog(true);
             } else {
-                setMessage(response?.data?.response_message)
+                setMessage(response?.data?.response_message);
                 setOpenDialog(true);
             }
         } catch (error) {
-
+            setMessage("Sorry, an error occurred. Please try again");
+            setOpenDialog(true);
         }
     }
     return (

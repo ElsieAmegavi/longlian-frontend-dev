@@ -37,4 +37,6 @@ export const SingleProductResponseSchema = z.object({
 })
 
 export type ProductType = z.infer<typeof ProductSchema>
-export type ProductResponseType = z.infer<typeof ProductResponseSchema>
+export type ProductResponseType = z.infer<typeof SingleProductResponseSchema>
+export type ProductsResponseType = z.infer<typeof ProductResponseSchema>
+
