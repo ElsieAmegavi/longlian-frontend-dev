@@ -179,14 +179,14 @@ export default function ContactUs() {
                         {t("Discover our location: Long Lian Industry and Trade on Google Maps - Visit us today!")}
                     </p>
                 </div>
-                <div className="w-full max-w-4xl aspect-w-16 aspect-h-10 py-10">
-                    <iframe
-                        className="w-full h-full"
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.8354345094856!2d144.95373531535066!3d-37.81720997975195!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf0727e4f6f8917e5!2sFederation%20Square!5e0!3m2!1sen!2sau!4v1615428945422!5m2!1sen!2sau"
-                        allowFullScreen={false}
-                        loading="lazy">
-                    </iframe>
-                </div>
+               <div className="w-full max-w-4xl aspect-w-16 aspect-h-9 py-6 sm:py-8 md:py-10">
+                <iframe 
+                    className="w-full h-[300px] sm:h-[400px] md:h-[500px]"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.8354345094856!2d144.95373531535066!3d-37.81720997975195!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf0727e4f6f8917e5!2sFederation%20Square!5e0!3m2!1sen!2sau!4v1615428945422!5m2!1sen!2sau" 
+                    allowFullScreen={false}
+                    loading="lazy">
+                </iframe>
+            </div>
             </section>
 
             <Footer />
