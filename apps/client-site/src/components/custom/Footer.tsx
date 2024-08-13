@@ -35,7 +35,7 @@ export const Footer = () => {
             <ul className="flex flex-col gap-3 text-white tracking-wide">
               <li>{t("Address: Adjecent Sunu Assurance")}</li>
               <li>{t("Phone: +233 535 097 486")}</li>
-              <li>{t("Email: jingdoli@gmail.com")}</li>
+              <li>{t("Email: longliangh07@gmail.com")}</li>
             </ul>
           </div>
           

@@ -89,11 +89,11 @@ export default function Home() {
 					</h3>
 
 					<p className='text-sm sm:text-base md:text-lg'>
-						{t("LongLian Industry and Trade Co., Ltd, specializes in diesel generator sets, prioritizing humanized design, professional production, and reliable support. Our generators are compact, efficient, and quiet, ideal for main and backup power. We partner with top companies and serve customers worldwide.")}
+						{t("Our company, Long Lian Industry and Trading Limited, specializes in diesel generators and has been in operation for over 20 years. We adhere to the principles of human-centered design, follow professional production standards, and provide quality after-sales service. Our commitment to continuous research, development, and meeting market demands has always been our hallmark. We continuously invest in and produce the latest international cutting-edge technology. Our products come in various volumes and sizes, are lightweight, produce low noise, consume less fuel, emit less, and guarantee smooth startup and performance. Our products serve as an ideal main power supply and emergency backup power supply")}
 					</p>
 
 					<p className='text-sm sm:text-base md:text-lg'>
-						{t("Our products are used in various fields like power plants, telecom, hospitals, and more. We offer a wide range of models to meet the needs of different industries, and our customers are very satisfied with our products.")}
+						{t("Over the years, our company has established long-term partnerships with world-renowned companies such as CUMMINS, Perkins, Weichai, Yuchai, and Shangchai. Our business has expanded to Southeast Asia, the Middle East, and South America, with our products being widely utilized in various industries, including: powerhouse stations, telecommunications stations, military service, railway industry, road and construction, banking , real estate, manufacturing, hospitals, schools and other industries. Our comprehensive range of products meets all power supply needs, as attested to by our satisfied customers.")}
 					</p>
 
 					<p className='text-sm sm:text-base md:text-lg'>
@@ -146,7 +146,7 @@ export default function Home() {
 					</h3>
 
 					<p className='mt-2 sm:mt-3 text-base sm:text-lg md:text-xl tracking-wide sm:tracking-wider leading-snug animate-slide-right'>
-						{t("At LongLian Industry and Trade Co, Ltd, we believe that strong values are the foundation of trust, innovation, and exceptional results. Our core values guide our actions,decisions, and relationships, and are at the heart of everything we do.")}
+						{t("At Long Lian Industry and Trade Co, Ltd, we believe that strong values are the foundation of trust, innovation, and exceptional results. Our core values guide our actions,decisions, and relationships, and are at the heart of everything we do.")}
 					</p>
 				</div>
 
@@ -263,7 +263,7 @@ export default function Home() {
 				<div className='w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 mt-8 sm:mt-10 max-w-[1450px]'>
 					<div className='p-5 rounded-md shadow-2xl bg-white space-y-3'>
 						<div className='flex items-center gap-3'>
-							<img src='./assets/img-01.jpg' alt='logo' className='w-16 h-16  rounded-full' />
+							<img src='./assets/card2.png' alt='logo' className='w-16 h-16  rounded-full' />
 							<div>
 								<h3 className='text-lg text-orange-500 font-medium'>{t("Prof Freda Abban")}</h3>
 								<p className='text-sm text-gray-500'>{t("Deputy Speaker")}</p>
@@ -276,7 +276,7 @@ export default function Home() {
 
 					<div className='p-5 rounded-md shadow-2xl bg-white space-y-3'>
 						<div className='flex items-center gap-3'>
-							<img src='./assets/img-01.jpg' alt='logo' className='w-16 h-16  rounded-full' />
+							<img src='./assets/card1.jpg' alt='logo' className='w-16 h-16  rounded-full' />
 							<div>
 								<h3 className='text-lg text-orange-500 font-medium'>{t("Xia Wanqui")}</h3>
 								<p className='text-sm text-gray-500'>{t("Deputy Speaker")}</p>
@@ -289,7 +289,7 @@ export default function Home() {
 
 					<div className='p-5 rounded-md shadow-2xl bg-white space-y-3'>
 						<div className='flex items-center gap-3'>
-							<img src='./assets/img-01.jpg' alt='logo' className='w-16 h-16  rounded-full' />
+							<img src='./assets/card3.jpeg' alt='logo' className='w-16 h-16  rounded-full' />
 							<div>
 								<h3 className='text-lg text-orange-500 font-medium'>{t("Prof Elliet Allan")}</h3>
 								<p className='text-sm text-gray-500'>{t("Deputy Speaker")}</p>

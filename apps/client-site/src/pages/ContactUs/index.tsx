@@ -100,9 +100,9 @@ export default function ContactUs() {
                                 {t("Address")}
                             </h3>
                             <p className="text-gray-700 text-sm font-semibold">
-                                {t("Adjecent Sunu Assurance 61")}
+                                {t("Adjecent Sunu Assurance")}
                                 <br />
-                                {t("George Bush Hwy GA-157-8719")}
+                                {t("61 George Bush Hwy GA-157-8719")}
                             </p>
                         </div>
                     </div>
@@ -117,7 +117,7 @@ export default function ContactUs() {
                                 {t("Email Address")}
                             </h3>
                             <p className="text-gray-700 text-sm font-semibold">
-                                {t("jingdoli@gmail.com")}
+                                {t("longliangh07@gmail.com")}
                             </p>
                         </div>
 
