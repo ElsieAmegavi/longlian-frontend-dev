@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import PageHead from '@/components/custom/page-head'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent } from '@/components/ui/tabs'
@@ -23,6 +24,7 @@ export default function DashboardPage() {
 		if (!user) {
 			router.push('/login')
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	const { data: orders } = useQuery({
@@ -140,27 +142,35 @@ export default function DashboardPage() {
 							</Card>
 						</div>
 						<div className='grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3'>
-							<Card className=''>
-								<CardContent className='w-full p-0 h-20 flex items-center justify-center'>
-									<Link to='new-quote' className='text-xl tracking-wider font-semibold'>
-										Create New Quote
-									</Link>
-								</CardContent>
-							</Card>
-							<Card className=''>
-								<CardContent className='w-full p-0 h-20 flex items-center justify-center'>
-									<Link to='all-quote' className='text-xl tracking-wider font-semibold'>
-										View All Quote
-									</Link>
-								</CardContent>
-							</Card>
-							<Card className=''>
-								<CardContent className='w-full p-0 h-20 flex items-center justify-center'>
-									<Link to='generate' className='text-xl tracking-wider font-semibold'>
-										Generate Report
-									</Link>
-								</CardContent>
-							</Card>
+							<Link to="new-quote" className="w-full">
+								<Card className="cursor-pointer">
+									<CardContent className="w-full p-0 h-20 flex items-center justify-center">
+										<span className="text-xl tracking-wider font-semibold">
+											Create New Quote
+										</span>
+									</CardContent>
+								</Card>
+							</Link>
+
+							<Link to="all-quote" className="w-full">
+								<Card className="cursor-pointer">
+									<CardContent className="w-full p-0 h-20 flex items-center justify-center">
+										<span className="text-xl tracking-wider font-semibold">
+											View All Quote
+										</span>
+									</CardContent>
+								</Card>
+							</Link>
+
+							<Link to="generate" className="w-full">
+								<Card className="cursor-pointer">
+									<CardContent className="w-full p-0 h-20 flex items-center justify-center">
+										<span className="text-xl tracking-wider font-semibold">
+											Generate Report
+										</span>
+									</CardContent>
+								</Card>
+							</Link>
 							{/* <Card className="col-span-4">
                 <CardHeader>
                   <CardTitle>Overview</CardTitle>

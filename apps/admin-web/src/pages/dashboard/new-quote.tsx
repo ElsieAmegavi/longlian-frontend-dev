@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 
 import { Input } from '@/components/ui/input'
@@ -42,7 +43,7 @@ export default function NewQuote() {
 		if (data.get('first_name') === '' || data.get('last_name') === '') {
 			return
 		}
-		const res: any = await createQuoteMutation.mutateAsync(Object.fromEntries(data.entries()))
+		const res: any = await createQuoteMutation.mutateAsync(Object.fromEntries(data.entries()));
 
 		if (res.data.response_code === '007') {
 			router.push('/all-quote')

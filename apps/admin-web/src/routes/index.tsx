@@ -10,7 +10,7 @@ import Report from '@/pages/report'
 import Settings from '@/pages/settings'
 import General from '@/pages/settings/general'
 import { Suspense, lazy } from 'react'
-import { Navigate, Outlet, redirect, useRoutes } from 'react-router-dom'
+import { Navigate, Outlet, useRoutes } from 'react-router-dom'
 import Cookies from 'js-cookie'
 const DashboardLayout = lazy(() => import('@/pages/layout'))
 const LoginPage = lazy(() => import('@/pages/auth/login'))
@@ -102,6 +102,7 @@ export default function AppRouter() {
 		},
 	]
 
+	// eslint-disable-next-line react-hooks/rules-of-hooks
 	const routes = useRoutes([...dashboardRoutes, ...publicRoutes])
 
 	return routes
