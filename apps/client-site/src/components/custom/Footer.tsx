@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { t } from "i18next";
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { pdfjs } from 'react-pdf';
 import PdfPreviewModal from '../custom/PdfPreviewModal';
 import Modal from 'react-modal';
@@ -45,7 +45,7 @@ export const Footer = () => {
           <div className="w-full sm:w-fit">
             <h3 className="text-white text-xl lg:text-2xl tracking-wider mb-4">{t("Further Information")}</h3>
             <ul className="flex flex-col gap-3 text-white tracking-wide">
-              <li><a href="#" className="hover:text-orange-500 transition-colors" onClick={() => openModal(termsAndConditionPdf)}>{t("Terms and conditions")}</a></li>
+              <li><a href="#" className="hover:text-orange-500 transition-colors" onClick={() => openModal(termsAndConditionPdf)}>{t("Terms and Conditions")}</a></li>
               <li><a href="#" className="hover:text-orange-500 transition-colors" onClick={() => openModal(privacyPolicyPdfUrl)}>{t("Privacy Policy")}</a></li>
               <li><Link to="/faq" className="hover:text-orange-500 transition-colors">{t("FAQ")}</Link></li>
             </ul>
@@ -60,7 +60,7 @@ export const Footer = () => {
           <div className="w-full sm:w-fit">
             <h3 className="text-white text-xl lg:text-2xl tracking-wider mb-4">{t("Contact Information")}</h3>
             <ul className="flex flex-col gap-3 text-white tracking-wide">
-              <li>{t("Address: Adjecent Sunu Assurance")}</li>
+              <li>{t("Address: Adjacent Sunu Assurance")}</li>
               <li>{t("Phone: +233 535 097 486")}</li>
               <li>{t("Email: longliangh07@gmail.com")}</li>
             </ul>
