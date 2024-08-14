@@ -211,46 +211,46 @@ export default function Home() {
 
 			{/* Kpi */}
 			<section className='w-full bg-[url("/assets/longlian-about.png")] bg-cover bg-no-repeat bg-center flex flex-col items-center'>
-				<div className='w-full grid grid-cols-3 gap-10 bg-[#000522BF] p-10 py-40'>
-					<div className='w-full flex flex-col items-center gap-5'>
-						<div className='w-44 h-44 rounded-full bg-[#FBECE6] mt-5 items-center justify-center flex relative'>
-							<img src='/assets/20-years.png' alt='20 years' className='h-36 w-36' />
-						</div>
-						<div>
-							<p className='text-base sm:text-lg md:text-xl text-white max-w-60 sm:max-w-80 text-center'>
-								{t("Focus on generator set products")}
-							</p>
-						</div>
+				<div className='w-full grid grid-cols-3 gap-8 bg-[#000522BF] p-8 py-20'>
+					<div className='w-full flex flex-col items-center gap-4'>
+					<div className='w-40 h-40 sm:w-32 sm:h-32 md:w-36 md:h-36 rounded-full bg-[#FBECE6] mt-3 items-center justify-center flex relative'>
+						<img src='/assets/20-years.png' alt='20 years' className='h-32 w-32' />
+					</div>
+					<div>
+						<p className='text-sm sm:text-base md:text-lg text-white max-w-52 sm:max-w-72 text-center'>
+						{t("Focus on generator set products")}
+						</p>
+					</div>
 					</div>
 
-					<div className='w-full flex flex-col items-center gap-4 sm:gap-5'>
-						<div className='w-32 h-32 sm:w-36 sm:h-36 md:w-44 md:h-44 rounded-full bg-[#FBECE6] mt-4 sm:mt-5 items-center justify-center flex'>
-							<img
-								src='/assets/generator.png'
-								alt='generator'
-								className='h-24 w-24 sm:h-28 sm:w-28 md:h-32 md:w-32'
-							/>
-						</div>
-						<div>
-							<p className='text-base sm:text-lg md:text-xl text-white max-w-60 sm:max-w-80 text-center'>
-								{t("Small size, light weight, no noise")}
-							</p>
-						</div>
+					<div className='w-full flex flex-col items-center gap-4'>
+					<div className='w-32 h-32 sm:w-28 sm:h-28 md:w-36 md:h-36 rounded-full bg-[#FBECE6] mt-3 items-center justify-center flex'>
+						<img
+						src='/assets/generator.png'
+						alt='generator'
+						className='h-20 w-20 sm:h-24 sm:w-24 md:h-28 md:w-28'
+						/>
+					</div>
+					<div>
+						<p className='text-sm sm:text-base md:text-lg text-white max-w-52 sm:max-w-72 text-center'>
+						{t("Small size, light weight, no noise")}
+						</p>
+					</div>
 					</div>
 
-					<div className='w-full flex flex-col items-center gap-4 sm:gap-5'>
-						<div className='w-32 h-32 sm:w-36 sm:h-36 md:w-44 md:h-44 rounded-full bg-[#FBECE6] items-center justify-center flex'>
-							<img
-								src='/assets/house.png'
-								alt='house'
-								className='h-24 w-24 sm:h-28 sm:w-28 md:h-36 md:w-36'
-							/>
-						</div>
-						<div>
-							<p className='text-base sm:text-lg md:text-xl text-white max-w-60 sm:max-w-80 text-center'>
-								{t("Less exhaust gas, less fuel consumption, good starting performance")}
-							</p>
-						</div>
+					<div className='w-full flex flex-col items-center gap-4'>
+					<div className='w-32 h-32 sm:w-28 sm:h-28 md:w-36 md:h-36 rounded-full bg-[#FBECE6] items-center justify-center flex'>
+						<img
+						src='/assets/house.png'
+						alt='house'
+						className='h-20 w-20 sm:h-24 sm:w-24 md:h-28 md:w-28'
+						/>
+					</div>
+					<div>
+						<p className='text-sm sm:text-base md:text-lg text-white max-w-52 sm:max-w-72 text-center'>
+						{t("Less exhaust gas, less fuel consumption, good starting performance")}
+						</p>
+					</div>
 					</div>
 				</div>
 			</section>

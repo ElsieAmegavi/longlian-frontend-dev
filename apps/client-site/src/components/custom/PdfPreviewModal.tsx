@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Modal from 'react-modal';
 import { Document, Page } from 'react-pdf';
 
@@ -49,7 +49,7 @@ const PdfPreviewModal = ({ isOpen, onRequestClose, pdfUrl }) => {
             onLoadSuccess={onDocumentLoadSuccess}
             onLoadError={onDocumentLoadError}
           >
-            {Array.from(new Array(numPages), (el, index) => (
+            {Array.from(new Array(numPages), (_el, index) => (
               <Page
                 key={`page_${index + 1}`}
                 pageNumber={index + 1}
