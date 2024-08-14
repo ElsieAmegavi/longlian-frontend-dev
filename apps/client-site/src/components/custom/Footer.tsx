@@ -1,8 +1,29 @@
 import { Link } from "react-router-dom";
 import { t } from "i18next";
+import React, { useState } from 'react';
+import { pdfjs } from 'react-pdf';
+import PdfPreviewModal from '../custom/PdfPreviewModal';
+import Modal from 'react-modal';
 
+
+// Configure the worker to use a relative path to the node_modules directory
+pdfjs.GlobalWorkerOptions.workerSrc = '/assets/pdfs/pdf.worker.min.mjs';
+
+// Set the app element for accessibility
+Modal.setAppElement('#root');
 
 export const Footer = () => {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [pdfUrl, setPdfUrl] = useState("");
+  const termsAndConditionPdf = '/assets/pdfs/longliangh-terms-and-conditions.pdf'; // Replace with the path to your PDF file
+  const privacyPolicyPdfUrl = '/assets/pdfs/longliangh-privacy-policy.pdf'; // Replace with the path to your PDF file
+
+  const openModal = (pdf) => {
+    setModalIsOpen(true);
+    setPdfUrl(pdf);
+  };
+
+
     return (
       <footer className="w-full flex flex-col bg-[#00072D]">
         {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-8 px-4 sm:px-6 lg:px- py-10"> */}
@@ -24,11 +45,17 @@ export const Footer = () => {
           <div className="w-full sm:w-fit">
             <h3 className="text-white text-xl lg:text-2xl tracking-wider mb-4">{t("Further Information")}</h3>
             <ul className="flex flex-col gap-3 text-white tracking-wide">
-              <li><a href="#" className="hover:text-orange-500 transition-colors">{t("Terms and conditions")}</a></li>
-              <li><a href="#" className="hover:text-orange-500 transition-colors">{t("Privacy Policy")}</a></li>
+              <li><a href="#" className="hover:text-orange-500 transition-colors" onClick={() => openModal(termsAndConditionPdf)}>{t("Terms and conditions")}</a></li>
+              <li><a href="#" className="hover:text-orange-500 transition-colors" onClick={() => openModal(privacyPolicyPdfUrl)}>{t("Privacy Policy")}</a></li>
               <li><Link to="/faq" className="hover:text-orange-500 transition-colors">{t("FAQ")}</Link></li>
             </ul>
           </div>
+
+          <PdfPreviewModal
+            isOpen={modalIsOpen}
+            onRequestClose={() => setModalIsOpen(false)}
+            pdfUrl={pdfUrl}
+          />
           
           <div className="w-full sm:w-fit">
             <h3 className="text-white text-xl lg:text-2xl tracking-wider mb-4">{t("Contact Information")}</h3>
