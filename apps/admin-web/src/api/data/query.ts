@@ -28,3 +28,8 @@ export const getProducts = async () => {
    console.log({res})
    return res  
 }
+export const getQuoteId = async () => {
+   const res = await apiClient.get('/admin/get_new_quote_id')
+   console.log({res})
+   return res  
+}
