@@ -15,7 +15,7 @@ import React from 'react'
 import Cookies from 'js-cookie'
 import { useRouter } from '@/routes/hooks'
 import { useQuery } from '@tanstack/react-query'
-import { getOrders, getQuotes } from '@/api/data/query'
+import { getOrders, getQuoteStatistics } from '@/api/data/query'
 import moment from 'moment'
 export default function DashboardPage() {
 	const user = Cookies.get('user')
@@ -32,10 +32,12 @@ export default function DashboardPage() {
 		queryKey: ['orders'],
 	})
 
-	const { data: quotes } = useQuery({
-		queryFn: getQuotes,
-		queryKey: ['quotes'],
+	const { data: quotesStats } = useQuery({
+		queryFn: getQuoteStatistics,
+		queryKey: ['quotesStats'],
 	})
+
+
 	return (
 		<>
 			<PageHead title='Dashboard | App' />
@@ -63,7 +65,7 @@ export default function DashboardPage() {
 									</svg>
 								</CardHeader>
 								<CardContent>
-									<div className='text-2xl font-bold'>{(quotes?.data as any)?.data.length}</div>
+									<div className='text-2xl font-bold'>{quotesStats?.data?.totalQuoteCount}</div>
 									{/* <p className='text-xs text-muted-foreground'>
 										{((quotes?.data as any)?.data.length / 100) * 100}% from last month
 									</p> */}
@@ -87,7 +89,7 @@ export default function DashboardPage() {
 								</CardHeader>
 								<CardContent>
 									<div className='text-2xl font-bold'>
-										{(quotes?.data as any)?.data.filter((q: any) => q.status === 'Pending').length}
+										{quotesStats?.data?.pendingQuoteCount}
 									</div>
 									{/* <p className='text-xs text-muted-foreground'>+5% from last month</p> */}
 								</CardContent>
@@ -111,7 +113,7 @@ export default function DashboardPage() {
 								<CardContent>
 									<div className='text-2xl font-bold'>
 										{' '}
-										{(quotes?.data as any)?.data.filter((q: any) => q.status === 'Approved').length}
+										{quotesStats?.data?.approvedQuoteCount}
 									</div>
 									{/* <p className='text-xs text-muted-foreground'>+5% from last month</p> */}
 								</CardContent>
@@ -135,7 +137,7 @@ export default function DashboardPage() {
 								<CardContent>
 									<div className='text-2xl font-bold'>
 										{' '}
-										{(quotes?.data as any)?.data.filter((q: any) => q.status === 'Rejected').length}
+										{quotesStats?.data?.rejectedQuoteCount}
 									</div>
 									{/* <p className='text-xs text-muted-foreground'>+5% from last month</p> */}
 								</CardContent>
