@@ -12,20 +12,48 @@ import {
 } from '@/components/ui/dropdown-menu';
 import Cookies from 'js-cookie'
 import { toast } from "react-toastify"
-import { useMutation } from "@tanstack/react-query"
-import { logout } from '@/api/data/query';
+import { useMutation, useQuery } from "@tanstack/react-query"
+import { getProfile, logout } from '@/api/data/query';
 import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 
 export default function UserNav() {
   const navigate = useNavigate();
-  const cookie = Cookies.get('user');
-  const user = cookie ? JSON.parse(cookie) : null;
-    
-
+  const [formData, setFormData] = useState({
+    first_name: "",
+    last_name: "",
+    email: "",
+    phone_number: "",
+    role: "",
+  });
+  
   const logoutMutation = useMutation({
     mutationFn: logout,
   })
+
+
+  const { data: profile } = useQuery({
+    queryFn: getProfile,
+    queryKey: ["profile"],
+  });
+
+ 
+
+  useEffect(() => {
+    if (profile?.data) {
+      const { first_name, last_name, email, phone_number, user_role } = profile.data;
+
+      setFormData({
+        first_name: first_name,
+        last_name: last_name,
+        email: email || "",
+        phone_number: phone_number || "",
+        role: user_role || "",
+      });
+    }
+  }, [profile]);
+
 
 
   async function submitLogout () {
@@ -78,9 +106,9 @@ export default function UserNav() {
       <DropdownMenuContent className="w-56 bg-white" align="end" forceMount>
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-1">
-            <p className="text-sm font-medium leading-none">{user ? `${user?.first_name} ${user?.last_name}` : 'User Avatar'}</p>
+            <p className="text-sm font-medium leading-none">{formData ? `${formData?.first_name} ${formData?.last_name}` : 'User Avatar'}</p>
             <p className="text-xs leading-none text-muted-foreground">
-              {user ? `${user?.email}` : 'Email'}
+              {formData ? `${formData?.email}` : 'Email'}
             </p>
           </div>
         </DropdownMenuLabel>
