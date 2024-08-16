@@ -15,6 +15,13 @@ import Cookies from 'js-cookie'
 import Notifications from '@/pages/settings/notification'
 import Security from '@/pages/settings/security'
 import ChangePassword from '@/pages/settings/security/change-password'
+import HelpSupport from '@/pages/settings/help'
+import ContactSupport from '@/pages/settings/help/ContactSupport'
+import AdminManagement from '@/pages/settings/admin'
+import AdminManagementForm from '@/pages/settings/admin/AdminManagementForm'
+import FAQ from '@/pages/settings/help/faq'
+import ProfileSettings from '@/pages/settings/profile'
+import AdminDetails from '@/pages/settings/admin/details'
 const DashboardLayout = lazy(() => import('@/pages/layout'))
 const LoginPage = lazy(() => import('@/pages/auth/login'))
 const DashboardPage = lazy(() => import('@/pages/dashboard'))
@@ -79,7 +86,7 @@ export default function AppRouter() {
 				},
 				{
 					path: '/settings/profile',
-					element: <Settings />,
+					element: <ProfileSettings />,
 				},
 				{
 					path: '/settings/general',
@@ -97,6 +104,29 @@ export default function AppRouter() {
 					path: '/settings/security/change-password',
 					element: <ChangePassword/>
 				}
+					path: '/settings/help',
+					element: <HelpSupport />,
+				},
+				{
+					path: '/settings/help/contact-support',
+					element: <ContactSupport />,
+				},
+				{
+					path: '/settings/help/faq',
+					element: <FAQ />,
+				},
+				{
+					path: '/settings/admin',
+					element: <AdminManagement />,
+				},
+				{
+					path: '/settings/admin/form',
+					element: <AdminManagementForm />,
+				},
+				{
+					path: '/settings/admin/details',
+					element: <AdminDetails />,
+				},
 			],
 		},
 	]
