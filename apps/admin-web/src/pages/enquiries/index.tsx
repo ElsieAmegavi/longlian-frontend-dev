@@ -41,21 +41,20 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-// import { Enquiries } from "@/api/data/interfaces";
+import { Enquiries } from "@/api/data/interfaces";
 
 export default function EnquiryPage() {
   const navigate = useNavigate();
   const [date, setDate] = useState<DateRange | undefined>(undefined); // Date range starts as undefined
-  const [filteredCustomers, setFilteredCustomers] = useState<
-    { id: string; name: string }[]
-  >([]);
+  const [filteredCustomers, setFilteredCustomers] = useState<{ id: string; name: string }[]>([]);
   const [selectedCustomerName, setSelectedCustomerName] = useState("");
   const [selectedCustomerId, setSelectedCustomerId] = useState<string | null>(
     null
   );
   const [customerMap, setCustomerMap] = useState<Record<string, string>>({});
   const [status, setStatus] = useState("");
-  const [enquiriesList, setEnquiriesList] = useState<any[]>([]);
+  const [enquiriesList, setEnquiriesList] = useState<Enquiries[]>([]);
+
 
   // Fetch customers using the getCustomers query
   const { data: customers } = useQuery({
@@ -79,10 +78,10 @@ export default function EnquiryPage() {
       });
       setCustomerMap(map);
     }
-	console.log(enquiries?.data.data);
+	console.log(enquiries?.data);
 
     if (enquiries?.data) {
-      setEnquiriesList(enquiries?.data.data);
+      setEnquiriesList(enquiries?.data);
     }
   }, [customers, enquiries]);
 

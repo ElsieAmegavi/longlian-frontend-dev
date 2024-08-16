@@ -31,12 +31,15 @@ import { toast } from 'react-toastify'
 import { useRouter } from '@/routes/hooks'
 import { getProducts, getQuoteId } from '@/api/data/query'
 import { useState, useEffect } from 'react'
+import { Product } from '@/api/data/interfaces'
 
 
 export default function NewQuote() {
 	const router = useRouter()
 	const [selectedProductId, setSelectedProductId] = useState('')
 	const [quoteId, setQuoteId] = useState('')
+	const [productList, setProductList] = useState<Product[]>([]);
+
 
 	const { data: products } = useQuery({
 		queryFn: getProducts,
@@ -47,6 +50,13 @@ export default function NewQuote() {
 		queryFn: getQuoteId,
 		queryKey: ['enquiries1'],
 	})
+
+
+	useEffect(() => {   
+		if (products?.data) {
+			setProductList(products?.data);
+		}
+	}, [products]);
 
 	useEffect(() => {
 		if (quoteIdRecord?.data?.response_code === '000') {
@@ -185,7 +195,7 @@ export default function NewQuote() {
 												</SelectTrigger>
 												<SelectContent className='bg-white'>
 													<SelectGroup>
-														{products?.data?.data?.map((product: any) => (
+														{productList?.map((product: any) => (
 															<SelectItem key={product.id} value={product.id}>
 																{product.model}
 															</SelectItem>

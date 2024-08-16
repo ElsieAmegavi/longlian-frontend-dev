@@ -210,7 +210,7 @@ export default function DashboardPage() {
 										</TableRow>
 									</TableHeader>
 									<TableBody>
-										{(orders?.data as any)?.data?.map((order: any) => (
+										{(orders as any)?.data?.map((order: any) => (
 											<TableRow key={order.id} className='border-none '>
 												<TableCell>{order.id}</TableCell>
 												<TableCell className='font-medium'>

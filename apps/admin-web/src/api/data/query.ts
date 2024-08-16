@@ -1,5 +1,5 @@
 import apiClient from "../client"
-import { CustomersResponse, EnquiriesResponse, GetQuotesResponse, QuoteIdRecordResponse, QuoteStatisticsResponse } from "./interfaces"
+import { CustomersResponse, EnquiriesResponse, GetOrderResponse, GetProductResponse, GetQuotesResponse, QuoteIdRecordResponse, QuoteStatisticsResponse } from "./interfaces"
 // import { ProductResponseSchema, ProductResponseType } from "../schema"
 
 
@@ -20,8 +20,7 @@ export const getCustomers = async (): Promise<CustomersResponse | undefined> => 
 
 export const getEnquiries = async (): Promise<EnquiriesResponse | undefined> => {
    const res = await apiClient.get<EnquiriesResponse>('/admin/enquiries')
-   console.log(res.data);
-   return res 
+   return res.data ? res.data : undefined;
 }
 
 export const getEnquiry = async (id: string) => {
@@ -49,14 +48,31 @@ export const searchEnquiries = async ({customer_id, status, start_date, end_date
 };
 
 
-export const getOrders = async (p0: { start_date: string | undefined; end_date: string | undefined }) => {   
-   const res = await apiClient.get('/admin/order', p0);
-   return res  
-}
+// export const getOrders = async (p0?: { start_date: string | undefined; end_date: string | undefined }): Promise<GetOrderResponse | undefined> => {   
+//    const res = await apiClient.get<GetOrderResponse>('/admin/order', p0);
+//    return res.data ? res.data : undefined;
+// }
+
+export const getOrders = async (): Promise<GetOrderResponse | undefined> => {   
+   const res = await apiClient.get<GetOrderResponse>('/admin/order');
+   console.log(res);
+   
+   return res.data;
+};
+
+export const getOrdersFilter = async (params: { start_date?: string, end_date?: string }): Promise<GetOrderResponse | undefined> => {
+   console.log(params);
+   
+   const res = await apiClient.get<GetOrderResponse>('/admin/order', { params });
+   console.log(res);
+   
+   return res.data;
+};
+
 
 export const getQuotes = async (): Promise<GetQuotesResponse | undefined> => {
    const res = await apiClient.get<GetQuotesResponse>('/admin/quote');
-   return res;  // Ensure you're returning res.data, not just res
+   return res.data ? res.data : undefined;
 };
 
 
@@ -81,10 +97,10 @@ export const searchQuotes = async ({customer_id, status, start_date, end_date }:
 };
 
 
-export const getProducts = async () => {
-   const res = await apiClient.get('/admin/products')
+export const getProducts = async (): Promise<GetProductResponse | undefined> => {
+   const res = await apiClient.get<GetProductResponse>('/admin/products')
    console.log({res})
-   return res  
+   return res.data ? res.data : undefined;
 }
 
  
