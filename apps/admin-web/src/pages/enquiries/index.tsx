@@ -25,7 +25,7 @@ import { CalendarIcon } from "lucide-react";
 import { format } from "date-fns";
 import { Calendar } from "@/components/ui/calendar";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { getEnquiries, searchEnquiries } from "@/api/data/query";
+import { getEnquiries, searchEnquiries, getCustomers } from "@/api/data/query";
 import moment from "moment";
 import { Label } from "@/components/ui/label";
 import { Popover, PopoverTrigger } from "@radix-ui/react-popover";
@@ -41,11 +41,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+// import { Enquiries } from "@/api/data/interfaces";
 
 export default function EnquiryPage() {
   const navigate = useNavigate();
   const [date, setDate] = useState<DateRange | undefined>(undefined); // Date range starts as undefined
-  const [filteredCustomers, setFilteredCustomers] = useState<string[]>([]);
+  const [filteredCustomers, setFilteredCustomers] = useState<
+    { id: string; name: string }[]
+  >([]);
   const [selectedCustomerName, setSelectedCustomerName] = useState("");
   const [selectedCustomerId, setSelectedCustomerId] = useState<string | null>(
     null
@@ -54,56 +57,69 @@ export default function EnquiryPage() {
   const [status, setStatus] = useState("");
   const [enquiriesList, setEnquiriesList] = useState<any[]>([]);
 
+  // Fetch customers using the getCustomers query
+  const { data: customers } = useQuery({
+    queryFn: getCustomers,
+    queryKey: ["customers"],
+  });
+
+  // Fetch enquiries using the getEnquiries query
   const { data: enquiries } = useQuery({
     queryFn: getEnquiries,
     queryKey: ["enquiries"],
   });
 
-  console.log(enquiries);
-
+  // UseEffect to set customerMap and filter customers
   useEffect(() => {
-    if (enquiries?.data?.data) {
-      setEnquiriesList(enquiries.data.data);
-
+    if (customers) {
       // Create a map of customer names to their IDs
       const map: Record<string, string> = {};
-      const uniqueCustomers = new Set<string>();
-
-      enquiries.data.data.forEach((enquiry: any) => {
-        map[enquiry.customer_name] = enquiry.customer_id;
-        uniqueCustomers.add(enquiry.customer_name);
+      customers?.data.forEach((customer: any) => {
+        map[customer.name] = customer.id;
       });
-
       setCustomerMap(map);
-      setFilteredCustomers(Array.from(uniqueCustomers)); // Populate distinct customers
     }
-  }, [enquiries]);
+	console.log(enquiries?.data.data);
 
+    if (enquiries?.data) {
+      setEnquiriesList(enquiries?.data.data);
+    }
+  }, [customers, enquiries]);
 
   const handleCustomerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value.toLowerCase();
     setSelectedCustomerName(inputValue);
 
-    if (enquiries?.data?.data) {
-      const customers = enquiries.data.data
-        .map((enquiry: any) => enquiry.customer_name)
-        .filter((name: string) => name.toLowerCase().includes(inputValue));
+    if (inputValue === "") {
+      setFilteredCustomers([]); // Clear the dropdown if input is empty
+      return;
+    }
 
-      setFilteredCustomers(customers);
+    if (customers) {
+      const filtered = customers?.data
+        .filter((customer: any) => {
+          const fullName =
+            `${customer.first_name} ${customer.last_name}`.toLowerCase();
+          return fullName.includes(inputValue);
+        })
+        .map((customer: any) => ({
+          id: customer.id,
+          name: `${customer.first_name} ${customer.last_name}`,
+        }));
+
+      setFilteredCustomers(filtered);
     }
   };
 
-  const handleCustomerSelect = (customer: string) => {
-    setSelectedCustomerName(customer);
-    setSelectedCustomerId(customerMap[customer] || null);
+  const handleCustomerSelect = (customerName: string) => {
+    setSelectedCustomerName(customerName);
+    setSelectedCustomerId(customerMap[customerName] || null);
     setFilteredCustomers([]); // Close the dropdown after selection
   };
 
   const searchEnquiriesMutation = useMutation({
-    mutationFn: searchEnquiries, // or simply `searchQuotes`
+    mutationFn: searchEnquiries,
     onSuccess: (data: any) => {
-      console.log(data.data.data);
-
       setEnquiriesList(data.data.data); // update the list with the result
     },
     onError: (error) => {
@@ -114,7 +130,6 @@ export default function EnquiryPage() {
   const handleSearch = () => {
     const start_date = date?.from ? moment(date.from).format("YYYY-MM-DD") : "";
     const end_date = date?.to ? moment(date.to).format("YYYY-MM-DD") : "";
-    console.log(selectedCustomerId);
 
     searchEnquiriesMutation.mutate({
       customer_id: selectedCustomerId || "", // Use the customer_id
@@ -215,11 +230,13 @@ export default function EnquiryPage() {
                             <ul className="bg-white border rounded shadow-lg mt-2">
                               {filteredCustomers.map((customer) => (
                                 <li
-                                  key={customer}
+                                  key={customer.id} // Use customer_id as the key
                                   className="p-2 cursor-pointer hover:bg-gray-100"
-                                  onClick={() => handleCustomerSelect(customer)}
+                                  onClick={() =>
+                                    handleCustomerSelect(customer.name)
+                                  }
                                 >
-                                  {customer}
+                                  {customer.name}
                                 </li>
                               ))}
                             </ul>
@@ -268,42 +285,38 @@ export default function EnquiryPage() {
             <Card className="col-span-4 md:col-span-3 pt-10">
               <CardContent>
                 <Table>
-                  <TableHeader>
-                    <TableRow className="border-t">
-                      <TableHead className="text-gray-400">ID</TableHead>
-                      <TableHead className="text-gray-400">Date</TableHead>
-                      <TableHead className="text-gray-400">Name</TableHead>
-                      <TableHead className="text-gray-400">Message</TableHead>
-                      <TableHead className="text-gray-400">Type</TableHead>
-                      <TableHead className="text-gray-400">Action</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {(enquiriesList as any)?.map((enquiry: any) => (
-                      <TableRow key={enquiry.id} className="border-none ">
-                        <TableCell className="font-medium">
-                          {enquiry.id}
-                        </TableCell>
-                        <TableCell>
-                          {moment(enquiry?.createdAt).format(
-                            "MMMM Do YYYY, h:mm A"
-                          )}
-                        </TableCell>
-                        <TableCell>{enquiry.customer_name}</TableCell>
-                        <TableCell>{enquiry.message}</TableCell>
-                        <TableCell>Enquiry</TableCell>
-                        <TableCell className="text-left">
-                          <Link
-                            to={`/enquiries/${enquiry.id}`}
-                            className="bg-gray-200 p-1.5 rounded"
-                          >
-                            View
-                          </Link>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
+					<TableHeader>
+						<TableRow className="border-t">
+						<TableHead className="text-gray-400">ID</TableHead>
+						<TableHead className="text-gray-400">Date</TableHead>
+						<TableHead className="text-gray-400">Name</TableHead>
+						<TableHead className="text-gray-400">Message</TableHead>
+						<TableHead className="text-gray-400">Type</TableHead>
+						<TableHead className="text-gray-400">Action</TableHead>
+						</TableRow>
+					</TableHeader>
+					<TableBody>
+						{enquiriesList?.map((enquiry: any) => (
+						<TableRow key={enquiry.id} className="border-none">
+							<TableCell className="font-medium">{enquiry.id}</TableCell>
+							<TableCell>
+							{moment(enquiry.createdAt).format("MMMM Do YYYY, h:mm A")}
+							</TableCell>
+							<TableCell>{enquiry.customer_name}</TableCell>
+							<TableCell>{enquiry.message}</TableCell>
+							<TableCell>Enquiry</TableCell>
+							<TableCell className="text-left">
+							<Link
+								to={`/enquiries/${enquiry.id}`}
+								className="bg-gray-200 p-1.5 rounded hover:bg-gray-300 transition"
+							>
+								View
+							</Link>
+							</TableCell>
+						</TableRow>
+						))}
+					</TableBody>
+					</Table>
               </CardContent>
             </Card>
           </TabsContent>
