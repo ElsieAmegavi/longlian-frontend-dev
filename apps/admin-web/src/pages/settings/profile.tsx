@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input"; // Assuming you have a custom Input component
 import { Avatar, AvatarImage, AvatarFallback } from "@radix-ui/react-avatar";
 import { Link } from "react-router-dom";
 
