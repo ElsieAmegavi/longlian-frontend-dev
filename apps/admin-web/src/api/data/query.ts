@@ -114,3 +114,12 @@ export const getQuoteStatistics = async (): Promise<QuoteStatisticsResponse | un
    const res = await apiClient.get<QuoteStatisticsResponse>('/admin/quotes_statistics');
    return res.data;
 };
+
+export const logout = async (): Promise<{ response_code: string, response_message: string} | undefined> => {
+   try {
+     const res = await apiClient.post<{ response_code: string, response_message: string}>('/admin/logout');
+     return res.data;
+   } catch (error) {
+     console.error('Logout error:', error);
+   }
+ };

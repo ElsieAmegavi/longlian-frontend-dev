@@ -50,6 +50,10 @@ export default function AppRouter() {
 					index: true,
 				},
 				{
+					path: 'dashboard',
+					element: <DashboardPage />,
+				},
+				{
 					path: 'enquiries',
 					element: <EnquiryPage />,
 				},
