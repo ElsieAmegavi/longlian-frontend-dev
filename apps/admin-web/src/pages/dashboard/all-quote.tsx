@@ -65,7 +65,7 @@ export default function AllQuote() {
     queryKey: ["quotes"],
   });
 
-  useEffect(() => {
+  useEffect(() => {    
     if (quotes?.data?.data) {
       setQuotesList(quotes.data.data);
 
