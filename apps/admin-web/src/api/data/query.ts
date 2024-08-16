@@ -1,5 +1,5 @@
 import apiClient from "../client"
-import { CustomersResponse, EnquiriesResponse, GetOrderResponse, GetProductResponse, GetQuotesResponse, QuoteIdRecordResponse, QuoteStatisticsResponse } from "./interfaces"
+import { CustomersResponse, EnquiriesResponse, GetOrderResponse, GetProductResponse, GetQuotesResponse, QuoteIdRecordResponse, QuoteStatisticsResponse, UserProfile } from "./interfaces"
 // import { ProductResponseSchema, ProductResponseType } from "../schema"
 
 
@@ -114,6 +114,13 @@ export const getQuoteStatistics = async (): Promise<QuoteStatisticsResponse | un
    const res = await apiClient.get<QuoteStatisticsResponse>('/admin/quotes_statistics');
    return res.data;
 };
+
+export const getProfile = async (): Promise<UserProfile | undefined> => {
+   const res = await apiClient.get<UserProfile>('/admin/profile');
+   console.log(res.data);
+   return res.data;
+};
+
 
 export const logout = async (): Promise<{ response_code: string, response_message: string} | undefined> => {
    try {
