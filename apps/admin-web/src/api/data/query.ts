@@ -49,14 +49,14 @@ export const searchEnquiries = async ({customer_id, status, start_date, end_date
 };
 
 
-export const getOrders = async () => {
-   const res = await apiClient.get('/admin/order')
+export const getOrders = async (p0: { start_date: string | undefined; end_date: string | undefined }) => {   
+   const res = await apiClient.get('/admin/order', p0);
    return res  
 }
 
 export const getQuotes = async (): Promise<GetQuotesResponse | undefined> => {
    const res = await apiClient.get<GetQuotesResponse>('/admin/quote');
-   return res.data;  // Ensure you're returning res.data, not just res
+   return res;  // Ensure you're returning res.data, not just res
 };
 
 
