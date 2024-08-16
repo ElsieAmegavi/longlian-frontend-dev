@@ -48,7 +48,7 @@ export default function Login({ className, ...props }: UserAuthFormProps) {
             // setTimeout(() => {
                 // window.location.reload();
                 // navigate('/dashboard')
-                window.location.href = '/dashboard';
+                window.location.href = '/';
             // }, 4000); // 4000 ms = 4 seconds
 
         } else {
