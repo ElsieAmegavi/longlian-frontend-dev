@@ -12,6 +12,9 @@ import General from '@/pages/settings/general'
 import { Suspense, lazy } from 'react'
 import { Navigate, Outlet, useRoutes } from 'react-router-dom'
 import Cookies from 'js-cookie'
+import Notifications from '@/pages/settings/notification'
+import Security from '@/pages/settings/security'
+import ChangePassword from '@/pages/settings/security/change-password'
 import HelpSupport from '@/pages/settings/help'
 import ContactSupport from '@/pages/settings/help/ContactSupport'
 import AdminManagement from '@/pages/settings/admin'
@@ -90,6 +93,17 @@ export default function AppRouter() {
 					element: <General />,
 				},
 				{
+					path: '/settings/notification',
+					element: <Notifications/>
+				},
+				{
+					path: '/settings/security',
+					element: <Security/>
+				},
+				{
+					path: '/settings/security/change-password',
+					element: <ChangePassword/>
+				}
 					path: '/settings/help',
 					element: <HelpSupport />,
 				},
