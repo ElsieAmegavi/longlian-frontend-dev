@@ -47,6 +47,7 @@ import { useQuery, useMutation } from "@tanstack/react-query";
 import { getQuotes, searchQuotes } from "@/api/data/query";
 import moment from "moment";
 
+
 export default function AllQuote() {
   const navigate = useNavigate();
   const [date, setDate] = useState<DateRange | undefined>(undefined); // Date range starts as undefined
@@ -98,7 +99,7 @@ export default function AllQuote() {
 
   const searchQuotesMutation = useMutation({
     mutationFn: searchQuotes, // or simply `searchQuotes`
-    onSuccess: (data) => {
+    onSuccess: (data: any) => {
       setQuotesList(data.data.data); // update the list with the result
     },
     onError: (error) => {
