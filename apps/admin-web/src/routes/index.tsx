@@ -12,6 +12,9 @@ import General from '@/pages/settings/general'
 import { Suspense, lazy } from 'react'
 import { Navigate, Outlet, useRoutes } from 'react-router-dom'
 import Cookies from 'js-cookie'
+import Notifications from '@/pages/settings/notification'
+import Security from '@/pages/settings/security'
+import ChangePassword from '@/pages/settings/security/change-password'
 const DashboardLayout = lazy(() => import('@/pages/layout'))
 const LoginPage = lazy(() => import('@/pages/auth/login'))
 const DashboardPage = lazy(() => import('@/pages/dashboard'))
@@ -82,6 +85,18 @@ export default function AppRouter() {
 					path: '/settings/general',
 					element: <General />,
 				},
+				{
+					path: '/settings/notification',
+					element: <Notifications/>
+				},
+				{
+					path: '/settings/security',
+					element: <Security/>
+				},
+				{
+					path: '/settings/security/change-password',
+					element: <ChangePassword/>
+				}
 			],
 		},
 	]
