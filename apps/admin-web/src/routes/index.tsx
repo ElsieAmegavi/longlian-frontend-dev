@@ -15,11 +15,11 @@ import Cookies from 'js-cookie'
 import Notifications from '@/pages/settings/notification'
 import Security from '@/pages/settings/security'
 import ChangePassword from '@/pages/settings/security/change-password'
-import AdminManagement from '@/pages/settings/admin'
+import HelpSupport from '@/pages/settings/help/index'
+import ContactSupport from '@/pages/settings/help/ContactSupport'
+import AdminManagement from '@/pages/settings/admin/index'
 import AdminManagementForm from '@/pages/settings/admin/AdminManagementForm'
 import AdminDetails from '@/pages/settings/admin/details'
-import HelpSupport from '@/pages/settings/help'
-import ContactSupport from '@/pages/settings/help/ContactSupport'
 import FAQ from '@/pages/settings/help/faq'
 import ProfileSettings from '@/pages/settings/profile'
 import path from 'path'
@@ -94,9 +94,24 @@ export default function AppRouter() {
 					element: <General />,
 				},
 				{
+					path: '/settings/notification',
+					element: <Notifications/>
+				},
+				{
+					path: '/settings/security',
+					element: <Security/>,
+				},
+				{
+					path: '/settings/security/change-password',
+					element: <ChangePassword/>
+				},	
+				{
+
 					path: '/settings/help',
 					element: <HelpSupport />,
-				},
+
+				},	
+				
 				{
 					path: '/settings/help/contact-support',
 					element: <ContactSupport />,
