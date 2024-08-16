@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { getProfile, updateProfile } from "@/api/data/query";
 import { toast } from "react-toastify";
