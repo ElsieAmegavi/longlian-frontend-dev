@@ -12,6 +12,13 @@ import General from '@/pages/settings/general'
 import { Suspense, lazy } from 'react'
 import { Navigate, Outlet, useRoutes } from 'react-router-dom'
 import Cookies from 'js-cookie'
+import HelpSupport from '@/pages/settings/help'
+import ContactSupport from '@/pages/settings/help/ContactSupport'
+import AdminManagement from '@/pages/settings/admin'
+import AdminManagementForm from '@/pages/settings/admin/AdminManagementForm'
+import FAQ from '@/pages/settings/help/faq'
+import ProfileSettings from '@/pages/settings/profile'
+import AdminDetails from '@/pages/settings/admin/details'
 const DashboardLayout = lazy(() => import('@/pages/layout'))
 const LoginPage = lazy(() => import('@/pages/auth/login'))
 const DashboardPage = lazy(() => import('@/pages/dashboard'))
@@ -76,11 +83,35 @@ export default function AppRouter() {
 				},
 				{
 					path: '/settings/profile',
-					element: <Settings />,
+					element: <ProfileSettings />,
 				},
 				{
 					path: '/settings/general',
 					element: <General />,
+				},
+				{
+					path: '/settings/help',
+					element: <HelpSupport />,
+				},
+				{
+					path: '/settings/help/contact-support',
+					element: <ContactSupport />,
+				},
+				{
+					path: '/settings/help/faq',
+					element: <FAQ />,
+				},
+				{
+					path: '/settings/admin',
+					element: <AdminManagement />,
+				},
+				{
+					path: '/settings/admin/form',
+					element: <AdminManagementForm />,
+				},
+				{
+					path: '/settings/admin/details',
+					element: <AdminDetails />,
 				},
 			],
 		},
