@@ -46,6 +46,7 @@ import {
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { getQuotes, searchQuotes } from "@/api/data/query";
 import moment from "moment";
+import { Quote } from '@/api/data/interfaces';
 
 
 export default function AllQuote() {
@@ -58,7 +59,8 @@ export default function AllQuote() {
   );
   const [customerMap, setCustomerMap] = useState<Record<string, string>>({});
   const [status, setStatus] = useState("");
-  const [quotesList, setQuotesList] = useState<any[]>([]);
+  const [quotesList, setQuotesList] = useState<Quote[]>([]);
+
 
   const { data: quotes } = useQuery({
     queryFn: getQuotes,
@@ -66,12 +68,12 @@ export default function AllQuote() {
   });
 
   useEffect(() => {    
-    if (quotes?.data?.data) {
-      setQuotesList(quotes.data.data);
+    if (quotes?.data) {
+      setQuotesList(quotes?.data);
 
       // Create a map of customer names to their IDs
       const map: Record<string, string> = {};
-      quotes.data.data.forEach((quote: any) => {
+      quotes?.data.forEach((quote: any) => {
         map[quote.customer_name] = quote.customer_id;
       });
       setCustomerMap(map);
@@ -82,8 +84,8 @@ export default function AllQuote() {
     const inputValue = e.target.value.toLowerCase();
     setSelectedCustomerName(inputValue);
 
-    if (quotes?.data?.data) {
-      const customers = quotes.data.data
+    if (quotes?.data) {
+      const customers = quotes?.data
         .map((quote: any) => quote.customer_name)
         .filter((name: string) => name.toLowerCase().includes(inputValue));
 

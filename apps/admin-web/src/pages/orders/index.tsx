@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { Label } from "@/components/ui/label";
 import PageHead from "@/components/custom/page-head";
@@ -25,22 +26,33 @@ import { cn } from "@/lib/utils";
 import { CalendarIcon } from "lucide-react";
 import { format } from "date-fns";
 import { Calendar } from "@/components/ui/calendar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DateRange } from "react-day-picker";
 import { useQuery } from "@tanstack/react-query";
-import { getOrders } from "@/api/data/query";
+import { getOrdersFilter } from "@/api/data/query";
 import moment from "moment";
+import { Order } from "@/api/data/interfaces";
 
 export default function Orders() {
   const [date, setDate] = useState<DateRange | undefined>(undefined);
+  const [orderList, setOrderList] = useState<Order[]>([]);
 
   const { data: orders, refetch } = useQuery({
-    queryFn: () => getOrders({
+    queryFn: () => getOrdersFilter({
       start_date: date?.from ? moment(date.from).format("YYYY-MM-DD") : undefined,
       end_date: date?.to ? moment(date.to).format("YYYY-MM-DD") : undefined,
     }),
     queryKey: ['orders', date?.from, date?.to],  // Include date in the queryKey to refetch on date change
   });
+
+
+  useEffect(() => {
+  
+    if (orders?.data) {
+        setOrderList(orders?.data);
+    }
+  }, [orders]);
+  
 
   const handleSearch = () => {
     refetch();
@@ -151,7 +163,7 @@ export default function Orders() {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {orders?.data?.data?.map((order: any) => (
+                    {orderList?.map((order: any) => (
                       <TableRow key={order.id} className="border-none">
                         <TableCell>{order.id}</TableCell>
                         <TableCell className="font-medium">{moment(order.createdAt).format("DD-MM-YYYY")}</TableCell>
