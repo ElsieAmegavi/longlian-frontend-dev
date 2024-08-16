@@ -45,7 +45,7 @@ export default function Orders() {
     queryKey: ['orders', date?.from, date?.to],  // Include date in the queryKey to refetch on date change
   });
 
-
+  //Use effect
   useEffect(() => {
   
     if (orders?.data) {
