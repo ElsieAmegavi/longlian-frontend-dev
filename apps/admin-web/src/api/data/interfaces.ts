@@ -124,3 +124,18 @@ export interface Product {
 export interface GetProductResponse {
     data: Product[];
 }
+
+
+export interface UserProfile {
+    data: {
+        id: number;
+        first_name: string;
+        last_name: string;
+        username: string;
+        email: string;
+        phone_number: string | null;
+        user_role: string;
+        active_status: boolean;
+        del_status: boolean;
+    }
+  }

@@ -1,15 +1,41 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarImage, AvatarFallback } from "@radix-ui/react-avatar";
 import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { getProfile } from "@/api/data/query";
 
 const ProfileSettings = () => {
   const [formData, setFormData] = useState({
-    fullName: "Fan Shenbin",
-    email: "fanshenbin@gmail.com",
-    phone: "+233 53 509 7485",
-    role: "Administrator",
+    fullName: "",
+    email: "",
+    phone: "",
+    role: "",
   });
+
+  const { data: profile } = useQuery({
+    queryFn: getProfile,
+    queryKey: ["profile"],
+  });
+
+
+  useEffect(() => {  
+    if (profile?.data) {
+      const { first_name, last_name, email, phone_number, user_role } = profile.data;
+      
+      // Update the formData state with the fetched profile data
+      setFormData({
+        fullName: `${first_name} ${last_name}`,
+        email: email || "",
+        phone: phone_number || "",
+        role: user_role || "",
+      });
+    }
+  }, [profile]);
+
+
+  
+  
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
