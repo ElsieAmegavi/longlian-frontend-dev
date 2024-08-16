@@ -138,4 +138,9 @@ export interface UserProfile {
         active_status: boolean;
         del_status: boolean;
     }
-  }
+}
+
+
+export interface DefaultApiResponse { 
+    response_code: string, response_message: string
+}

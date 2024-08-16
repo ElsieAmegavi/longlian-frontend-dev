@@ -1,5 +1,5 @@
 import apiClient from "../client"
-import { CustomersResponse, EnquiriesResponse, GetOrderResponse, GetProductResponse, GetQuotesResponse, QuoteIdRecordResponse, QuoteStatisticsResponse, UserProfile } from "./interfaces"
+import { CustomersResponse, DefaultApiResponse, EnquiriesResponse, GetOrderResponse, GetProductResponse, GetQuotesResponse, QuoteIdRecordResponse, QuoteStatisticsResponse, UserProfile } from "./interfaces"
 // import { ProductResponseSchema, ProductResponseType } from "../schema"
 
 
@@ -122,9 +122,17 @@ export const getProfile = async (): Promise<UserProfile | undefined> => {
 };
 
 
-export const logout = async (): Promise<{ response_code: string, response_message: string} | undefined> => {
+export const updateProfile = async (profileData: {first_name: string; last_name: string; phone_number: string; }): Promise<DefaultApiResponse | undefined> => {
+   console.log(profileData);
+   
+   const res = await apiClient.post<DefaultApiResponse>("/admin/profile/update", profileData); // Adjust the endpoint URL as needed
+   return res.data;
+ };
+
+
+export const logout = async (): Promise<DefaultApiResponse | undefined> => {
    try {
-     const res = await apiClient.post<{ response_code: string, response_message: string}>('/admin/logout');
+     const res = await apiClient.post<DefaultApiResponse>('/admin/logout');
      return res.data;
    } catch (error) {
      console.error('Logout error:', error);
