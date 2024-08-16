@@ -12,13 +12,17 @@ import General from '@/pages/settings/general'
 import { Suspense, lazy } from 'react'
 import { Navigate, Outlet, useRoutes } from 'react-router-dom'
 import Cookies from 'js-cookie'
-import HelpSupport from '@/pages/settings/help'
-import ContactSupport from '@/pages/settings/help/ContactSupport'
+import Notifications from '@/pages/settings/notification'
+import Security from '@/pages/settings/security'
+import ChangePassword from '@/pages/settings/security/change-password'
 import AdminManagement from '@/pages/settings/admin'
 import AdminManagementForm from '@/pages/settings/admin/AdminManagementForm'
+import AdminDetails from '@/pages/settings/admin/details'
+import HelpSupport from '@/pages/settings/help'
+import ContactSupport from '@/pages/settings/help/ContactSupport'
 import FAQ from '@/pages/settings/help/faq'
 import ProfileSettings from '@/pages/settings/profile'
-import AdminDetails from '@/pages/settings/admin/details'
+import path from 'path'
 const DashboardLayout = lazy(() => import('@/pages/layout'))
 const LoginPage = lazy(() => import('@/pages/auth/login'))
 const DashboardPage = lazy(() => import('@/pages/dashboard'))
@@ -113,6 +117,17 @@ export default function AppRouter() {
 					path: '/settings/admin/details',
 					element: <AdminDetails />,
 				},
+					path: '/settings/notification',
+					element: <Notifications/>
+				},
+				{
+					path: '/settings/security',
+					element: <Security/>
+				},
+				{
+					path: '/settings/security/change-password',
+					element: <ChangePassword/>
+				}
 			],
 		},
 	]
