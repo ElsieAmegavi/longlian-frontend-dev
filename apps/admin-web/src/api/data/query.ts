@@ -29,6 +29,25 @@ export const getEnquiry = async (id: string) => {
 }
 
 
+export const searchEnquiries = async ({customer_id, status, start_date, end_date }: { customer_id?: string; status?: string; start_date?: string; end_date?: string;}) => {
+   const params = {
+     customer_id,
+     status,
+     start_date,
+     end_date,
+   };
+  
+   try {
+     const res = await apiClient.get('/admin/enquiries', params);
+     console.log("API Response:", res);
+     return res;
+   } catch (error) {
+     console.error("API Error:", error);
+     throw error; // Re-throw the error for handling in the calling code
+   }
+};
+
+
 export const getOrders = async () => {
    const res = await apiClient.get('/admin/order')
    return res  
@@ -58,7 +77,7 @@ export const searchQuotes = async ({customer_id, status, start_date, end_date }:
      console.error("API Error:", error);
      throw error; // Re-throw the error for handling in the calling code
    }
- };
+};
 
 
 export const getProducts = async () => {
