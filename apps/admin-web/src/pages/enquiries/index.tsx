@@ -33,14 +33,6 @@ import { Button } from "@/components/ui/button";
 import { DateRange } from "react-day-picker";
 import { PopoverContent } from "@/components/ui/popover";
 import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Enquiries } from "@/api/data/interfaces";
 
 export default function EnquiryPage() {
@@ -52,7 +44,6 @@ export default function EnquiryPage() {
     null
   );
   const [customerMap, setCustomerMap] = useState<Record<string, string>>({});
-  const [status, setStatus] = useState("");
   const [enquiriesList, setEnquiriesList] = useState<Enquiries[]>([]);
 
 
@@ -78,7 +69,6 @@ export default function EnquiryPage() {
       });
       setCustomerMap(map);
     }
-	console.log(enquiries?.data);
 
     if (enquiries?.data) {
       setEnquiriesList(enquiries?.data);
@@ -90,11 +80,12 @@ export default function EnquiryPage() {
     setSelectedCustomerName(inputValue);
 
     if (inputValue === "") {
-      setFilteredCustomers([]); // Clear the dropdown if input is empty
-      return;
+		setFilteredCustomers([]); // Clear the dropdown if input is empty
+		setSelectedCustomerId(null);
+		return;
     }
 
-    if (customers) {
+    if (customers?.data) {
       const filtered = customers?.data
         .filter((customer: any) => {
           const fullName =
@@ -112,7 +103,13 @@ export default function EnquiryPage() {
 
   const handleCustomerSelect = (customerName: string) => {
     setSelectedCustomerName(customerName);
-    setSelectedCustomerId(customerMap[customerName] || null);
+
+	const selectedCust = customers?.data.filter((customer: any) => {
+		const fullName = `${customer.first_name} ${customer.last_name}`.toLowerCase();		
+        return fullName.includes(customerName.toLowerCase());
+	});
+	
+    setSelectedCustomerId(selectedCust[0].id);
     setFilteredCustomers([]); // Close the dropdown after selection
   };
 
@@ -128,11 +125,11 @@ export default function EnquiryPage() {
 
   const handleSearch = () => {
     const start_date = date?.from ? moment(date.from).format("YYYY-MM-DD") : "";
-    const end_date = date?.to ? moment(date.to).format("YYYY-MM-DD") : "";
+    const end_date = date?.to ? moment(date.to).format("YYYY-MM-DD") : "";	
 
     searchEnquiriesMutation.mutate({
       customer_id: selectedCustomerId || "", // Use the customer_id
-      status,
+    //   status,
       start_date, // Empty if no date selected
       end_date, // Empty if no date selected
     });
@@ -240,22 +237,6 @@ export default function EnquiryPage() {
                               ))}
                             </ul>
                           )}
-                        </div>
-
-                        <div className="flex flex-col gap-3">
-                          <Label htmlFor="status">Status:</Label>
-                          <Select onValueChange={setStatus}>
-                            <SelectTrigger className="w-full">
-                              <SelectValue placeholder="Select Status" />
-                            </SelectTrigger>
-                            <SelectContent className="bg-white">
-                              <SelectGroup>
-                                <SelectItem value="P">Pending</SelectItem>
-                                <SelectItem value="R">Rejected</SelectItem>
-                                <SelectItem value="A">Approved</SelectItem>
-                              </SelectGroup>
-                            </SelectContent>
-                          </Select>
                         </div>
 
                         <div className="flex justify-between mt-8">
