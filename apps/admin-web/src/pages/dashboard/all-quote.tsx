@@ -84,6 +84,11 @@ export default function AllQuote() {
     const inputValue = e.target.value.toLowerCase();
     setSelectedCustomerName(inputValue);
 
+    if (inputValue === "") {
+      setFilteredCustomers([]); // Clear the dropdown if input is empty
+      return;
+    }
+
     if (quotes?.data) {
       const customers = quotes?.data
         .map((quote: any) => quote.customer_name)
@@ -303,7 +308,7 @@ export default function AllQuote() {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {quotesList.map((quote: any) => (
+                    {quotesList?.map((quote: any) => (
                       <TableRow key={quote.id} className="border-none ">
                         <TableCell className="font-medium">
                           {quote.quote_id}
