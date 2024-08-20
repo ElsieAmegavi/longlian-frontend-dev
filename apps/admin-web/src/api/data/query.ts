@@ -106,7 +106,7 @@ export const getProducts = async (): Promise<GetProductResponse | undefined> => 
  
 
 export const getQuoteId = async (): Promise<QuoteIdRecordResponse | undefined> => {
-   const res = await apiClient.get<QuoteIdRecordResponse>('/admin/quote-id');
+   const res = await apiClient.get<QuoteIdRecordResponse>('/admin/get_new_quote_id');
    return res.data;
 };
 
