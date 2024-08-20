@@ -164,7 +164,7 @@ export default function Orders() {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {orderList.map((order: any) => (
+                    {orderList?.map((order: any) => (
                       <TableRow key={order.id} className="border-none">
                         <TableCell>{order.id}</TableCell>
                         <TableCell className="font-medium">{moment(order.createdAt).format("DD-MM-YYYY")}</TableCell>
