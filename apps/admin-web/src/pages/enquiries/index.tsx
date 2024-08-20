@@ -43,7 +43,6 @@ export default function EnquiryPage() {
   const [selectedCustomerId, setSelectedCustomerId] = useState<string | null>(
     null
   );
-  const [customerMap, setCustomerMap] = useState<Record<string, string>>({});
   const [enquiriesList, setEnquiriesList] = useState<Enquiries[]>([]);
 
 
@@ -61,15 +60,6 @@ export default function EnquiryPage() {
 
   // UseEffect to set customerMap and filter customers
   useEffect(() => {
-    if (customers) {
-      // Create a map of customer names to their IDs
-      const map: Record<string, string> = {};
-      customers?.data.forEach((customer: any) => {
-        map[customer.name] = customer.id;
-      });
-      setCustomerMap(map);
-    }
-
     if (enquiries?.data) {
       setEnquiriesList(enquiries?.data);
     }
