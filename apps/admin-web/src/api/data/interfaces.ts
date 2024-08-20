@@ -15,10 +15,10 @@ export interface GetQuotesResponse {
 
 
 export interface QuoteIdRecordResponse {
-    data: {
+    // data: {
         response_code: string;
-        data: string; // Adjust according to the actual data structure
-    }
+        data: string;
+    // }
 }
 
 
