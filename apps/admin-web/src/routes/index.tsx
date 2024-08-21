@@ -132,7 +132,7 @@ export default function AppRouter() {
 					element: <AdminManagementForm />,
 				},
 				{
-					path: '/settings/admin/details',
+					path: '/settings/admin/details/:id',
 					element: <AdminDetails />,
 				},
 			],

@@ -1,5 +1,5 @@
 import apiClient from "../client"
-import { CustomersResponse, DefaultApiResponse, EnquiriesResponse, GetOrderResponse, GetProductResponse, GetQuotesResponse, QuoteIdRecordResponse, QuoteStatisticsResponse, UserProfile } from "./interfaces"
+import { CustomersResponse, DefaultApiResponse, EnquiriesResponse, GetOrderResponse, GetProductResponse, GetQuotesResponse, GetUserResponse, GetUsersResponse, QuoteIdRecordResponse, QuoteStatisticsResponse, UserProfile } from "./interfaces"
 // import { ProductResponseSchema, ProductResponseType } from "../schema"
 
 
@@ -97,6 +97,20 @@ export const searchQuotes = async ({customer_id, status, start_date, end_date }:
 };
 
 
+export const getAdminUsers = async (): Promise<GetUsersResponse | undefined> => {
+   const res = await apiClient.get<GetUsersResponse>('/admin/users')
+   console.log({res})
+   return res.data ? res.data : undefined;
+}
+
+export const getAdminUser = async (id: number): Promise<GetUserResponse | undefined> => {
+   console.log(id);
+   
+   const res = await apiClient.get<GetUserResponse>(`/admin/user/${id}`)
+   console.log({res})
+   return res.data ? res.data : undefined;
+}
+
 export const getProducts = async (): Promise<GetProductResponse | undefined> => {
    const res = await apiClient.get<GetProductResponse>('/admin/products')
    console.log({res})
@@ -123,11 +137,30 @@ export const getProfile = async (): Promise<UserProfile | undefined> => {
 
 
 export const updateProfile = async (profileData: {first_name: string; last_name: string; phone_number: string; }): Promise<DefaultApiResponse | undefined> => {
-   console.log(profileData);
-   
-   const res = await apiClient.post<DefaultApiResponse>("/admin/profile/update", profileData); // Adjust the endpoint URL as needed
+   const res = await apiClient.post<DefaultApiResponse>("/admin/profile/update", profileData);
    return res.data;
- };
+};
+
+
+export const updateUserRecord = async (userData: {first_name: string; last_name: string; phone_number: string; email: string }): Promise<DefaultApiResponse | undefined> => {
+   console.log(userData);
+   
+   const res = await apiClient.post<DefaultApiResponse>("/admin/user/update", userData);
+   return res.data;
+};
+
+export const addUserRecord = async (userData: {first_name: string; last_name: string; email: string, user_role: string }): Promise<DefaultApiResponse | undefined> => {
+   console.log(userData);
+   
+   const res = await apiClient.post<DefaultApiResponse>("/admin/user/add", userData);
+   return res.data;
+};
+
+export const deleteUser = async (id: number): Promise<DefaultApiResponse | undefined> => {
+   const res = await apiClient.delete<DefaultApiResponse>(`/admin/user/${id}`);
+   return res.data;
+};
+
 
 
 export const logout = async (): Promise<DefaultApiResponse | undefined> => {
