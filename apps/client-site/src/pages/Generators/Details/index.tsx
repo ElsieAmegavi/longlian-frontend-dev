@@ -91,114 +91,107 @@ export default function Details() {
 		<main className='flex flex-col items-start m-auto min-h-screen w-full '>
 			<Navbar />
 
-			{/* Generator Details */}
-			<section className='w-full flex items-center justify-between mt-20 py-10 px-10'>
-				<div className='w-1/2'>
-					<h2 className='font-bold uppercase text-6xl py-3'>{productList?.prime}</h2>
+		{/* Generator Details */}
+<section className='w-full flex flex-col-reverse md:flex-row items-center justify-between mt-20 py-10 px-5 md:px-10'>
+  <div className='w-full md:w-1/2'>
+    <h2 className='font-bold uppercase text-4xl md:text-6xl py-3'>{productList?.prime}</h2>
 
-					<h4 className='font-semibold text-orange-600 capitalize text-xl mb-5'>
-						{productList?.description}
-					</h4>
-					<div className='w-full grid grid-cols-2 max-w-[500px]'>
-						<div>
-							<div className='w-full flex gap-2 items-center'>
-								<p className='text-black'>{t("Engine:")}</p>
-								<p className='text-gray-500 capitalize'>{productList?.engine}</p>
-							</div>
-							<div className='w-full flex gap-2 items-center mt-2'>
-								<p className='text-black'>{t("Prime:")}</p>
-								<p className='text-gray-500 capitalize'>{productList?.prime}</p>
-							</div>
-							<div className='w-full flex gap-2 items-center mt-2'>
-								<p className='text-black'>{t("Alternator:")}</p>
-								<p className='text-gray-500'>{productList?.alternator}</p>
-							</div>
-							<div className='py-5'>
-								<button
-									onClick={() => openModal('enquiry_modal')}
-									type='submit'
-									className='w-44 text-xl h-12 bg-orange-600 text-white rounded mx-auto uppercase tracking-wider font-semibold'
-								>
-									{t("Make Enquiry")}
-								</button>
-							</div>
-						</div>
+    <h4 className='font-semibold text-orange-600 capitalize text-lg md:text-xl mb-5'>
+      {productList?.description}
+    </h4>
+    <div className='w-full grid grid-cols-1 md:grid-cols-2 gap-4 max-w-[500px]'>
+      <div>
+        <div className='w-full flex gap-2 items-center'>
+          <p className='text-black'>{t("Engine:")}</p>
+          <p className='text-gray-500 capitalize'>{productList?.engine}</p>
+        </div>
+        <div className='w-full flex gap-2 items-center mt-2'>
+          <p className='text-black'>{t("Prime:")}</p>
+          <p className='text-gray-500 capitalize'>{productList?.prime}</p>
+        </div>
+        <div className='w-full flex gap-2 items-center mt-2'>
+          <p className='text-black'>{t("Alternator:")}</p>
+          <p className='text-gray-500'>{productList?.alternator}</p>
+        </div>
+        <div className='py-5'>
+          <button
+            onClick={() => openModal('enquiry_modal')}
+            type='submit'
+            className='w-full md:w-44 text-xl h-12 bg-orange-600 text-white rounded mx-auto uppercase tracking-wider font-semibold'
+          >
+            {t("Make Enquiry")}
+          </button>
+        </div>
+      </div>
 
-						<div className=''>
-							<div className='w-full flex gap-2 items-center '>
-								<p className='text-black'>{t("Voltage:")}</p>
-								<p className='text-gray-500'>{productList?.voltage}</p>
-							</div>
-							<div className='w-full flex mt-2 gap-2 items-center'>
-								<p className='text-black'>{t("Frequency:")}</p>
-								<p className='text-gray-500'>{productList?.frequency}</p>
-							</div>
-							<div className='w-full flex mt-2 gap-2 items-center'>
-								<p className='text-black'>{t("Amp Per Phase:")}</p>
-								<p className='text-gray-500'>{productList?.amp_per_phase}</p>
-							</div>
-							<div className='py-5'>
-								<button
-									onClick={() => openModal('order_modal')}
-									type='submit'
-									className='w-44 text-xl h-12 bg-white text-orange-600 border border-orange-600 rounded mx-auto uppercase tracking-wider font-semibold'
-								>
-									{t("Order Online")}
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
+      <div className=''>
+        <div className='w-full flex gap-2 items-center'>
+          <p className='text-black'>{t("Voltage:")}</p>
+          <p className='text-gray-500'>{productList?.voltage}</p>
+        </div>
+        <div className='w-full flex mt-2 gap-2 items-center'>
+          <p className='text-black'>{t("Frequency:")}</p>
+          <p className='text-gray-500'>{productList?.frequency}</p>
+        </div>
+        <div className='w-full flex mt-2 gap-2 items-center'>
+          <p className='text-black'>{t("Amp Per Phase:")}</p>
+          <p className='text-gray-500'>{productList?.amp_per_phase}</p>
+        </div>
+        <div className='py-5'>
+          <button
+            onClick={() => openModal('order_modal')}
+            type='submit'
+            className='w-full md:w-44 text-xl h-12 bg-white text-orange-600 border border-orange-600 rounded mx-auto uppercase tracking-wider font-semibold'
+          >
+            {t("Order Online")}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 
-				{/* <div>
-                <Product key={productList.id} {...productList}/>
+  <div className='w-full md:w-1/2 flex justify-center mb-10 md:mb-0'>
+    <img src={productList?.picture_url || ''} alt={productList?.model} className='w-full md:w-auto max-h-96 object-contain' />
+  </div>
+</section>
 
-            </div> */}
-				<div className=''>
-					<img src={productList?.picture_url || ''} alt={productList?.model} className='' />
-				</div>
-			</section>
+{/* Technical Problems */}
+<section className='w-full flex flex-col items-center justify-center py-5'>
+  <h3 className='font-semibold text-3xl md:text-5xl text-black'>{t("Technical Problems")}</h3>
 
-			{/* Technical Problems */}
-			<section className='w-full flex flex-col items-center justify-center py-5'>
-				<h3 className='font-semibold text-5xl text-black'>{t("Technical Problems")}</h3>
+  <div className='w-full flex flex-col items-center my-5'>
+    <div className='w-full md:w-10/12'>
+      <div className='flex border-y h-16 w-full items-center justify-between px-8 md:px-96'>
+        <p>{productList?.model} {productList?.prime}</p>
+        <p>{productList?.voltage}</p>
+      </div>
+      <div className='flex border-b h-16 w-full items-center justify-between px-8 md:px-96'>
+        <p>{productList?.prime}</p>
+        <p>{productList?.voltage}</p>
+      </div>
+    </div>
+    <div className='w-full md:w-10/12'>
+      <div className='flex border-y h-16 w-full items-center justify-between px-8 md:px-96 opacity-25'>
+        <p>{productList?.voltage}</p>
+        <p>{productList?.model} {productList?.prime}</p>
+      </div>
+      <div className='flex border-b h-16 w-full items-center justify-between px-8 md:px-96 opacity-10'>
+        <p>{productList?.voltage}</p>
+        <p>{productList?.prime}</p>
+      </div>
+    </div>
+  </div>
 
-				<div className='w-full flex flex-col items-center my-5'>
-					<div className='  w-10/12 '>
-						<div className='flex border-y h-16 w-full items-center justify-between px-96'>
-							<p>
-								{productList?.model} {productList?.prime}
-							</p>
-							<p>{productList?.voltage}</p>
-						</div>
-						<div className='flex border-b h-16 w-full items-center justify-between px-96'>
-							<p>{productList?.prime}</p>
-							<p>{productList?.voltage}</p>
-						</div>
-					</div>
-					<div className='  w-10/12 '>
-						<div className='flex border-y h-16 w-full items-center justify-between px-96 opacity-25'>
-							<p>{productList?.voltage}</p>
-							<p>
-								{productList?.model} {productList?.prime}
-							</p>
-						</div>
-						<div className='flex border-b h-16 w-full items-center justify-between px-96 opacity-10'>
-							<p>{productList?.voltage}</p>
-							<p>{productList?.prime}</p>
-						</div>
-					</div>
-				</div>
+  <div className='py-5'>
+    <button
+      type='submit'
+      className='w-full md:w-auto text-xl h-12 bg-white text-orange-600 border border-orange-600 rounded px-5 pt-2 pb-2 uppercase tracking-wider font-semibold flex flex-row justify-center items-center'
+    >
+      {t("Download PDF")} <Download className='ml-2' />
+    </button>
+  </div>
+</section>
 
-				<div className='py-5'>
-					<button
-						type='submit'
-						className='w-full text-xl h-12 bg-white text-orange-600 border border-orange-600 rounded px-5 pt-2 pb-2  uppercase tracking-wider font-semibold flex flex-row'
-					>
-						{t("Download PDF")} <Download className='ml-2' />{' '}
-					</button>
-				</div>
-			</section>
 
 			{/* Related Products */}
 			<section className='w-full px-10 py-10'>
