@@ -102,7 +102,7 @@ interface ApiResponse {
                     <h3 className='text-xl md:text-2xl font-semibold'>{t("Quick Search")}</h3>
                     <hr className='w-10/12 my-3 bg-black' />
                     <div className='w-full flex flex-col pl-5 gap-3'>
-                        {!isLoading &&
+                        {!isLoading && productList?.length > 0 &&
                             productList?.map(product => (
                                 <Link to={`/generators/details/${product.id}`} className='w-full'>
                                     <p className='text-black text-left text-sm sm:text-base  btn btn-ghost'>
@@ -114,7 +114,7 @@ interface ApiResponse {
                 </div>
                 <div className='w-full col-span-1 lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4'>
                     {
-                        !isLoading && productList?.map(product => (
+                        !isLoading && productList?.length > 0 && productList?.map(product => (
                             <Link to={`/generators/details/${product.id}`} className='w-full'>
                                 <Product key={product.id} {...product} />
                             </Link>

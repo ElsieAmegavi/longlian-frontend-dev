@@ -102,15 +102,15 @@ export default function Details() {
     <div className='w-full grid grid-cols-1 md:grid-cols-2 gap-4 max-w-[500px]'>
       <div>
         <div className='w-full flex gap-2 items-center'>
-          <p className='text-black'>{t("Engine:")}</p>
+          <p className='text-black'>{t("Engine")}:</p>
           <p className='text-gray-500 capitalize'>{productList?.engine}</p>
         </div>
         <div className='w-full flex gap-2 items-center mt-2'>
-          <p className='text-black'>{t("Prime:")}</p>
+          <p className='text-black'>{t("Prime")}:</p>
           <p className='text-gray-500 capitalize'>{productList?.prime}</p>
         </div>
         <div className='w-full flex gap-2 items-center mt-2'>
-          <p className='text-black'>{t("Alternator:")}</p>
+          <p className='text-black'>{t("Alternator")}:</p>
           <p className='text-gray-500'>{productList?.alternator}</p>
         </div>
         <div className='py-5'>
@@ -126,15 +126,15 @@ export default function Details() {
 
       <div className=''>
         <div className='w-full flex gap-2 items-center'>
-          <p className='text-black'>{t("Voltage:")}</p>
+          <p className='text-black'>{t("Voltage")}:</p>
           <p className='text-gray-500'>{productList?.voltage}</p>
         </div>
         <div className='w-full flex mt-2 gap-2 items-center'>
-          <p className='text-black'>{t("Frequency:")}</p>
+          <p className='text-black'>{t("Frequency")}:</p>
           <p className='text-gray-500'>{productList?.frequency}</p>
         </div>
         <div className='w-full flex mt-2 gap-2 items-center'>
-          <p className='text-black'>{t("Amp Per Phase:")}</p>
+          <p className='text-black'>{t("Amp Per Phase")}:</p>
           <p className='text-gray-500'>{productList?.amp_per_phase}</p>
         </div>
         <div className='py-5'>
@@ -155,7 +155,7 @@ export default function Details() {
   </div>
 </section>
 
-{/* Technical Problems */}
+{/* Technical Parameters */}
 <section className='w-full flex flex-col items-center justify-center py-5'>
   <h3 className='font-semibold text-3xl md:text-5xl text-black'>{t("Technical Parameters")}</h3>
 
@@ -239,7 +239,7 @@ export default function Details() {
 								<img src='/assets/nn.png' alt='logo' className='w-48' />
 							</span>
 						</div>
-						<h3 className='font-bold text-lg '>"{t("Make Enquiry")}</h3>
+						<h3 className='font-bold text-lg '>{t("Make Enquiry")}</h3>
 						<p className='text-gray-500 mb-2'>{t("Send us a message to answer all your questions")}</p>
 					</div>
 
