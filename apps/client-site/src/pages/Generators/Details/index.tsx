@@ -194,36 +194,35 @@ export default function Details() {
 
 
 			{/* Related Products */}
-			<section className='w-full px-10 py-10'>
-				{/* <h3 className='font-semibold text-4xl text-black mb-5'>
-                Related Products
-            </h3> */}
+<section className='w-full px-5 md:px-10 py-10'>
+  {/* <h3 className='font-semibold text-4xl text-black mb-5'>
+      Related Products
+  </h3> */}
 
-				<div className='w-full flex justify-center'>
-					<div className='w-8/12 flex items-center'>
-						<div className='w-full'>
-							<div className='flex flex-row items-center justify-center'>
-								<p className='text-xl text-center'>
-									{t("For more information about")}
-									<span className='font-semibold text-gray-700 uppercase text-xl'>
-										{' '}
-										{t("Long Lian Industry and Trade Generators")}
-									</span>{' '}
-									{t("Get in touch to speak with our experts")}
-								</p>
-							</div>
-						</div>
-						<div className=' w-6/12 ml-10'>
-							<Link
-								to='/contactus'
-								className='w-48 p-5 text-lg h-20 bg-orange-600 text-white rounded uppercase tracking-wider font-semibold'
-							>
-								{t("Contact Us")}{' '}
-							</Link>
-						</div>
-					</div>
-				</div>
-			</section>
+  <div className='w-full flex flex-col md:flex-row items-center justify-center'>
+    <div className='w-full md:w-8/12 flex flex-col md:flex-row items-center text-center md:text-left'>
+      <div className='w-full'>
+        <p className='text-lg md:text-xl'>
+          {t("For more information about")}
+          <span className='font-semibold text-gray-700 uppercase text-lg md:text-xl'>
+            {' '}
+            {t("Long Lian Industry and Trade Generators")}
+          </span>{' '}
+          {t("Get in touch to speak with our experts")}
+        </p>
+      </div>
+      <div className='w-full md:w-auto mt-5 md:mt-0 md:ml-10'>
+        <Link
+          to='/contactus'
+          className='w-full md:w-48 p-5 text-lg h-12 md:h-20 bg-orange-600 text-white rounded uppercase tracking-wider font-semibold flex justify-center items-center'
+        >
+          {t("Contact Us")}{' '}
+        </Link>
+      </div>
+    </div>
+  </div>
+</section>
+
 			<Footer />
 
 			{/* Enquiry Modal */}
