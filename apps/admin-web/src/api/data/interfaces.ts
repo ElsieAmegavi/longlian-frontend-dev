@@ -14,6 +14,25 @@ export interface GetQuotesResponse {
 
 
 
+export interface MonthlyQuoteStats {
+    week: number;
+    approved: number;
+    pending: number;
+    rejected: number;
+}
+
+
+export interface MonthlyQuoteStatsResponse {
+    data: {
+        weekly_stats: MonthlyQuoteStats[],
+        overall_counts: {
+            approved: number;
+            pending: number;
+            rejected: number;
+        }
+    }
+}
+
 export interface QuoteIdRecordResponse {
     // data: {
         response_code: string;

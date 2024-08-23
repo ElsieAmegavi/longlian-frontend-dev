@@ -1,5 +1,5 @@
 import apiClient from "../client"
-import { CustomersResponse, DefaultApiResponse, EnquiriesResponse, GetOrderResponse, GetProductResponse, GetQuotesResponse, GetUserResponse, GetUsersResponse, ProductDetailsApiResponse, QuoteIdRecordResponse, QuoteStatisticsResponse, UserProfile } from "./interfaces"
+import { CustomersResponse, DefaultApiResponse, EnquiriesResponse, GetOrderResponse, GetProductResponse, GetQuotesResponse, GetUserResponse, GetUsersResponse, MonthlyQuoteStatsResponse, ProductDetailsApiResponse, QuoteIdRecordResponse, QuoteStatisticsResponse, UserProfile } from "./interfaces"
 // import { ProductResponseSchema, ProductResponseType } from "../schema"
 
 
@@ -96,18 +96,19 @@ export const searchQuotes = async ({customer_id, status, start_date, end_date }:
    }
 };
 
-
-export const getAdminUsers = async (): Promise<GetUsersResponse | undefined> => {
-   const res = await apiClient.get<GetUsersResponse>('/admin/users')
-   console.log({res})
+export const getQuoteMonthlyStats = async (month: number): Promise<MonthlyQuoteStatsResponse | undefined> => {
+   const res = await apiClient.get<MonthlyQuoteStatsResponse>(`/admin/quote_stats?month=${month}`);
    return res.data ? res.data : undefined;
 }
 
-export const getAdminUser = async (id: number): Promise<GetUserResponse | undefined> => {
-   console.log(id);
-   
+
+export const getAdminUsers = async (): Promise<GetUsersResponse | undefined> => {
+   const res = await apiClient.get<GetUsersResponse>('/admin/users')
+   return res.data ? res.data : undefined;
+}
+
+export const getAdminUser = async (id: number): Promise<GetUserResponse | undefined> => {   
    const res = await apiClient.get<GetUserResponse>(`/admin/user/${id}`)
-   console.log({res})
    return res.data ? res.data : undefined;
 }
 
@@ -120,7 +121,6 @@ export const createProduct = async (data: {id: number, model: string, prime: str
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const getProducts = async (params?: {product_id: any, stock_status: any}): Promise<GetProductResponse | undefined> => {  
    const res = await apiClient.get<GetProductResponse>('/admin/products', params)
-   console.log({res})
    return res.data ? res.data : undefined;
 }
 
@@ -148,7 +148,6 @@ export const getQuoteStatistics = async (): Promise<QuoteStatisticsResponse | un
 
 export const getProfile = async (): Promise<UserProfile | undefined> => {
    const res = await apiClient.get<UserProfile>('/admin/profile');
-   console.log(res.data);
    return res.data;
 };
 
@@ -159,16 +158,12 @@ export const updateProfile = async (profileData: {first_name: string; last_name:
 };
 
 
-export const updateUserRecord = async (userData: {first_name: string; last_name: string; phone_number: string; email: string }): Promise<DefaultApiResponse | undefined> => {
-   console.log(userData);
-   
+export const updateUserRecord = async (userData: {first_name: string; last_name: string; phone_number: string; email: string }): Promise<DefaultApiResponse | undefined> => {   
    const res = await apiClient.post<DefaultApiResponse>("/admin/user/update", userData);
    return res.data;
 };
 
-export const addUserRecord = async (userData: {first_name: string; last_name: string; email: string, user_role: string }): Promise<DefaultApiResponse | undefined> => {
-   console.log(userData);
-   
+export const addUserRecord = async (userData: {first_name: string; last_name: string; email: string, user_role: string }): Promise<DefaultApiResponse | undefined> => {   
    const res = await apiClient.post<DefaultApiResponse>("/admin/user/add", userData);
    return res.data;
 };
