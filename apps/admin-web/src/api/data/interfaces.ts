@@ -119,6 +119,9 @@ export interface Product {
     power: string;
     fuel_type: string;
     size: string;
+    price?: number;
+    color?: string;
+    stock_status?: string;
 }
 
 export interface GetProductResponse {

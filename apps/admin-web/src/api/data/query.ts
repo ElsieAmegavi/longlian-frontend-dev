@@ -111,6 +111,12 @@ export const getAdminUser = async (id: number): Promise<GetUserResponse | undefi
    return res.data ? res.data : undefined;
 }
 
+export const createProduct = async (data: {id: number, model: string, prime: string, picture_url?: string, description?: string, voltage?: string, engine?: string, frequency?: string, alternator?: string, amp_per_phase?: string, power?: string, fuel_type?: string, size?: string }): Promise<DefaultApiResponse | undefined> => {
+   const res = await apiClient.post<DefaultApiResponse>("/admin/product/add", data);
+   return res.data;
+};
+
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const getProducts = async (params?: {product_id: any, stock_status: any}): Promise<GetProductResponse | undefined> => {  
    const res = await apiClient.get<GetProductResponse>('/admin/products', params)
