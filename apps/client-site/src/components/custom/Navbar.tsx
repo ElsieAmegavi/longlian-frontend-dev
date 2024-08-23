@@ -19,7 +19,7 @@ export const Navbar = () => {
                         <li>
                             <LanguageSelector/>
                         </li>
-                        <li className="border-x border-black px-2 lg:px-3"><a href="#" className="hover:text-orange-600">+23312341234</a></li>
+                        <li className="border-x border-black px-2 lg:px-3"><a href="#" className="hover:text-orange-600">+233535097486</a></li>
                         <li><Link to="/contactus" className="hover:text-orange-600">{t('Contact Us')}</Link></li>
                         <li><Link to="/faq" className="hover:text-orange-600">{t("FAQ")}</Link></li>
                     </ul>
