@@ -1,5 +1,5 @@
 import apiClient from "../client"
-import { CustomersResponse, DefaultApiResponse, EnquiriesResponse, GetOrderResponse, GetProductResponse, GetQuotesResponse, GetUserResponse, GetUsersResponse, QuoteIdRecordResponse, QuoteStatisticsResponse, UserProfile } from "./interfaces"
+import { CustomersResponse, DefaultApiResponse, EnquiriesResponse, GetOrderResponse, GetProductResponse, GetQuotesResponse, GetUserResponse, GetUsersResponse, ProductDetailsApiResponse, QuoteIdRecordResponse, QuoteStatisticsResponse, UserProfile } from "./interfaces"
 // import { ProductResponseSchema, ProductResponseType } from "../schema"
 
 
@@ -111,12 +111,23 @@ export const getAdminUser = async (id: number): Promise<GetUserResponse | undefi
    return res.data ? res.data : undefined;
 }
 
-export const getProducts = async (): Promise<GetProductResponse | undefined> => {
-   const res = await apiClient.get<GetProductResponse>('/admin/products')
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const getProducts = async (params?: {product_id: any, stock_status: any}): Promise<GetProductResponse | undefined> => {  
+   const res = await apiClient.get<GetProductResponse>('/admin/products', params)
    console.log({res})
    return res.data ? res.data : undefined;
 }
 
+
+export const getProduct = async (id: string): Promise<ProductDetailsApiResponse | undefined> => {
+   const res = await apiClient.get<ProductDetailsApiResponse>(`/admin/products/${id}`);
+   return res.data  
+}
+
+export const updateProduct = async (data: {id: number, model?: string, prime?: string, picture_url?: string, description?: string, voltage?: string, engine?: string, frequency?: string, alternator?: string, amp_per_phase?: string, power?: string, fuel_type?: string, size?: string }): Promise<DefaultApiResponse | undefined> => {
+   const res = await apiClient.post<DefaultApiResponse>("/admin/product/update", data);
+   return res.data;
+};
  
 
 export const getQuoteId = async (): Promise<QuoteIdRecordResponse | undefined> => {

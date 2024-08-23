@@ -42,7 +42,7 @@ export default function NewQuote() {
 
 
 	const { data: products } = useQuery({
-		queryFn: getProducts,
+		queryFn: () => getProducts(),
 		queryKey: ['products'],
 	})
 
@@ -52,7 +52,8 @@ export default function NewQuote() {
 	})
 
 
-	useEffect(() => {   
+	useEffect(() => {  
+		console.log(products?.data);
 		if (products?.data) {
 			setProductList(products?.data);
 		}

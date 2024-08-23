@@ -166,3 +166,8 @@ export interface UserProfile {
 export interface DefaultApiResponse { 
     response_code: string, response_message: string
 }
+
+
+export interface ProductDetailsApiResponse { 
+    response_code: string, response_message: string, data: Product
+}
