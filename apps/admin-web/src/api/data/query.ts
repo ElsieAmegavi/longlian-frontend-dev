@@ -1,5 +1,5 @@
 import apiClient from "../client"
-import { CustomersResponse, DefaultApiResponse, EnquiriesResponse, GetOrderResponse, GetProductResponse, GetQuotesResponse, GetUserResponse, GetUsersResponse, MonthlyQuoteStatsResponse, ProductDetailsApiResponse, QuoteIdRecordResponse, QuoteStatisticsResponse, UserProfile } from "./interfaces"
+import { CustomersResponse, DefaultApiResponse, EnquiriesResponse, GetOrderResponse, GetProductResponse, GetQuotesResponse, GetUserResponse, GetUsersResponse, MonthlyQuoteStatsResponse, ProductDetailsApiResponse, QuoteIdRecordResponse, QuoteStatisticsResponse, SettingsDetailsApiResponse, UserProfile } from "./interfaces"
 // import { ProductResponseSchema, ProductResponseType } from "../schema"
 
 
@@ -117,6 +117,15 @@ export const createProduct = async (data: {id: number, model: string, prime: str
    return res.data;
 };
 
+export const save_general_settings = async (data: {company_name?: string, company_email?: string, company_phone?: string, company_address?: string, language?: string, currency?: string }): Promise<DefaultApiResponse | undefined> => {
+   const res = await apiClient.post<DefaultApiResponse>("/admin/save_general_settings", data);
+   return res.data;
+};
+
+export const get_general_settings = async (): Promise<SettingsDetailsApiResponse | undefined> => {   
+   const res = await apiClient.get<SettingsDetailsApiResponse>(`/admin/general_settings`);
+   return res.data ? res.data : undefined;
+}
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const getProducts = async (params?: {product_id: any, stock_status: any}): Promise<GetProductResponse | undefined> => {  
