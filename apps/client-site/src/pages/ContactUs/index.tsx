@@ -57,7 +57,7 @@ export default function ContactUs() {
                     email: '',
                     phone_number: '',
                     message: ''
-                });
+                });  
                 setOpenDialog(true);
             } else {
                 setMessage(response?.data?.response_message);
