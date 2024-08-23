@@ -210,50 +210,48 @@ export default function Home() {
 			</section>
 
 			{/* Kpi */}
-			<section className='w-full bg-[url("/assets/longlian-about.png")] bg-cover bg-no-repeat bg-center flex flex-col items-center'>
-				<div className='w-full grid grid-cols-3 gap-8 bg-[#000522BF] p-8 py-20'>
-					<div className='w-full flex flex-col items-center gap-4'>
-					<div className='w-40 h-40 sm:w-32 sm:h-32 md:w-36 md:h-36 rounded-full bg-[#FBECE6] mt-3 items-center justify-center flex relative'>
-						<img src='/assets/20-years.png' alt='20 years' className='h-32 w-32' />
-					</div>
-					<div>
-						<p className='text-sm sm:text-base md:text-lg text-white max-w-52 sm:max-w-72 text-center'>
-						{t("Focus on generator set products")}
-						</p>
-					</div>
-					</div>
-
-					<div className='w-full flex flex-col items-center gap-4'>
-					<div className='w-32 h-32 sm:w-28 sm:h-28 md:w-36 md:h-36 rounded-full bg-[#FBECE6] mt-3 items-center justify-center flex'>
-						<img
-						src='/assets/generator.png'
-						alt='generator'
-						className='h-20 w-20 sm:h-24 sm:w-24 md:h-28 md:w-28'
-						/>
-					</div>
-					<div>
-						<p className='text-sm sm:text-base md:text-lg text-white max-w-52 sm:max-w-72 text-center'>
-						{t("Small size, light weight, no noise")}
-						</p>
-					</div>
-					</div>
-
-					<div className='w-full flex flex-col items-center gap-4'>
-					<div className='w-32 h-32 sm:w-28 sm:h-28 md:w-36 md:h-36 rounded-full bg-[#FBECE6] items-center justify-center flex'>
-						<img
-						src='/assets/house.png'
-						alt='house'
-						className='h-20 w-20 sm:h-24 sm:w-24 md:h-28 md:w-28'
-						/>
-					</div>
-					<div>
-						<p className='text-sm sm:text-base md:text-lg text-white max-w-52 sm:max-w-72 text-center'>
-						{t("Less exhaust gas, less fuel consumption, good starting performance")}
-						</p>
-					</div>
-					</div>
-				</div>
-			</section>
+<section className='w-full bg-[url("/assets/longlian-about.png")] bg-cover bg-no-repeat bg-center flex flex-col items-center'>
+  <div className='w-full flex flex-col sm:flex-row justify-center items-center gap-8 bg-[#000522BF] p-4 sm:p-8 py-10 sm:py-20'>
+    <div className='w-full sm:w-1/3 flex flex-col items-center gap-4'>
+      <div className='w-32 h-32 sm:w-36 sm:h-36 rounded-full bg-[#FBECE6] flex items-center justify-center'>
+        <img src='/assets/20-years.png' alt='20 years' className='h-24 w-24 sm:h-28 sm:w-28' />
+      </div>
+      <div>
+        <p className='text-sm sm:text-base text-white max-w-[200px] text-center'>
+          {t("Focus on generator set products")}
+        </p>
+      </div>
+    </div>
+    <div className='w-full sm:w-1/3 flex flex-col items-center gap-4'>
+      <div className='w-32 h-32 sm:w-36 sm:h-36 rounded-full bg-[#FBECE6] flex items-center justify-center'>
+        <img
+          src='/assets/generator.png'
+          alt='generator'
+          className='h-20 w-20 sm:h-24 sm:w-24'
+        />
+      </div>
+      <div>
+        <p className='text-sm sm:text-base text-white max-w-[200px] text-center'>
+          {t("Small size, light weight, low noise")}
+        </p>
+      </div>
+    </div>
+    <div className='w-full sm:w-1/3 flex flex-col items-center gap-4'>
+      <div className='w-32 h-32 sm:w-36 sm:h-36 rounded-full bg-[#FBECE6] flex items-center justify-center'>
+        <img
+          src='/assets/house.png'
+          alt='house'
+          className='h-20 w-20 sm:h-24 sm:w-24'
+        />
+      </div>
+      <div>
+        <p className='text-sm sm:text-base text-white max-w-[200px] text-center'>
+          {t("Less exhaust gas, less fuel consumption, good starting performance")}
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
 
 			{/* testimonials */}
 			<section className='w-full flex flex-col items-center p-6 sm:p-8 md:p-10 py-16 sm:py-20 md:py-32 lg:py-44'>
