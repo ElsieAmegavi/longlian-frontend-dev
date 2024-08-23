@@ -236,7 +236,7 @@ export default function Details() {
 					<div className='flex items-center justify-center flex-col'>
 						<div className=''>
 							<span>
-								<img src='/assets/logo.png' alt='logo' className='w-48' />
+								<img src='/assets/nn.png' alt='logo' className='w-48' />
 							</span>
 						</div>
 						<h3 className='font-bold text-lg '>"{t("Make Enquiry")}</h3>
@@ -326,7 +326,7 @@ export default function Details() {
 					<div className='flex items-center justify-center flex-col'>
 						<div className=''>
 							<span>
-								<img src='/assets/logo.png' alt='logo' className='w-48' />
+								<img src='/assets/nn.png' alt='logo' className='w-48' />
 							</span>
 						</div>
 						<h3 className='font-bold text-lg '>{t("Order Form")}</h3>
