@@ -29,10 +29,10 @@ export default function Generators() {
 			{/* Kpi */}
 			<section className='w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 px-4 md:px-8 lg:px-32 mt-10'>
 				{[
-					{ title: 'Power Range', value: '10 - 1250 KVA' },
-					{ title: 'Fuel Type', value: 'DIESEL' },
-					{ title: 'Frequencies', value: '50 & 60 Hz' },
-					{ title: 'Warranty', value: '18 MONTHS' },
+					{ title: t('Power Range'), value: '10 - 1250 KVA' },
+					{ title: t('Fuel Type'), value: t('DIESEL') },
+					{ title: t('Frequencies'), value: '50 & 60 Hz' },
+					{ title: t('Warranty'), value: t('18 MONTHS') },
 				].map((item, index) => (
 					<div key={index} className='flex flex-col items-center justify-center gap-2 mb-4 lg:mb-0'>
 						<h4 className='text-lg md:text-xl font-semibold text-gray-600'>{item.title}</h4>
@@ -88,23 +88,23 @@ export default function Generators() {
 						<div className='grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4'>
 							<input
 								id='firstName'
-								placeholder='First Name'
+								placeholder={t('First Name')} 
 								className='w-full h-12 md:h-16 text-gray-700 bg-white shadow-md border-black rounded-lg px-5'
 							/>
 							<input
 								id='lastName'
-								placeholder='Last Name'
+								placeholder={t('Last Name')} 
 								className='w-full h-12 md:h-16 text-gray-700 bg-white shadow-md border-black rounded-lg px-5'
 							/>
 							<input
 								id='email'
 								type='email'
-								placeholder='Email'
+								placeholder={t('Email')} 
 								className='w-full h-12 md:h-16 text-gray-700 bg-white shadow-md border-black rounded-lg px-5'
 							/>
 							<input
 								id='phone'
-								placeholder='Phone Number'
+								placeholder={t('Phone Number')} 
 								className='w-full h-12 md:h-16 text-gray-700 bg-white shadow-md border-black rounded-lg px-5'
 							/>
 						</div>
@@ -112,7 +112,7 @@ export default function Generators() {
 						<div className='w-full'>
 							<textarea
 								id='message'
-								placeholder='Message'
+								placeholder={t('Message')} 
 								className='w-full h-32 md:h-40 text-gray-700 bg-white shadow-md border-black rounded-lg px-5 mb-4'
 							/>
 							<button

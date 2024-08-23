@@ -133,26 +133,26 @@ export default function ContactUs() {
                             {t("If you got any questions don't hesitate to send us a message")}
                         </p>
                         <div className='w-full grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6 py-10 tracking-wider'>
-                            <input id='text' placeholder='First Name' value={formData.first_name}
+                            <input id='text' placeholder={t('First Name')} value={formData.first_name}
                                 className=' h-16 text-gray-700 bg-white shadow-md border-black rounded-lg px-5'
                                 onChange={e => setFormData((prev) => ({ ...prev, first_name: e.target.value }))}
                             />
-                            <input id='text' placeholder='Last Name' value={formData.last_name}
+                            <input id='text' placeholder={t('Last Name')} value={formData.last_name}
                                 className=' h-16 text-gray-700 bg-white shadow-md border-black rounded-lg px-5'
                                 onChange={e => setFormData((prev) => ({ ...prev, last_name: e.target.value }))}
                             />
-                            <input id='email' placeholder='Email' value={formData.email}
+                            <input id='email' placeholder={t('Email')} value={formData.email}
                                 className='h-16 text-gray-700 bg-white shadow-md border-black rounded-lg px-5'
                                 onChange={e => setFormData((prev) => ({ ...prev, email: e.target.value }))}
                             />
-                            <input id='text' placeholder='Phone Number' value={formData.phone_number}
+                            <input id='text' placeholder={t('Phone Number')} value={formData.phone_number}
                                 className='h-16 text-gray-700 bg-white shadow-md border-black rounded-lg px-5'
                                 onChange={e => setFormData((prev) => ({ ...prev, phone_number: e.target.value }))}
                             />
                         </div>
 
                         <div className='w-full tracking-widest'>
-                            <textarea id='message' placeholder='Message' value={formData.message}
+                            <textarea id='message'placeholder={t('Message')}  value={formData.message}
                                 className='w-full h-40  text-gray-700 bg-white shadow-md border-black rounded-lg px-5 '
                                 onChange={e => setFormData((prev) => ({ ...prev, message: e.target.value }))}
                             />
