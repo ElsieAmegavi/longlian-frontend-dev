@@ -157,7 +157,7 @@ export default function Details() {
 
 {/* Technical Problems */}
 <section className='w-full flex flex-col items-center justify-center py-5'>
-  <h3 className='font-semibold text-3xl md:text-5xl text-black'>{t("Technical Problems")}</h3>
+  <h3 className='font-semibold text-3xl md:text-5xl text-black'>{t("Technical Parameters")}</h3>
 
   <div className='w-full flex flex-col items-center my-5'>
     <div className='w-full md:w-10/12'>
