@@ -1,4 +1,4 @@
-import { Search, Menu } from "lucide-react"
+import { Menu } from "lucide-react"
 import { Link } from "react-router-dom"
 import { useState } from "react"
 import LanguageSelector from "./LanguageSelector"
@@ -24,14 +24,12 @@ export const Navbar = () => {
                         <li><Link to="/faq" className="hover:text-orange-600">{t("FAQ")}</Link></li>
                     </ul>
                     <ul className="flex items-center gap-3 lg:gap-4 text-sm">
-                        <li><Search className="text-orange-600 cursor-pointer w-4 h-4"/></li>
                         <li><a href="/" className="hover:text-orange-600">{t("Home")}</a></li>
                         <li><Link to="/generator" className="hover:text-orange-600">{t("Generators")}</Link></li>
                         <li><a href="#" className="hover:text-orange-600">{t("News")}</a></li>
                     </ul>
                 </div>
                 <div className="lg:hidden flex items-center gap-3">
-                    <Search className="text-orange-600 cursor-pointer w-5 h-5"/>
                     <Menu className="cursor-pointer w-6 h-6" onClick={() => setIsMenuOpen(!isMenuOpen)}/>
                 </div>
             </div>

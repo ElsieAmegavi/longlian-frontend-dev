@@ -66,7 +66,7 @@ export default function ContactUs() {
         <main className='flex flex-col items-start m-auto min-h-screen w-full bg-gray-100'>
             <Navbar />
             {/* Image */}
-            <section className='w-full h-[60vh] bg-[url("/assets/longlian-contact.png")] bg-center bg-cover bg-no-repeat relative'>
+            <section className='w-full h-[70vh] bg-[url("/assets/longlian-about.png")] bg-center bg-cover bg-no-repeat relative'>
             </section>
             {/* Contact Us */}
             <section className="w-full flex flex-col md:flex-row items-center gap-4">
@@ -166,11 +166,9 @@ export default function ContactUs() {
                     </p>
                 </div>
                <div className="w-full max-w-4xl aspect-w-16 aspect-h-9 py-6 sm:py-8 md:py-10">
-                <iframe 
-                    className="w-full h-[300px] sm:h-[400px] md:h-[500px]"
-                    src="https://www.google.com/maps/place/5%C2%B037'00.5%22N+0%C2%B011'54.1%22W/@5.6167937,-0.2009241,17z/data=!3m1!4b1!4m4!3m3!8m2!3d5.6167937!4d-0.1983492?hl=en&entry=ttu&g_ep=EgoyMDI0MDgyMC4xIKXMDSoASAFQAw%3D%3D" 
-                    allowFullScreen={false}
-                    loading="lazy">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3970.662144619191!2d-0.1983611!3d5.6168056!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNcKwMzcnMDAuNSJOIDDCsDExJzU0LjEiVw!5e0!3m2!1sen!2sgh!4v1724452167516!5m2!1sen!2sgh"
+                    style={{border: 0}} className="w-full h-[300px] sm:h-[400px] md:h-[500px]">
                 </iframe>
             </div>
             </section>
