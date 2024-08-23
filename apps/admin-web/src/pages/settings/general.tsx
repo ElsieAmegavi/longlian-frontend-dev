@@ -151,8 +151,8 @@ export default function General() {
                         </SelectTrigger>
                         <SelectContent className="bg-white">
                           <SelectGroup>
-                            <SelectItem value="apple">English</SelectItem>
-                            <SelectItem value="banana">Chinese</SelectItem>
+                          <SelectItem value="cedis">Cedis</SelectItem>
+                          <SelectItem value="dollars">Dollars</SelectItem>
                           </SelectGroup>
                         </SelectContent>
                       </Select>
