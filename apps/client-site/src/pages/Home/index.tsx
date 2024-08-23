@@ -52,7 +52,7 @@ export default function Home() {
 				{' '}
 				<div className='lg:animate-slide-right delay-0 w-full md:w-10/12 lg:w-8/12 h-full bg-[#000522BF] clip flex flex-col px-4 sm:px-6 md:px-10 gap-3 sm:gap-4 md:gap-5 justify-center'>
 					<h3 className='text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-medium w-full md:w-3/4 leading-tight tracking-wider text-white lg:animate-slide-right animation-delay-200 '>
-						{t("Powering Your World with Reliable")}<span className='text-orange-500'>{t("Generators")}</span>
+						{t("Powering Your World with Reliable")}<span className='text-orange-500 mx-3'>{t("Generators")}</span>
 					</h3>
 					<p className='text-white text-sm sm:text-base md:text-lg lg:text-xl w-full md:w-3/4 leading-normal mt-2 sm:mt-3 md:mt-5 lg:mt-10 tracking-wide sm:tracking-wider lg:animate-slide-up animation-delay-500'>
 						{t("To provide you with stable reliable electricity, Let you enjoy unlimited convienience in life")}
