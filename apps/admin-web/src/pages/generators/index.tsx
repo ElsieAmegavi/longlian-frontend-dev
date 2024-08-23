@@ -21,34 +21,41 @@ import {
 import { Link } from 'react-router-dom'
 import { Tabs, TabsContent } from '@/components/ui/tabs'
 import { Card, CardContent } from '@/components/ui/card'
-// import { addDays } from 'date-fns'
-// import React from 'react'
-// import { DateRange } from 'react-day-picker'
 import {
 	Select,
 	SelectContent,
 	SelectGroup,
 	SelectItem,
-	SelectLabel,
+	// SelectLabel,
 	SelectTrigger,
 	SelectValue,
 } from '@/components/ui/select'
 import { useQuery } from '@tanstack/react-query'
 import { getProducts } from '@/api/data/query'
-
-
+import { useState } from 'react'
 
 export default function Generators() {
-	// const [date, setDate] = React.useState<DateRange | undefined>({
-	// 	from: new Date(2022, 0, 20),
-	// 	to: addDays(new Date(2022, 0, 20), 20),
-	// })
+	// State to manage selected generator and stock status
+	const [selectedProductId, setSelectedProductId] = useState<string | null>(null)
+	const [selectedStockStatus, setSelectedStockStatus] = useState<string | null>(null)
 
+	// Fetch products with the query key including selected generator and stock status
 	const { data: products } = useQuery({
-		queryFn: getProducts,
-		queryKey: ['enquiries'],
+		queryFn: () => getProducts({ product_id: selectedProductId, stock_status: selectedStockStatus }),
+		queryKey: ['enquiries', selectedProductId, selectedStockStatus],
 	})
 
+	console.log(products?.data)
+
+	// Function to handle generator selection
+	const handleGeneratorChange = (value: string) => {
+		setSelectedProductId(value)
+	}
+
+	// Function to handle stock status selection
+	const handleStockStatusChange = (value: string) => {
+		setSelectedStockStatus(value)
+	}
 
 	return (
 		<>
@@ -78,42 +85,38 @@ export default function Generators() {
 									<form className='grid w-full items-start gap-6  '>
 										<div className='flex items-center justify-between gap-4 ml-10'>
 											<div className='flex items-center  gap-3 '>
-												<Label htmlFor='first_name' className='w-52 text-lg'>
+												<Label htmlFor='generator' className='w-52 text-lg'>
 													Generators
 												</Label>
-												<Select>
+												<Select onValueChange={handleGeneratorChange}>
 													<SelectTrigger className=' rounded'>
 														<SelectValue placeholder='Select option' />
 													</SelectTrigger>
 													<SelectContent className='bg-white'>
 														<SelectGroup>
-															<SelectLabel>Fruits</SelectLabel>
-															<SelectItem value='apple'>Apple</SelectItem>
-															<SelectItem value='banana'>Banana</SelectItem>
-															<SelectItem value='blueberry'>Blueberry</SelectItem>
-															<SelectItem value='grapes'>Grapes</SelectItem>
-															<SelectItem value='pineapple'>Pineapple</SelectItem>
+															{(products?.data as any)?.map((product: any) => (
+																<SelectItem key={product.id} value={product.id}>
+																	{product.model}
+																</SelectItem>
+															))}
 														</SelectGroup>
 													</SelectContent>
 												</Select>
 											</div>
 
 											<div className='flex items-center  gap-3 '>
-												<Label htmlFor='first_name' className='w-52 text-lg'>
+												<Label htmlFor='stock_status' className='w-52 text-lg'>
 													Stock Status
 												</Label>
-												<Select>
+												<Select onValueChange={handleStockStatusChange}>
 													<SelectTrigger className=' rounded'>
 														<SelectValue placeholder='Select option' />
 													</SelectTrigger>
 													<SelectContent className='bg-white'>
 														<SelectGroup>
-															<SelectLabel>Fruits</SelectLabel>
-															<SelectItem value='apple'>Apple</SelectItem>
-															<SelectItem value='banana'>Banana</SelectItem>
-															<SelectItem value='blueberry'>Blueberry</SelectItem>
-															<SelectItem value='grapes'>Grapes</SelectItem>
-															<SelectItem value='pineapple'>Pineapple</SelectItem>
+															<SelectItem value='I'>In Stock</SelectItem>
+															<SelectItem value='L'>Low Stock</SelectItem>
+															<SelectItem value='O'>Out of Stock</SelectItem>
 														</SelectGroup>
 													</SelectContent>
 												</Select>
@@ -132,20 +135,26 @@ export default function Generators() {
 											<TableHead className='text-gray-400'>Product Model</TableHead>
 											<TableHead className='text-gray-400'>Generator Power</TableHead>
 											<TableHead className='text-gray-400'>Engine</TableHead>
-											<TableHead className='text-gray-400'>Prime</TableHead>
-											{/* <TableHead className='text-gray-400'>Fuel Type</TableHead> */}
-											<TableHead className='text-gray-400'>Description</TableHead>
+											<TableHead className='text-gray-400'>Status</TableHead>
+											<TableHead className='text-gray-400'>Action</TableHead>
 										</TableRow>
 									</TableHeader>
 									<TableBody>
-										{(products?.data as any)?.data?.map((product: any) => (
+										{(products?.data as any)?.map((product: any) => (
 											<TableRow key={product.id} className='border-none '>
 												<TableCell className='font-medium'>{product.model}</TableCell>
 												<TableCell>{product.power}</TableCell>
 												<TableCell className='capitalize'>{product.engine}</TableCell>
-												<TableCell>{product.prime}</TableCell>
-												{/* <TableCell>{product.fuel_type}</TableCell> */}
-												<TableCell className='max-w-xs'>{product.description}</TableCell>
+												<TableCell>
+													<span className="bg-green-500 text-white px-2 py-1 rounded">
+														In Stock
+													</span>
+												</TableCell>
+												<TableCell>
+													<Link to={`/generators/${product.id}`} className="bg-gray-200 p-1.5 rounded hover:bg-gray-300 transition">
+														View
+													</Link>
+												</TableCell>
 											</TableRow>
 										))}
 									</TableBody>

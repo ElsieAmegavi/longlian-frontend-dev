@@ -22,6 +22,7 @@ import AdminManagementForm from '@/pages/settings/admin/AdminManagementForm'
 import FAQ from '@/pages/settings/help/faq'
 import ProfileSettings from '@/pages/settings/profile'
 import AdminDetails from '@/pages/settings/admin/details'
+import GeneratorDetails from '@/pages/generators/details'
 const DashboardLayout = lazy(() => import('@/pages/layout'))
 const LoginPage = lazy(() => import('@/pages/auth/login'))
 const DashboardPage = lazy(() => import('@/pages/dashboard'))
@@ -79,6 +80,10 @@ export default function AppRouter() {
 				{
 					path: 'generators',
 					element: <Generators />,
+				},
+				{
+					path: 'generators/:id',
+					element: <GeneratorDetails />,
 				},
 				{
 					path: 'report',
