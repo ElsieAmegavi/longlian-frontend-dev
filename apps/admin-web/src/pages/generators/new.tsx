@@ -5,7 +5,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import PageHead from "@/components/custom/page-head";
-import { useParams } from "react-router-dom";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -13,13 +12,13 @@ import {
   BreadcrumbList,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Tabs, TabsContent } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { useQuery, useMutation } from "@tanstack/react-query";
-import { getProduct, updateProduct } from "@/api/data/query";
-import { useEffect, useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { createProduct } from "@/api/data/query";
+import { useState } from "react";
 import { Product } from "@/api/data/interfaces";
 import {
   Select,
@@ -32,9 +31,10 @@ import {
 } from "@/components/ui/select";
 import { toast } from "react-toastify";
 
-export default function GeneratorDetails() {
-  const { id } = useParams();
-  const [productDetails, setProductDetails] = useState<Product>({
+export default function AddGenerator() {
+  const navigate = useNavigate();
+
+  const [newProduct, setNewProduct] = useState<Product>({
     id: 0,
     model: "",
     prime: "",
@@ -49,44 +49,32 @@ export default function GeneratorDetails() {
     power: "",
     fuel_type: "",
     size: "",
-    stock_status: "",
+    price: 0,
+    color: "",
+    stock_status: "I",
   });
 
-  const { data: product } = useQuery({
-    queryKey: ["product", id],
-    queryFn: () => getProduct(id as string),
-  });
-
-  const updateProductMutation = useMutation({
-    mutationFn: () => updateProduct(productDetails),
-    onSuccess: () => {
-      toast.success("Product updated successfully");
+  const createProductMutation = useMutation({
+    mutationFn: () => createProduct(newProduct),
+    onSuccess: (res: any) => {
+      console.log(res);
+      if (res.response_code == "002") {
+        toast.success("Product added successfully");
+        navigate("/generators"); // Redirect to the generators list page
+      } else {
+        toast.error(
+          res.response_message || "An error occurred. Please try again."
+        );
+      }
     },
     onError: () => {
-      toast.error("Failed to update product");
+      toast.error("Failed to add product");
     },
   });
 
-  useEffect(() => {
-    console.log(product?.data);
-    
-    if (product?.data) {
-      setProductDetails({
-        ...product.data,
-        id: Number(id),
-      });
-
-      setProductDetails(product.data);
-      
-    }
-  }, [product, id]);
-
-
-
-
-  const handleUpdate = async (event: React.SyntheticEvent) => {
+  const handleAddProduct = async (event: React.SyntheticEvent) => {
     event.preventDefault();
-    await updateProductMutation.mutateAsync();
+    await createProductMutation.mutateAsync();
   };
 
   return (
@@ -95,7 +83,7 @@ export default function GeneratorDetails() {
       <div className="flex-1 min-h-screen space-y-4 p-4 pt-6 md:p-8 bg-gray-100">
         <div className="flex items-center justify-between space-y-2">
           <h2 className="text-3xl font-bold tracking-tight">
-            Generator Details
+            Add New Generator
           </h2>
           <Breadcrumb>
             <BreadcrumbList>
@@ -113,7 +101,7 @@ export default function GeneratorDetails() {
               <BreadcrumbSeparator />
               <BreadcrumbItem>
                 <BreadcrumbLink className="cursor-pointer">
-                  Generator Details
+                  Add Generator
                 </BreadcrumbLink>
               </BreadcrumbItem>
             </BreadcrumbList>
@@ -125,42 +113,45 @@ export default function GeneratorDetails() {
               <CardContent>
                 <div className="relative hidden flex-col items-start gap-8 md:flex">
                   <form
-                    onSubmit={handleUpdate}
+                    onSubmit={handleAddProduct}
                     className="grid w-full items-start gap-6"
                   >
+                    {/* Existing fields */}
                     <div className="grid grid-cols-2 gap-4">
                       <div className="grid gap-3">
-                        <Label htmlFor="model">Model:</Label>
+                        <Label htmlFor="model">Model *:</Label>
                         <Input
                           id="model"
                           name="model"
                           type="text"
-                          value={productDetails?.model}
+                          value={newProduct.model}
                           onChange={(e) =>
-                            setProductDetails({
-                              ...productDetails,
+                            setNewProduct({
+                              ...newProduct,
                               model: e.target.value,
                             })
                           }
                           placeholder="Model"
                           className="rounded"
+                          required
                         />
                       </div>
                       <div className="grid gap-3">
-                        <Label htmlFor="power">Power:</Label>
+                        <Label htmlFor="power">Power *:</Label>
                         <Input
                           id="power"
                           name="power"
                           type="text"
-                          value={productDetails?.power}
+                          value={newProduct.power}
                           onChange={(e) =>
-                            setProductDetails({
-                              ...productDetails,
+                            setNewProduct({
+                              ...newProduct,
                               power: e.target.value,
                             })
                           }
                           placeholder="Power"
                           className="rounded"
+                          required
                         />
                       </div>
                     </div>
@@ -172,10 +163,10 @@ export default function GeneratorDetails() {
                           id="price"
                           name="price"
                           type="number"
-                          value={productDetails.price}
+                          value={newProduct.price}
                           onChange={(e) =>
-                            setProductDetails({
-                              ...productDetails,
+                            setNewProduct({
+                              ...newProduct,
                               price: parseFloat(e.target.value),
                             })
                           }
@@ -190,10 +181,10 @@ export default function GeneratorDetails() {
                           id="prime"
                           name="prime"
                           type="text"
-                          value={productDetails.prime}
+                          value={newProduct.prime}
                           onChange={(e) =>
-                            setProductDetails({
-                              ...productDetails,
+                            setNewProduct({
+                              ...newProduct,
                               prime: e.target.value,
                             })
                           }
@@ -210,10 +201,10 @@ export default function GeneratorDetails() {
                           id="color"
                           name="color"
                           type="text"
-                          value={productDetails.color}
+                          value={newProduct.color}
                           onChange={(e) =>
-                            setProductDetails({
-                              ...productDetails,
+                            setNewProduct({
+                              ...newProduct,
                               color: e.target.value,
                             })
                           }
@@ -228,10 +219,10 @@ export default function GeneratorDetails() {
                           id="amp_per_phase"
                           name="amp_per_phase"
                           type="text"
-                          value={productDetails.amp_per_phase}
+                          value={newProduct.amp_per_phase}
                           onChange={(e) =>
-                            setProductDetails({
-                              ...productDetails,
+                            setNewProduct({
+                              ...newProduct,
                               amp_per_phase: e.target.value,
                             })
                           }
@@ -242,26 +233,29 @@ export default function GeneratorDetails() {
                       </div>
                     </div>
 
-
+                    {/* Rest of the existing fields */}
                     <div className="grid grid-cols-2 gap-4">
                       <div className="grid gap-3">
-                        <Label htmlFor="engine">Engine:</Label>
+                        <Label htmlFor="engine">Engine *:</Label>
                         <Select
                           name="engine"
-                          value={productDetails?.engine}
+                          value={newProduct.engine}
                           onValueChange={(value) =>
-                            setProductDetails({
-                              ...productDetails,
+                            setNewProduct({
+                              ...newProduct,
                               engine: value,
                             })
                           }
+                          required
                         >
                           <SelectTrigger>
                             <SelectValue placeholder="Select Generator Engine" />
                           </SelectTrigger>
                           <SelectContent className="bg-white">
                             <SelectGroup>
-                              <SelectLabel>Select Generator Engine</SelectLabel>
+                              <SelectLabel>
+                                Select Generator Engine *
+                              </SelectLabel>
                               <SelectItem key="diesel" value="diesel">
                                 Diesel
                               </SelectItem>
@@ -272,16 +266,17 @@ export default function GeneratorDetails() {
                         </Select>
                       </div>
                       <div className="grid gap-3">
-                        <Label htmlFor="fuel_type">Fuel Type:</Label>
+                        <Label htmlFor="fuel_type">Fuel Type *:</Label>
                         <Select
                           name="fuel_type"
-                          value={productDetails?.fuel_type}
+                          value={newProduct.fuel_type}
                           onValueChange={(value) =>
-                            setProductDetails({
-                              ...productDetails,
+                            setNewProduct({
+                              ...newProduct,
                               fuel_type: value,
                             })
                           }
+                          required
                         >
                           <SelectTrigger>
                             <SelectValue placeholder="Select Fuel Type" />
@@ -289,51 +284,57 @@ export default function GeneratorDetails() {
                           <SelectContent className="bg-white">
                             <SelectGroup>
                               <SelectLabel>Select Fuel Type</SelectLabel>
-                              <SelectItem key="petrol" value="petrol"> Petrol </SelectItem>
-                              <SelectItem key="diesel" value="diesel"> Diesel </SelectItem>
+                              <SelectItem key="petrol" value="petrol">
+                                {" "}
+                                Petrol{" "}
+                              </SelectItem>
+                              <SelectItem key="diesel" value="diesel">
+                                {" "}
+                                Diesel{" "}
+                              </SelectItem>
                             </SelectGroup>
                           </SelectContent>
                         </Select>
-
                       </div>
                     </div>
                     <div className="grid grid-cols-2 gap-4">
                       <div className="grid gap-3">
-                        <Label htmlFor="voltage">Voltage:</Label>
+                        <Label htmlFor="voltage">Voltage *:</Label>
                         <Input
                           id="voltage"
                           name="voltage"
                           type="text"
-                          value={productDetails?.voltage}
+                          value={newProduct.voltage}
                           onChange={(e) =>
-                            setProductDetails({
-                              ...productDetails,
+                            setNewProduct({
+                              ...newProduct,
                               voltage: e.target.value,
                             })
                           }
                           placeholder="Voltage"
                           className="rounded"
+                          required
                         />
                       </div>
                       <div className="grid gap-3">
-                        <Label htmlFor="frequency">Frequency:</Label>
+                        <Label htmlFor="frequency">Frequency *:</Label>
                         <Input
                           id="frequency"
                           name="frequency"
                           type="text"
-                          value={productDetails?.frequency}
+                          value={newProduct.frequency}
                           onChange={(e) =>
-                            setProductDetails({
-                              ...productDetails,
+                            setNewProduct({
+                              ...newProduct,
                               frequency: e.target.value,
                             })
                           }
                           placeholder="Frequency"
                           className="rounded"
+                          required
                         />
                       </div>
                     </div>
-
 
                     <div className="grid grid-cols-3 gap-4">
                       <div className="grid gap-3">
@@ -342,10 +343,10 @@ export default function GeneratorDetails() {
                           id="alternator"
                           name="alternator"
                           type="text"
-                          value={productDetails.alternator}
+                          value={newProduct.alternator}
                           onChange={(e) =>
-                            setProductDetails({
-                              ...productDetails,
+                            setNewProduct({
+                              ...newProduct,
                               alternator: e.target.value,
                             })
                           }
@@ -360,10 +361,10 @@ export default function GeneratorDetails() {
                           id="size"
                           name="size"
                           type="text"
-                          value={productDetails.size}
+                          value={newProduct.size}
                           onChange={(e) =>
-                            setProductDetails({
-                              ...productDetails,
+                            setNewProduct({
+                              ...newProduct,
                               size: e.target.value,
                             })
                           }
@@ -376,10 +377,10 @@ export default function GeneratorDetails() {
                         <Label htmlFor="fuel_type">Stock Status *:</Label>
                         <Select
                           name="stock_status"
-                          value={productDetails.stock_status}
+                          value={newProduct.stock_status}
                           onValueChange={(value) =>
-                            setProductDetails({
-                              ...productDetails,
+                            setNewProduct({
+                              ...newProduct,
                               stock_status: value,
                             })
                           }
@@ -409,16 +410,15 @@ export default function GeneratorDetails() {
                       </div>
                     </div>
 
-
                     <div className="grid gap-3">
                       <Label htmlFor="description">Description:</Label>
                       <Textarea
                         id="description"
                         name="description"
-                        value={productDetails?.description}
+                        value={newProduct.description}
                         onChange={(e) =>
-                          setProductDetails({
-                            ...productDetails,
+                          setNewProduct({
+                            ...newProduct,
                             description: e.target.value,
                           })
                         }
@@ -429,9 +429,9 @@ export default function GeneratorDetails() {
                     </div>
                     <Button
                       type="submit"
-                      className="w-44 text-xl h-12 bg-orange-600 text-white rounded hover:bg-orange-600 mx-auto uppercase tracking-wider"
+                      className="w-64 text-xl h-12 bg-orange-600 text-white rounded hover:bg-orange-600 mx-auto uppercase tracking-wider"
                     >
-                      Update
+                      Add Generator
                     </Button>
                   </form>
                 </div>

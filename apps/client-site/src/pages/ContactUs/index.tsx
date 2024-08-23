@@ -40,6 +40,13 @@ export default function ContactUs() {
     
     
     const submit = async () => {
+         if (!formData.first_name || !formData.last_name || !formData.email || !formData.phone_number || !formData.message) {
+            setMessage("Please fill out all required fields.");
+            setOpenDialog(true);
+            return;
+        }
+
+
         try {
             const response = await mutateAsync(formData) as ApiResponse;
             setMessage(null);
@@ -66,7 +73,7 @@ export default function ContactUs() {
             <Navbar />
 
             {/* Image */}
-            <section className='w-full h-[50vh] bg-[url("/assets/longlian-contact.png")] bg-center bg-cover bg-no-repeat relative'>
+            <section className='w-full h-[60vh] bg-[url("/assets/longlian-contact.png")] bg-center bg-cover bg-no-repeat relative'>
 
             </section>
 
@@ -75,8 +82,8 @@ export default function ContactUs() {
                 <div className='w-full md:w-fit p-10  flex flex-wrap md:flex-col items-center gap-5 justify-center'>
 
                     <div className='w-full h-32 p-10  bg-white flex flex-row items-center '>
-                        <div className='h-16 w-16 rounded-full bg-orange-300 flex justify-center items-center mr-5'>
-                            <Smartphone className="text-orange-700 size-10" />
+                        <div className='h-16 w-16 rounded-full bg-orange-600 flex justify-center items-center mr-5'>
+                            <Smartphone className="text-gray-200 size-10" />
                         </div>
 
                         <div>
@@ -90,12 +97,12 @@ export default function ContactUs() {
 
                     </div>
 
-                    <div className='w-full h-32 p-10  bg-white flex flex-row items-center '>
-                        <div className='h-16 w-16 rounded-full bg-orange-300 flex justify-center items-center mr-5'>
-                            <MapPin className="text-orange-700 size-10" />
+                    <div className='w-full h-32 py-10 px-2  bg-white flex flex-row items-center '>
+                        <div className='h-16 w-16 rounded-full bg-orange-600 flex justify-center items-center '>
+                            <MapPin className="text-gray-200 size-10" />
                         </div>
 
-                        <div>
+                        <div className="mx-5 ">
                             <h3 className='text-2xl font-semibold'>
                                 {t("Address")}
                             </h3>
@@ -108,8 +115,8 @@ export default function ContactUs() {
                     </div>
 
                     <div className='w-full h-32 p-10  bg-white flex flex-row items-center '>
-                        <div className='h-16 w-16 rounded-full bg-orange-300 flex justify-center items-center mr-5'>
-                            <MailOpen className="text-orange-700 size-10" />
+                        <div className='h-16 w-16 rounded-full bg-orange-600 flex justify-center items-center mr-5'>
+                            <MailOpen className="text-gray-200 size-10" />
                         </div>
 
                         <div>
@@ -182,7 +189,7 @@ export default function ContactUs() {
                <div className="w-full max-w-4xl aspect-w-16 aspect-h-9 py-6 sm:py-8 md:py-10">
                 <iframe 
                     className="w-full h-[300px] sm:h-[400px] md:h-[500px]"
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.8354345094856!2d144.95373531535066!3d-37.81720997975195!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf0727e4f6f8917e5!2sFederation%20Square!5e0!3m2!1sen!2sau!4v1615428945422!5m2!1sen!2sau" 
+                    src="https://www.google.com/maps/place/5%C2%B037'00.5%22N+0%C2%B011'54.1%22W/@5.6167937,-0.2009241,17z/data=!3m1!4b1!4m4!3m3!8m2!3d5.6167937!4d-0.1983492?hl=en&entry=ttu&g_ep=EgoyMDI0MDgyMC4xIKXMDSoASAFQAw%3D%3D" 
                     allowFullScreen={false}
                     loading="lazy">
                 </iframe>
@@ -198,8 +205,8 @@ export default function ContactUs() {
                                 <path fill="currentColor" d="M7.29 4.908a54.4 54.4 0 0 1 9.42 0l1.511.13a2.89 2.89 0 0 1 2.313 1.546a.236.236 0 0 1-.091.307l-6.266 3.88a4.25 4.25 0 0 1-4.4.045L3.47 7.088a.236.236 0 0 1-.103-.293A2.89 2.89 0 0 1 5.78 5.039z" />
                                 <path fill="currentColor" d="M3.362 8.767a.248.248 0 0 0-.373.187a30.4 30.4 0 0 0 .184 7.56A2.89 2.89 0 0 0 5.78 18.96l1.51.131c3.135.273 6.287.273 9.422 0l1.51-.13a2.89 2.89 0 0 0 2.606-2.449a30.4 30.4 0 0 0 .161-7.779a.248.248 0 0 0-.377-.182l-5.645 3.494a5.75 5.75 0 0 1-5.951.061z" />
                             </svg>
-                            <p className="uppercase font-bold text-3xl">THANK YOU!</p>
-                            <p className="text-xl text-[#84868D]">Your message has been sent. We’ll be in touch shortly to answer all your question</p>
+                            <p className="uppercase font-bold text-3xl">{t("THANK YOU!")}</p>
+                            <p className="text-xl text-[#84868D]">{t("Your message has been sent. We'll be in touch shortly to answer all your question")}</p>
                         </div>
                     </>
                 }
