@@ -193,3 +193,17 @@ export interface DefaultApiResponse {
 export interface ProductDetailsApiResponse { 
     response_code: string, response_message: string, data: Product
 }
+
+
+export interface GeneralSettings {
+    company_name?: string;
+    company_email?: string;
+    company_phone?: string;
+    company_address?: string;
+    language?: string;
+    currency?: string;
+}
+
+export interface SettingsDetailsApiResponse { 
+    response_code: string, response_message: string, data: GeneralSettings
+}
