@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { Navbar } from '../../components/custom/Navbar';
 import Product from '../../components/custom/Product';
 import { useQuery } from '@tanstack/react-query';
@@ -14,7 +15,17 @@ export default function Generators() {
   });
 
   const productList = Array.isArray(data?.data) ? data.data : [];
-  console.log(productList);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = productList.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.ceil(productList.length / itemsPerPage);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -56,7 +67,7 @@ export default function Generators() {
           <h3 className='text-xl md:text-2xl font-semibold'>{t("Quick Search")}</h3>
           <hr className='w-10/12 my-3 bg-black' />
           <div className='w-full flex flex-col pl-5 gap-3'>
-            {productList.map(product => (
+            {currentItems.map(product => (
               <Link key={product.id} to={`/generators/details/${product.id}`} className='w-full'>
                 <p className='text-black text-left text-sm sm:text-base btn btn-ghost'>
                   <span>{product.model}</span>
@@ -67,12 +78,27 @@ export default function Generators() {
         </div>
 
         <div className='w-full col-span-1 lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4'>
-          {productList.map(product => (
+          {currentItems.map(product => (
             <Link key={product.id} to={`/generators/details/${product.id}`} className='w-full'>
               <Product key={product.id} {...product} />
             </Link>
           ))}
         </div>
+      </section>
+
+      {/* Pagination Controls */}
+      <section className='w-full flex justify-center py-5'>
+        <ul className='flex items-center space-x-4'>
+          {Array.from({ length: totalPages }, (_, index) => (
+            <li key={index}>
+              <button
+                className={`px-3 py-1 rounded ${currentPage === index + 1 ? 'bg-orange-600 text-white' : 'bg-gray-200'}`}
+                onClick={() => handlePageChange(index + 1)}>
+                {index + 1}
+              </button>
+            </li>
+          ))}
+        </ul>
       </section>
 
       {/* Make Enquiry */}
