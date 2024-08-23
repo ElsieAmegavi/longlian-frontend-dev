@@ -141,6 +141,7 @@ export default function AppRouter() {
 					path: '/settings/admin/details/:id',
 					element: <AdminDetails />,
 				},
+				{
 					path: '/settings/notification',
 					element: <Notifications/>
 				},
