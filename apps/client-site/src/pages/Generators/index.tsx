@@ -15,7 +15,6 @@ export default function Generators() {
         queryFn: () => getProductList(),
     })
     const productList = data?.data
-    console.log(productList)
     
     interface FormData {
     first_name: string;
