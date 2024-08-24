@@ -68,7 +68,6 @@ export default function GeneratorDetails() {
   });
 
   useEffect(() => {
-    console.log(product?.data);
     
     if (product?.data) {
       setProductDetails({

@@ -39,7 +39,7 @@ export const searchEnquiries = async ({customer_id, status, start_date, end_date
   
    try {
      const res = await apiClient.get('/admin/enquiries', params);
-     console.log("API Response:", res);
+   //   console.log("API Response:", res);
      return res;
    } catch (error) {
      console.error("API Error:", error);
@@ -55,17 +55,11 @@ export const searchEnquiries = async ({customer_id, status, start_date, end_date
 
 export const getOrders = async (): Promise<GetOrderResponse | undefined> => {   
    const res = await apiClient.get<GetOrderResponse>('/admin/order');
-   console.log(res);
-   
    return res.data;
 };
 
 export const getOrdersFilter = async (params: { start_date?: string, end_date?: string }): Promise<GetOrderResponse | undefined> => {
-   console.log(params);
-   
    const res = await apiClient.get<GetOrderResponse>('/admin/order', { params });
-   console.log(res);
-   
    return res.data;
 };
 
@@ -83,12 +77,9 @@ export const searchQuotes = async ({customer_id, status, start_date, end_date }:
      start_date,
      end_date,
    };
- 
-   console.log("Search Parameters:", params);
- 
+  
    try {
      const res = await apiClient.get('/admin/quote', params);
-     console.log("API Response:", res);
      return res;
    } catch (error) {
      console.error("API Error:", error);

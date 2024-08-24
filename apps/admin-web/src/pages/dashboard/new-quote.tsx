@@ -53,7 +53,6 @@ export default function NewQuote() {
 
 
 	useEffect(() => {  
-		console.log(products?.data);
 		if (products?.data) {
 			setProductList(products?.data);
 		}

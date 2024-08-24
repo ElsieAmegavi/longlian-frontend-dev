@@ -57,7 +57,6 @@ export default function AddGenerator() {
   const createProductMutation = useMutation({
     mutationFn: () => createProduct(newProduct),
     onSuccess: (res: any) => {
-      console.log(res);
       if (res.response_code == "002") {
         toast.success("Product added successfully");
         navigate("/generators"); // Redirect to the generators list page

@@ -46,7 +46,6 @@ const AdminDetails = () => {
   const mutation = useMutation({
     mutationFn: updateUserRecord,
     onSuccess: (res: any) => {
-      console.log(res);
       if (res.response_code == "200") {
         toast.success("User record updated successfully!");
       }else{
@@ -66,7 +65,6 @@ const AdminDetails = () => {
   const deleteUserMutation = useMutation({
     mutationFn: () => deleteUser(Number(id)),
     onSuccess: (res: any) => {
-      console.log(res);
       if (res.response_code == "003") {
         toast.success("User record deleted successfully!");
       }else{
@@ -93,7 +91,6 @@ const AdminDetails = () => {
 
   const handleSave = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Changes saved:", formData);
     mutation.mutate(formData);
   };
 
@@ -102,7 +99,6 @@ const AdminDetails = () => {
   };
 
   const confirmDelete = () => {
-    console.log("Admin deleted:", formData);
     deleteUserMutation.mutate();
     navigate("/settings");
   };

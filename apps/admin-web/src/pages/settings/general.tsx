@@ -60,7 +60,6 @@ export default function General() {
   const saveGeneralMutation = useMutation({
     mutationFn: () => save_general_settings(newGeneralSettings),
     onSuccess: (res: any) => {
-      console.log(res);
       if (res.response_code == "002") {
         toast.success("General Settings saved successfully");
         navigate("/settings"); // Redirect to the generators list page

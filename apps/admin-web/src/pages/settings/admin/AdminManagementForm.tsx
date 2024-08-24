@@ -32,7 +32,6 @@ const AdminManagementForm = () => {
   const addUserMutation = useMutation({
     mutationFn: addUserRecord,
     onSuccess: (res: any) => {
-      console.log(res);
       if (res.response_code == "014") {
         toast.success("User record created successfully!");
         navigate('/settings/admin');
