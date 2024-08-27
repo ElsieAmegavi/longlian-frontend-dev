@@ -1,51 +1,68 @@
-import { Navbar } from '../../components/custom/Navbar'
-import Product from '../../components/custom/Product'
-import { useMutation, useQuery } from '@tanstack/react-query'
-import { getProductList } from '../../api/data/query'
-import { Footer } from '../../components/custom/Footer'
-import { FileQuestion } from 'lucide-react'
-import { Link } from 'react-router-dom'
-import { t } from 'i18next'
-import { useState } from 'react'
-import Dialog from '../../components/custom/Dialog'
-import { contactUs } from '../../api/data/mutations'
+import { Navbar } from '../../components/custom/Navbar';
+import Product from '../../components/custom/Product';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { getProductList } from '../../api/data/query';
+import { Footer } from '../../components/custom/Footer';
+import { FileQuestion } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { t } from 'i18next';
+import { useState } from 'react';
+import Dialog from '../../components/custom/Dialog';
+import { contactUs } from '../../api/data/mutations';
+
 export default function Generators() {
     const { data, isLoading } = useQuery({
         queryKey: ['products'],
         queryFn: () => getProductList(),
-    })
-    const productList = data?.data
+    });
+
+    const productList = Array.isArray(data?.data) ? data.data : []; // Ensure productList is an array
     
+    // Pagination state and logic
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 6;
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = productList.slice(indexOfFirstItem, indexOfLastItem); // Safely call slice
+
+    const totalPages = Math.ceil(productList.length / itemsPerPage);
+
+    // Handle page change
+    const handlePageChange = (pageNumber) => {
+        setCurrentPage(pageNumber);
+    };
+
     interface FormData {
-    first_name: string;
-    last_name: string;
-    email: string;
-    phone_number: string;
-    message: string;
-}
-interface ApiResponse {
-    data: {
-        response_code: string;
-        response_message: string;
+        first_name: string;
+        last_name: string;
+        email: string;
+        phone_number: string;
+        message: string;
     }
-}
+
+    interface ApiResponse {
+        data: {
+            response_code: string;
+            response_message: string;
+        };
+    }
+
     const [openDialog, setOpenDialog] = useState(false);
-    const [message, setMessage] = useState('')
+    const [message, setMessage] = useState('');
     const [formData, setFormData] = useState<FormData>({
         first_name: '',
         last_name: '',
         email: '',
         phone_number: '',
-        message: ''
+        message: '',
     });
-    
+
     const { mutateAsync, isPending } = useMutation<ApiResponse, Error, FormData>({
-        mutationFn: (data: FormData) => contactUs(data)
+        mutationFn: (data: FormData) => contactUs(data),
     });
-    
-    
+
     const submit = async () => {
-         if (!formData.first_name || !formData.last_name || !formData.email || !formData.phone_number || !formData.message) {
+        if (!formData.first_name || !formData.last_name || !formData.email || !formData.phone_number || !formData.message) {
             setMessage("Please fill out all required fields.");
             setOpenDialog(true);
             return;
@@ -70,7 +87,9 @@ interface ApiResponse {
             setMessage("Sorry, an error occurred. Please try again");
             setOpenDialog(true);
         }
-    }
+    };
+
+
     return (
         <main className='flex flex-col items-start m-auto min-h-screen w-full'>
             <Navbar />
@@ -101,25 +120,53 @@ interface ApiResponse {
                     <h3 className='text-xl md:text-2xl font-semibold'>{t("Quick Search")}</h3>
                     <hr className='w-10/12 my-3 bg-black' />
                     <div className='w-full flex flex-col pl-5 gap-3'>
-                        {!isLoading && productList?.length > 0 &&
-                            productList?.map(product => (
-                                <Link to={`/generators/details/${product.id}`} className='w-full'>
-                                    <p className='text-black text-left text-sm sm:text-base  btn btn-ghost'>
-                                        <span className=' '>{product.model}</span>
-                                    </p>
-                                </Link>
-                            ))}
+                        {!isLoading && currentItems.map(product => (
+                            <Link key={product.id} to={`/generators/details/${product.id}`} className='w-full'>
+                                <p className='text-black text-left text-sm sm:text-base btn btn-ghost'>
+                                    <span>{product.model}</span>
+                                </p>
+                            </Link>
+                        ))}
                     </div>
                 </div>
                 <div className='w-full col-span-1 lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4'>
                     {
-                        !isLoading && productList?.length > 0 && productList?.map(product => (
-                            <Link to={`/generators/details/${product.id}`} className='w-full'>
+                        !isLoading && currentItems.map(product => (
+                            <Link key={product.id} to={`/generators/details/${product.id}`} className='w-full'>
                                 <Product key={product.id} {...product} />
                             </Link>
                         ))
                     }
                 </div>
+            </section>
+
+            {/* Pagination Controls */}
+            <section className='w-full flex justify-center py-5'>
+                <button
+                    onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                    disabled={currentPage === 1}
+                    className='px-4 py-2 border'
+                >
+                    &lt; Previous
+                </button>
+                
+                {Array.from({ length: totalPages }, (_, index) => (
+                    <button
+                        key={index}
+                        onClick={() => handlePageChange(index + 1)}
+                        className={`px-4 py-2 border ${currentPage === index + 1 ? 'bg-orange-600 text-white' : ''}`}
+                    >
+                        {index + 1}
+                    </button>
+                ))}
+                
+                <button
+                    onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                    disabled={currentPage === totalPages}
+                    className='px-4 py-2 border'
+                >
+                    Next &gt;
+                </button>
             </section>
             {/* Make Enquiry */}
             <section className='w-full px-4 md:px-8 lg:px-16 py-16'>
@@ -137,61 +184,60 @@ interface ApiResponse {
                     </div>
                     <div className='w-full mt-6 lg:mt-0'>
                         <form >
-                        <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4'>
-                            <input
-                                id='firstName'
-                                placeholder={t('First Name')} 
-                                className='w-full h-12 md:h-16 text-gray-700 bg-white shadow-md border-black rounded-lg px-5'
-                                value={formData.first_name}
-                                required
-                                onChange={(e) => setFormData({ ...formData, first_name: e.target.value })}
-                            />
-                            <input
-                                id='lastName'
-                                placeholder={t('Last Name')} 
-                                className='w-full h-12 md:h-16 text-gray-700 bg-white shadow-md border-black rounded-lg px-5'
-                                value={formData.last_name}
-                                required
-                                onChange={(e) => setFormData({ ...formData, last_name: e.target.value })}
-                            />
-                            <input
-                                id='email'
-                                type='email'
-                                placeholder={t('Email')} 
-                                className='w-full h-12 md:h-16 text-gray-700 bg-white shadow-md border-black rounded-lg px-5'
-                                value={formData.email}
-                                required
-                                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                            />
-                            <input
-                                id='phone'
-                                placeholder={t('Phone Number')} 
-                                className='w-full h-12 md:h-16 text-gray-700 bg-white shadow-md border-black rounded-lg px-5'
-                                value={formData.phone_number}
-                                required
-                                onChange={(e) => setFormData({ ...formData, phone_number: e.target.value })}
-                            />
-                        </div>
-                        <div className='w-full'>
-                            <textarea
-                                id='message'
-                                placeholder={t('Message')} 
-                                className='w-full h-32 md:h-40 text-gray-700 bg-white shadow-md border-black rounded-lg px-5 mb-4'
-                                value={formData.message}
-                                required
-                                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                            />
-                            <button
-                                type='submit'
-                                disabled={isPending}
-                                onClick={submit}
-                                className={`w-full sm:w-32 text-lg md:text-xl h-12 bg-orange-600 text-white rounded hover:bg-orange-700 uppercase tracking-wider ${isPending && 'animate-pulse'}`}
-                            >
-                                {t("Send")}
-                            </button>
-                        </div>
+                            <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4'>
+                                <input
+                                    id='firstName'
+                                    placeholder={t('First Name')} 
+                                    className='w-full h-12 md:h-16 text-gray-700 bg-white shadow-md border-black rounded-lg px-5'
+                                    value={formData.first_name}
+                                    required
+                                    onChange={(e) => setFormData({ ...formData, first_name: e.target.value })}
+                                />
+                                <input
+                                    id='lastName'
+                                    placeholder={t('Last Name')} 
+                                    className='w-full h-12 md:h-16 text-gray-700 bg-white shadow-md border-black rounded-lg px-5'
+                                    value={formData.last_name}
+                                    required
+                                    onChange={(e) => setFormData({ ...formData, last_name: e.target.value })}
+                                />
+                                <input
+                                    id='email'
+                                    type='email'
+                                    placeholder={t('Email')} 
+                                    className='w-full h-12 md:h-16 text-gray-700 bg-white shadow-md border-black rounded-lg px-5'
+                                    value={formData.email}
+                                    required
+                                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                />
+                                <input
+                                    id='phone'
+                                    placeholder={t('Phone Number')} 
+                                    className='w-full h-12 md:h-16 text-gray-700 bg-white shadow-md border-black rounded-lg px-5'
+                                    value={formData.phone_number}
+                                    required
+                                    onChange={(e) => setFormData({ ...formData, phone_number: e.target.value })}
+                                />
+                            </div>
+                            <div className='w-full'>
+                                <textarea
+                                    id='message'
+                                    placeholder={t('Message')} 
+                                    className='w-full h-32 md:h-40 text-gray-700 bg-white shadow-md border-black rounded-lg px-5 mb-4'
+                                    value={formData.message}
+                                    required
+                                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                                />
+                                <button
+                                    type='submit'
+                                    disabled={isPending}
+                                    onClick={submit}
+                                    className={`w-full sm:w-32 text-lg md:text-xl h-12 bg-orange-600 text-white rounded hover:bg-orange-700 uppercase tracking-wider ${isPending && 'animate-pulse'}`}
+                                >
+                                    {t("Send")}
+                                </button>
+                            </div>
                         </form>
-                        
                     </div>
                 </div>
             </section>
