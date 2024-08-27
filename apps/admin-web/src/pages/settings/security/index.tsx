@@ -63,6 +63,7 @@ export default function Security() {
                     </svg>
                     <Link to="/settings/security/change-password">Change Password</Link>
                   </div>
+                  <Link to="/settings/security/change-password">
                   <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0_1809_624)">
                     <path fillRule="evenodd" clipRule="evenodd" d="M23.4201 15.9544C23.8297 16.3646 24.0598 16.9206 24.0598 17.5003C24.0598 18.08 23.8297 18.636 23.4201 19.0461L15.1717 27.2974C14.7614 27.7075 14.2049 27.9379 13.6247 27.9378C13.0445 27.9376 12.4881 27.707 12.0779 27.2966C11.6677 26.8863 11.4374 26.3298 11.4375 25.7496C11.4376 25.1693 11.6683 24.613 12.0786 24.2028L18.7811 17.5003L12.0786 10.7978C11.68 10.3854 11.4592 9.83293 11.4639 9.25937C11.4686 8.68581 11.6984 8.13705 12.1038 7.73128C12.5092 7.3255 13.0578 7.09519 13.6313 7.08994C14.2049 7.08468 14.7575 7.30491 15.1703 7.70319L23.4215 15.953L23.4201 15.9544Z" fill="#131C40"/>
@@ -72,7 +73,7 @@ export default function Security() {
                     <rect width="35" height="35" fill="white"/>
                     </clipPath>
                     </defs>
-                  </svg>
+                  </svg></Link>
                 </div>
                
               </CardContent>
